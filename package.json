@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/MagnusFrater/Bungalow/issues"
   },
-  "homepage": "https://github.com/MagnusFrater/Bungalow#readme"
+  "homepage": "https://github.com/MagnusFrater/Bungalow#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
