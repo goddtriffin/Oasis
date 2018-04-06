@@ -15,6 +15,12 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
     console.log('user connected');
 
+    // login
+    socket.on('login', function (login) {
+        console.log('login attempted | username:', login.username, ' , password:', login.password);
+        socket.emit('login failure', login);
+    });
+
     // disconnection
     socket.on('disconnect', function () {
         console.log('user disconnected');

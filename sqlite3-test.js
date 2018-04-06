@@ -26,7 +26,7 @@ function main () {
         // createUserTable();
     
         // insertTestUsers();
-
+        
         printAllUserData();
     });
     

@@ -1,3 +1,13 @@
+// intitialize socket.io client socket
+const socket = io();
+
+//
+//      Listeners
+//
+
+socket.on('login success', loginSuccess);
+socket.on('login failure', loginFailure);
+
 //
 //      Callbacks
 //
@@ -9,8 +19,19 @@ function login (e) {
     // get user info
     const username = document.getElementById('usernameInputField').value;
     const password = document.getElementById('passwordInputField').value;
-    
-    console.log('login: username: ' + username + ' , password: ' + password);
+
+    // attempt login
+    socket.emit('login', {username, password});
+}
+
+// handles a login success
+function loginSuccess (login) {
+    console.log('login success | username:', login.username, ', password:', login.password);
+}
+
+// handles a login failure
+function loginFailure (login) {
+    console.log('login failed | username:', login.username, ', password:', login.password);
 }
 
 //
