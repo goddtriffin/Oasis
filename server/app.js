@@ -4,9 +4,8 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-// authentication
-const login = require('./authentication/login').login;
-const signup = require('./authentication/signup').signup;
+// clients
+const clients = require('./clients');
 
 // allow access to everything in public folder
 app.use(express.static('public'));
@@ -16,22 +15,10 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-// new connection
-io.on('connection', function (socket) {
-    console.log('user connected');
+// handle the connection of clients
+clients.init(io);
 
-    // login
-    socket.on('login', login);
-
-    // signup
-    socket.on('signup', signup);
-
-    // disconnection
-    socket.on('disconnect', function () {
-        console.log('user disconnected');
-    });
-});
-
+// start server
 http.listen(3000, function () {
     console.log('Server listening on *:3000');
 });

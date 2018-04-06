@@ -5,6 +5,7 @@ function login (login) {
     // this.emit('login failure', login);
 }
 
+// export
 module.exports = {
     login
 }

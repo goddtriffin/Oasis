@@ -5,6 +5,7 @@ function signup (signup) {
     // this.emit('signup failure', signup);
 }
 
+// export
 module.exports = {
     signup
 }
