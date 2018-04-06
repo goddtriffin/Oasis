@@ -1,7 +1,12 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+// express / socket.io
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+// authentication
+const login = require('./authentication/login').login;
+const signup = require('./authentication/signup').signup;
 
 // allow access to everything in public folder
 app.use(express.static('public'));
@@ -16,18 +21,10 @@ io.on('connection', function (socket) {
     console.log('user connected');
 
     // login
-    socket.on('login', function (login) {
-        console.log('login attempted | username:', login.username, ' , password:', login.password);
-        // socket.emit('login success', login);
-        socket.emit('login failure', login);
-    });
+    socket.on('login', login);
 
     // signup
-    socket.on('signup', function (signup) {
-        console.log('signup attempted | username:', signup.username, ' , password:', signup.password);
-        // socket.emit('signup success', signup);
-        socket.emit('signup failure', signup);
-    });
+    socket.on('signup', signup);
 
     // disconnection
     socket.on('disconnect', function () {
