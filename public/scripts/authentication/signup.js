@@ -1,4 +1,11 @@
 //
+//      Listeners
+//
+
+socket.on('signup success', signupSuccess);
+socket.on('signup failure', signupFailure);
+
+//
 //      Callbacks
 //
 
@@ -16,7 +23,18 @@ function signup (e) {
         return;
     }
     
-    console.log('signup: username: ' + username + ' , password: ' + password);
+    // attempt signup
+    socket.emit('signup', {username, password});
+}
+
+// handles signup success
+function signupSuccess (signup) {
+    console.log('signup success | username:', signup.username, ', password:', signup.password);
+}
+
+// handles signup failure
+function signupFailure (signup) {
+    console.log('signup failed | username:', signup.username, ', password:', signup.password);
 }
 
 //

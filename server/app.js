@@ -18,7 +18,15 @@ io.on('connection', function (socket) {
     // login
     socket.on('login', function (login) {
         console.log('login attempted | username:', login.username, ' , password:', login.password);
+        // socket.emit('login success', login);
         socket.emit('login failure', login);
+    });
+
+    // signup
+    socket.on('signup', function (signup) {
+        console.log('signup attempted | username:', signup.username, ' , password:', signup.password);
+        // socket.emit('signup success', signup);
+        socket.emit('signup failure', signup);
     });
 
     // disconnection
