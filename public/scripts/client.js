@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(getPageHeader());
 
     // load login form
-    document.body.appendChild(getLoginForm());
+    // document.body.appendChild(getLoginForm());
+
+    // load signup form
+    document.body.appendChild(getSignupForm());
  }, false);
 
  //

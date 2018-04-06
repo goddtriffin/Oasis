@@ -35,3 +35,20 @@ function getPasswordInputField () {
     // return completed password input field
     return passwordInputField;
 }
+
+// returns repassword input field (for re-entering password)
+function getRepasswordInputField () {
+    // create input field
+    const repasswordInputField = document.createElement('input');
+
+    // set attributes
+    repasswordInputField.setAttribute('alt', 'username input field');
+    repasswordInputField.setAttribute('autocomplete', 'off');
+    repasswordInputField.setAttribute('id', 'repasswordInputField');
+    repasswordInputField.setAttribute('placeholder', 'Re-enter Password');
+    repasswordInputField.setAttribute('required', 'true');
+    repasswordInputField.setAttribute('type', 'password');
+
+    // return completed repassword input field
+    return repasswordInputField;
+}
