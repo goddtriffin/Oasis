@@ -14,7 +14,7 @@ function login (e) {
 }
 
 //
-//      Login Form Creation
+//      Element Creation
 //
 
 // returns form for logging in
@@ -25,7 +25,7 @@ function getLoginForm () {
     // set attributes
     loginForm.setAttribute('id', 'loginForm');
 
-    // add necessary elements
+    // add elements
     loginForm.appendChild(getLoginHeader());
     loginForm.appendChild(getUsernameInputField());
     loginForm.appendChild(getPasswordInputField());
@@ -36,6 +36,15 @@ function getLoginForm () {
 
     // return completed login form
     return loginForm;
+}
+
+// removes login form
+function removeLoginForm () {
+    // remove listeners
+    document.getElementById('loginForm').removeEventListener('submit', login);
+
+    // remove element
+    removeElement('loginForm');
 }
 
 // returns login form header

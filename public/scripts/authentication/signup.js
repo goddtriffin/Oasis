@@ -20,7 +20,7 @@ function signup (e) {
 }
 
 //
-//      Signup Form Creation
+//      Element Creation
 //
 
 // returns form for signing up
@@ -31,7 +31,7 @@ function getSignupForm () {
     // set attributes
     signupForm.setAttribute('id', 'signupForm');
 
-    // add necessary elements
+    // add elements
     signupForm.appendChild(getSignupHeader());
     signupForm.appendChild(getUsernameInputField());
     signupForm.appendChild(getPasswordInputField());
@@ -43,6 +43,15 @@ function getSignupForm () {
 
     // return completed signup form
     return signupForm;
+}
+
+// removes signup form
+function removeSignupForm () {
+    // remove listeners
+    document.getElementById('signupForm').removeEventListener('submit', signup);
+
+    // remove element
+    removeElement('signupForm');
 }
 
 // returns signup form header
