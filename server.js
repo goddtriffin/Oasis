@@ -4,7 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 // allow access to everything in public folder
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // home requested
 app.get('/', function (req, res) {
