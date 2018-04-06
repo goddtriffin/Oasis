@@ -2,9 +2,9 @@
   "name": "bungalow",
   "version": "1.0.0",
   "description": "Simple realtime virtual rooms.",
-  "main": "server.js",
+  "main": "server/app.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
