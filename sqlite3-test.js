@@ -1,29 +1,26 @@
 const sqlite3 = require('sqlite3').verbose();
 
-const db_p = "./db/production";
-const db_t = "./db/test";
-
 // handle program usage
 if (process.argv.length != 3) {
-    console.error('Usage: node sqlite3-test.js -p|t');
+    console.error('Usage: node sqlite3-test.js <database-name>');
 }
 
 // set which database to use
-const which = (process.argv[2] === '-t')? db_t : db_p;
+const databasePath = "./db/" + process.argv[2] + ".db";
 
 // open database from local
-const db = new sqlite3.Database(which, (err) => {
+const db = new sqlite3.Database(databasePath, (err) => {
     if (err) {
         console.error(err.message);
     }
-    console.log('Connected to local database: ' + which);
+    console.log('Connected to local database: ' + databasePath);
 });
 
 // actual test script
 function main () {
     // run in-order:
     db.serialize(function () {
-        // createUserTable();
+        createUserTable();
     
         // insertTestUsers();
         
@@ -41,7 +38,7 @@ function main () {
 
 // creates the user table
 function createUserTable () {
-    db.run("CREATE TABLE user (id INT primary key, username INT, password TEXT, creationDate TEXT)");
+    db.run("CREATE TABLE user (id INTEGER NOT NULL PRIMARY KEY, username INTEGER NOT NULL UNIQUE, password TEXT NOT NULL, creationDate TEXT NOT NULL)");
 }
 
 // inserts test users into the user table
@@ -62,11 +59,11 @@ function insertTestUsers () {
 
 // prints all the data in the user table
 function printAllUserData () {
-    db.each('SELECT id,username,password,creationDate FROM user', function (err, row) {
+    db.each('SELECT id, username,password,creationDate FROM user', function (err, row) {
         if (err) {
             console.error(err.message);
         }
-        console.log('id:',row.id, 'username:', row.username, ', password:', row.password, ', creationDate:', row.creationDate);
+        console.log('id|', row.id, 'username|', row.username, 'password|', row.password, 'creationDate|', row.creationDate);
     });
 }
 

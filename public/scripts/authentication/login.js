@@ -27,8 +27,8 @@ function loginSuccess (login) {
 }
 
 // handles a login failure
-function loginFailure (login) {
-    console.log('login failed | username:', login.username, ', password:', login.password);
+function loginFailure (err) {
+    console.log('login failed | err:', err);
 }
 
 //

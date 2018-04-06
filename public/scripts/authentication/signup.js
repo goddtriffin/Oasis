@@ -33,8 +33,8 @@ function signupSuccess (signup) {
 }
 
 // handles signup failure
-function signupFailure (signup) {
-    console.log('signup failed | username:', signup.username, ', password:', signup.password);
+function signupFailure (err) {
+    console.log('signup failed | err:', err);
 }
 
 //

@@ -8,10 +8,8 @@ function init (io) {
     io.on('connection', function (socket) {
         console.log('user connected');
 
-        // login
+        // authentication
         socket.on('login', login);
-
-        // signup
         socket.on('signup', signup);
 
         // disconnection
