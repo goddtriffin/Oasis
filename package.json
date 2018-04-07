@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/MagnusFrater/Bungalow#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "express": "^4.16.3",
     "nodemon": "^1.17.3",
     "socket.io": "^2.1.0",
