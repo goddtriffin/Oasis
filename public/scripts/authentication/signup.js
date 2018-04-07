@@ -17,14 +17,9 @@ function signup (e) {
     const username = document.getElementById('usernameInputField').value;
     const password = document.getElementById('passwordInputField').value;
     const repassword = document.getElementById('repasswordInputField').value;
-
-    if (password !== repassword) {
-        console.log('passwords don\'t match');
-        return;
-    }
     
     // attempt signup
-    socket.emit('signup', {username, password});
+    socket.emit('signup', {username, password, repassword});
 }
 
 // handles signup success

@@ -25,6 +25,12 @@ function signup (signup) {
         err: false
     };
 
+    // make sure password and repassword match
+    if (data.info.password !== data.info.repassword) {
+        signupFailure(data, 'passwords don\'t match');
+        return;
+    }
+
     // do in-order:
     db.serialize(() => {
         // get row with username
@@ -45,7 +51,7 @@ function createUser (data) {
         bcrypt.hash(data.info.password, saltRounds, function(err, hash) {
             // handle bcrypt error
             if (err) {
-                signupFailure(data, 'bcrypt error');
+                signupFailure(data, 'bcrypt error: ' + err);
                 return;
             }
 
@@ -54,7 +60,7 @@ function createUser (data) {
 
             // attempt inserting user into the database
             data.values = [data.info.username, data.info.password, data.info.creationDate]
-            database.insertRow(data.db, 'user', Object.keys(data.info), data, signupSuccess, signupFailure);
+            database.insertRow(data.db, 'user', ['username', 'password', 'creationDate'], data, signupSuccess, signupFailure);
         });
     } else {
         // username already exists
