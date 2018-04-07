@@ -23,7 +23,7 @@ function login (e) {
 
 // handles a login success
 function loginSuccess (login) {
-    console.log('login success | username:', login.username, ', password:', login.password);
+    console.log('login success | username:', login.username, ', hash:', login.hash);
 }
 
 // handles a login failure

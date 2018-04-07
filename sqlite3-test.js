@@ -38,20 +38,20 @@ function main () {
 
 // creates the user table
 function createUserTable () {
-    db.run("CREATE TABLE user (id INTEGER NOT NULL PRIMARY KEY, username INTEGER NOT NULL UNIQUE, password TEXT NOT NULL, creationDate TEXT NOT NULL)");
+    db.run("CREATE TABLE user (id INTEGER NOT NULL PRIMARY KEY, username INTEGER NOT NULL UNIQUE, hash TEXT NOT NULL, creationDate TEXT NOT NULL)");
 }
 
 // inserts test users into the user table
 function insertTestUsers () {
-    const statement = db.prepare("INSERT into user(username, password, creationDate) values(?,?,?)");
+    const statement = db.prepare("INSERT into user(username, hash, creationDate) values(?,?,?)");
 
     for (i=0; i<10; i++) {
         const username = 'user-' + i;
-        const password = 'password-' + i;
+        const hash = 'hash-' + i;
         const date = new Date();
         const creationDate = date.toLocaleTimeString();
 
-        statement.run(username, password, creationDate);
+        statement.run(username, hash, creationDate);
     }
 
     statement.finalize();
@@ -59,37 +59,12 @@ function insertTestUsers () {
 
 // prints all the data in the user table
 function printAllUserData () {
-    db.each('SELECT id, username,password,creationDate FROM user', function (err, row) {
+    db.each('SELECT id, username,hash,creationDate FROM user', function (err, row) {
         if (err) {
             console.error(err.message);
         }
-        console.log('id|', row.id, 'username|', row.username, 'password|', row.password, 'creationDate|', row.creationDate);
+        console.log('id|', row.id, 'username|', row.username, 'hash|', row.hash, 'creationDate|', row.creationDate);
     });
 }
 
 main();
-
-//
-//      EXAMPLE
-/*
-db.serialize(function () {
-    db.run("CREATE TABLE user (id INT primary key, username INT, password TEXT, creationDate TEXT)");
-
-    const statement = db.prepare("INSERT into user(username, password, creationDate) values(?,?,?)");
-
-    for (i=0; i<10; i++) {
-        const username = 'user-' + i;
-        const password = 'password-' + i;
-        const date = new Date();
-        const creationDate = date.toLocaleTimeString();
-
-        statement.run(username, password, creationDate);
-    }
-
-    statement.finalize();
-
-    printAllUserData();
-
-    db.close();
-});
-*/

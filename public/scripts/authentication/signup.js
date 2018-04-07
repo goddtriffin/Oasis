@@ -24,7 +24,7 @@ function signup (e) {
 
 // handles signup success
 function signupSuccess (signup) {
-    console.log('signup success | username:', signup.username, ', password:', signup.password);
+    console.log('signup success | username:', signup.username, ', hash:', signup.hash);
 }
 
 // handles signup failure

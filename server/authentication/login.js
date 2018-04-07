@@ -35,7 +35,7 @@ function authenticateUser (data) {
     // username does exist
     if (data.row) {
         // check if passwords match
-        bcrypt.compare(data.info.password, data.row.password, function(err, res) {
+        bcrypt.compare(data.info.password, data.row.hash, function(err, res) {
             if (err) {
                 loginFailure(data, 'bcrypt error: ' + err);
                 return;

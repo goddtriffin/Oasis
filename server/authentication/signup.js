@@ -5,6 +5,9 @@ const database = require('../database');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+// login
+const login = require('./login').login;
+
 // handles signing up
 // signup = {username, password}
 function signup (signup) {
@@ -56,11 +59,11 @@ function createUser (data) {
             }
 
             // set signup password as hash
-            data.info.password = hash;
+            data.info.hash = hash;
 
             // attempt inserting user into the database
-            data.values = [data.info.username, data.info.password, data.info.creationDate]
-            database.insertRow(data.db, 'user', ['username', 'password', 'creationDate'], data, signupSuccess, signupFailure);
+            data.values = [data.info.username, data.info.hash, data.info.creationDate]
+            database.insertRow(data.db, 'user', ['username', 'hash', 'creationDate'], data, signupSuccess, signupFailure);
         });
     } else {
         // username already exists
@@ -83,6 +86,11 @@ function signupSuccess (data) {
 
     // always
     database.close(data.db);
+
+    // since successfully signed up, login
+    // has to bind to socket (make 'this' refer to socket) because login sets its 'data.socket' var equal to 'this'
+    const socketBindLogin = login.bind(data.socket);
+    socketBindLogin({username: data.info.username, password: data.info.password});
 }
 
 // handles signup failure
