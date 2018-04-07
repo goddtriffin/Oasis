@@ -16,29 +16,40 @@ function signup (signup) {
     const data = {
         'socket': this,
         db,
-        signup
+        info: signup,
+        err: false
     };
 
     // do in-order:
     db.serialize(() => {
         // get row with username
-        database.getRow(db, 'user', 'username', data, addUser, signupFailure);
+        database.getRow(db, 'user', 'username', data, createUser, signupFailure);
     });
 }
 
 // adds a user
-function addUser (data) {
+function createUser (data) {
+    // catch error from last step
+    if (data.err) {
+        signupFailure(data, 'sqlite3 error');
+        return;
+    }
+
     // username doesn't exist yet
     if (!data.row) {
-        data.values = [data.signup.username, data.signup.password, data.signup.creationDate]
-        database.insertRow(data.db, 'user', Object.keys(data.signup), data, null, signupFailure);
-        // database.printAll(data.db, 'user', ['id', 'username', 'password', 'creationDate']);
+        data.values = [data.info.username, data.info.password, data.info.creationDate]
+        database.insertRow(data.db, 'user', Object.keys(data.info), data, null, signupFailure);
+
+        // catch error from last step
+        if (data.err) {
+            signupFailure(data, 'sqlite3 error');
+        }
 
         // log
-        console.log(data.signup.username, 'signed up.');
+        console.log(data.info.username, 'signed up.');
 
         // tell client
-        data.socket.emit('signup success', data.signup);
+        data.socket.emit('signup success', data.info);
 
         // always
         database.close(data.db);

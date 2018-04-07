@@ -68,6 +68,7 @@ function insertRow (db, table, vars, data, successCallback, failureCallback) {
     db.run(statement, data.values, (err) => {
         if (err) {
             // failure
+            data.err = true;
             console.error(err.message);
             if (failureCallback) failureCallback(data, err);
         } else {
@@ -95,14 +96,15 @@ function getRow (db, table, whereVar, data, successCallback, failureCallback) {
     console.log('getRow:', statement);
 
     // get
-    db.get(statement, [data[whereVar]], (err, row) => {
+    db.get(statement, [data.info[whereVar]], (err, row) => {
         if (err) {
             // failure
+            data.err = true;
             console.error(err.message);
             if (failureCallback) failureCallback(data, err);
         } else {
             // success
-            data['row'] = row;
+            data.row = row;
             if (successCallback) successCallback(data);
         }
     });
