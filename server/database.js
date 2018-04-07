@@ -73,7 +73,7 @@ function insertRow (db, table, vars, data, successCallback, failureCallback) {
             if (failureCallback) failureCallback(data, err);
         } else {
             // success
-            if (successCallback) successCallback();
+            if (successCallback) successCallback(data);
         }
     });
 }

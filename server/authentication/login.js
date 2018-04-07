@@ -1,4 +1,8 @@
+// sqlite3
 const database = require('../database');
+
+// bcrypt
+const bcrypt = require('bcrypt');
 
 // handles logging in a user
 function login (login) {
@@ -31,22 +35,29 @@ function authenticateUser (data) {
     // username does exist
     if (data.row) {
         // check if passwords match
-        if (data.info.password !== data.row.password) {
-            // passwords don't match
-            loginFailure(data, 'wrong password');
-            return;
-        }
+        bcrypt.compare(data.info.password, data.row.password, function(err, res) {
+            if (err) {
+                loginFailure(data, 'bcrypt error: ' + err);
+                return;
+            }
 
-        // passwords match
+            if (res) {
+                // passwords match
 
-        // log
-        console.log(data.info.username, 'logged in.');
+                // log
+                console.log(data.info.username, 'logged in.');
 
-        // tell client
-        data.socket.emit('login success', data.info);
+                // tell client
+                data.socket.emit('login success', data.row);
 
-        // always
-        database.close(data.db);
+                // always
+                database.close(data.db);
+            } else {
+                // passwords don't match
+                loginFailure(data, 'wrong password');
+                return;
+            }
+        });
     } else {
         // username doesn't exist
         loginFailure(data, 'user doesn\'t exist');

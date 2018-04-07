@@ -1,4 +1,9 @@
+// sqlite3
 const database = require('../database');
+
+// bcrypt
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // handles signing up
 // signup = {username, password}
@@ -37,26 +42,41 @@ function createUser (data) {
 
     // username doesn't exist yet
     if (!data.row) {
-        data.values = [data.info.username, data.info.password, data.info.creationDate]
-        database.insertRow(data.db, 'user', Object.keys(data.info), data, null, signupFailure);
+        bcrypt.hash(data.info.password, saltRounds, function(err, hash) {
+            // handle bcrypt error
+            if (err) {
+                signupFailure(data, 'bcrypt error');
+                return;
+            }
 
-        // catch error from last step
-        if (data.err) {
-            signupFailure(data, 'sqlite3 error');
-        }
+            // set signup password as hash
+            data.info.password = hash;
 
-        // log
-        console.log(data.info.username, 'signed up.');
-
-        // tell client
-        data.socket.emit('signup success', data.info);
-
-        // always
-        database.close(data.db);
+            // attempt inserting user into the database
+            data.values = [data.info.username, data.info.password, data.info.creationDate]
+            database.insertRow(data.db, 'user', Object.keys(data.info), data, signupSuccess, signupFailure);
+        });
     } else {
         // username already exists
         signupFailure(data, 'username taken');
     }
+}
+
+// handles signup success
+function signupSuccess (data) {
+    // catch error from last step
+    if (data.err) {
+        signupFailure(data, 'sqlite3 error');
+    }
+
+    // log
+    console.log(data.info.username, 'signed up.');
+
+    // tell client
+    data.socket.emit('signup success', data.info);
+
+    // always
+    database.close(data.db);
 }
 
 // handles signup failure
