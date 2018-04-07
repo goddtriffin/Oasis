@@ -48,7 +48,7 @@ function authenticateUser (data) {
                 console.log(data.info.username, 'logged in.');
 
                 // tell client
-                data.socket.emit('login success', data.row);
+                data.socket.emit('login success', {id: data.row.id, username: data.row.username});
 
                 // always
                 database.close(data.db);

@@ -23,8 +23,8 @@ function signup (e) {
 }
 
 // handles signup success
-function signupSuccess (signup) {
-    console.log('signup success | username:', signup.username, ', hash:', signup.hash);
+function signupSuccess () {
+    console.log('signup success');
 }
 
 // handles signup failure

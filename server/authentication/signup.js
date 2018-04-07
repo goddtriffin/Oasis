@@ -82,7 +82,7 @@ function signupSuccess (data) {
     console.log(data.info.username, 'signed up.');
 
     // tell client
-    data.socket.emit('signup success', data.info);
+    data.socket.emit('signup success', null);
 
     // always
     database.close(data.db);
