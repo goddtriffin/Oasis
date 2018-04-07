@@ -4,6 +4,9 @@
 
 // returns username input field
 function getUsernameInputField () {
+    // check for element creation errors
+    if (elementCreationErrors('usernameInputField')) return;
+
     // create input field
     const usernameInputField = document.createElement('input');
 
@@ -21,6 +24,9 @@ function getUsernameInputField () {
 
 // returns password input field
 function getPasswordInputField () {
+    // check for element creation errors
+    if (elementCreationErrors('passwordInputField')) return;
+
     // create input field
     const passwordInputField = document.createElement('input');
 
@@ -38,6 +44,9 @@ function getPasswordInputField () {
 
 // returns repassword input field (for re-entering password)
 function getRepasswordInputField () {
+    // check for element creation errors
+    if (elementCreationErrors('repasswordInputField')) return;
+
     // create input field
     const repasswordInputField = document.createElement('input');
 

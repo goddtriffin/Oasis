@@ -23,7 +23,13 @@ function login (e) {
 
 // handles a login success
 function loginSuccess (session) {
+    // store session
     storeUserSessionData(session);
+
+    // go back to main screen
+    removeLoginForm();
+    removeBackButton();
+    loadMainScreen();
 }
 
 // handles a login failure
@@ -46,6 +52,9 @@ function storeUserSessionData (session) {
 
 // returns form for logging in
 function getLoginForm () {
+    // check for element creation errors
+    if (elementCreationErrors('loginForm')) return;
+
     // create form
     const loginForm = document.createElement('form');
 
@@ -67,6 +76,9 @@ function getLoginForm () {
 
 // removes login form
 function removeLoginForm () {
+    // check for element removal errors
+    if (elementRemovalErrors('loginForm')) return;
+
     // remove listeners
     document.getElementById('loginForm').removeEventListener('submit', login);
 
@@ -76,6 +88,9 @@ function removeLoginForm () {
 
 // returns login form header
 function getLoginHeader () {
+    // check for element creation errors
+    if (elementCreationErrors('loginHeader')) return;
+
     // create header
     const loginHeader = document.createElement('h2');
 
@@ -89,6 +104,9 @@ function getLoginHeader () {
 
 // returns login button
 function getLoginButton () {
+    // check for element creation errors
+    if (elementCreationErrors('loginButton')) return;
+
     // create button
     const loginButton = document.createElement('button');
 

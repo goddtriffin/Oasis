@@ -7,10 +7,12 @@ function chooseSignup () {
     removeLoginSignupChoice();
 
     // load back button
-    document.body.appendChild(getBackButton('signup'));
+    const backButton = getBackButton('signup');
+    if(backButton) document.body.appendChild(backButton);
 
     // load signup form
-    document.body.appendChild(getSignupForm());
+    const signupForm = getSignupForm();
+    if (signupForm) document.body.appendChild(signupForm);
 }
 
 // handles choosing to login
@@ -18,10 +20,12 @@ function chooseLogin () {
     removeLoginSignupChoice();
 
     // load back button
-    document.body.appendChild(getBackButton('login'));
+    const backButton = getBackButton('login');
+    if (backButton) document.body.appendChild(backButton);
 
     // load login form
-    document.body.appendChild(getLoginForm());
+    const loginForm = getLoginForm();
+    if (loginForm) document.body.appendChild(loginForm);
 }
 
 // handles resetting the page to home from login/signup forms
@@ -39,7 +43,8 @@ function resetHome (e) {
     removeBackButton();
 
     // present login/signup choice
-    document.body.appendChild(getLoginSignupChoice());
+    const loginSignupChoice = getLoginSignupChoice();
+    if (loginSignupChoice) document.body.appendChild(loginSignupChoice);
 }
 
 //
@@ -48,6 +53,9 @@ function resetHome (e) {
 
 // returns page header
 function getPageHeader () {
+    // check for element creation errors
+    if (elementCreationErrors('pageHeader')) return;
+
     // create header
     const pageHeader = document.createElement('h1');
 
@@ -61,6 +69,9 @@ function getPageHeader () {
 
 // returns login/signup choice
 function getLoginSignupChoice () {
+    // check for element creation errors
+    if (elementCreationErrors('loginSignupChoice')) return;
+
     // create container
     const loginSignupChoice = document.createElement('div');
 
@@ -84,6 +95,9 @@ function getLoginSignupChoice () {
 
 // removes login/signup choice
 function removeLoginSignupChoice () {
+    // check for element removal errors
+    if (elementRemovalErrors('loginSignupChoice')) return;
+
     // remove listeners
     document.getElementById('loginButton').removeEventListener('click', chooseLogin);
     document.getElementById('signupButton').removeEventListener('click', chooseSignup);
@@ -94,6 +108,9 @@ function removeLoginSignupChoice () {
 
 // returns back button; name: 'login' | 'signup'
 function getBackButton (name) {
+    // check for element creation errors
+    if (elementCreationErrors('backButton')) return;
+
     // validation
     if (name !== 'login' && name !== 'signup') {
         console.log('invalid back button \'name\'');
@@ -117,6 +134,9 @@ function getBackButton (name) {
 
 // removes back button
 function removeBackButton () {
+    // check for element removal errors
+    if (elementRemovalErrors('backButton')) return;
+
     // remove listeners
     document.getElementById('backButton').removeEventListener('click', resetHome);
 

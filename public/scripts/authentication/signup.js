@@ -24,7 +24,10 @@ function signup (e) {
 
 // handles signup success
 function signupSuccess () {
-    console.log('signup success');
+    // go back to main screen
+    removeSignupForm();
+    removeBackButton();
+    loadMainScreen();
 }
 
 // handles signup failure
@@ -38,6 +41,9 @@ function signupFailure (err) {
 
 // returns form for signing up
 function getSignupForm () {
+    // check for element creation errors
+    if (elementCreationErrors('signupForm')) return;
+
     // create form
     const signupForm = document.createElement('form');
 
@@ -60,6 +66,9 @@ function getSignupForm () {
 
 // removes signup form
 function removeSignupForm () {
+    // check for element removal errors
+    if (elementRemovalErrors('signupForm')) return;
+
     // remove listeners
     document.getElementById('signupForm').removeEventListener('submit', signup);
 
@@ -69,6 +78,9 @@ function removeSignupForm () {
 
 // returns signup form header
 function getSignupHeader () {
+    // check for element creation errors
+    if (elementCreationErrors('signupHeader')) return;
+
     // create header
     const signupHeader = document.createElement('h2');
 
@@ -82,6 +94,9 @@ function getSignupHeader () {
 
 // returns signup button
 function getSignupButton () {
+    // check for element creation errors
+    if (elementCreationErrors('signupButton')) return;
+
     // create button
     const signupButton = document.createElement('button');
 
