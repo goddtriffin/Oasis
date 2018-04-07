@@ -22,13 +22,22 @@ function login (e) {
 }
 
 // handles a login success
-function loginSuccess (login) {
-    console.log('login success | id:', login.id, ', username:', login.username);
+function loginSuccess (session) {
+    storeUserSessionData(session);
 }
 
 // handles a login failure
 function loginFailure (err) {
     console.log('login failed | err:', err);
+}
+
+// stores user session information to browser local storage on successful login
+function storeUserSessionData (session) {
+    // set id
+    localStorage.setItem('Bungalow-session-id', session.id);
+
+    // set username
+    localStorage.setItem('Bungalow-session-username', session.username);
 }
 
 //
