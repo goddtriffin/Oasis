@@ -40,7 +40,7 @@ function signupFailure (err) {
 //
 
 // returns form for signing up
-function getSignupForm () {
+function createSignupForm () {
     // check for element creation errors
     if (elementCreationErrors('signupForm')) return;
 
@@ -51,11 +51,11 @@ function getSignupForm () {
     signupForm.setAttribute('id', 'signupForm');
 
     // add elements
-    signupForm.appendChild(getSignupHeader());
-    signupForm.appendChild(getUsernameInputField());
-    signupForm.appendChild(getPasswordInputField());
-    signupForm.appendChild(getRepasswordInputField());
-    signupForm.appendChild(getSignupButton());
+    signupForm.appendChild(createSignupHeader());
+    signupForm.appendChild(createUsernameInputField());
+    signupForm.appendChild(createPasswordInputField());
+    signupForm.appendChild(createRepasswordInputField());
+    signupForm.appendChild(createSignupButton());
 
     // add listeners
     signupForm.addEventListener('submit', signup);
@@ -77,7 +77,7 @@ function removeSignupForm () {
 }
 
 // returns signup form header
-function getSignupHeader () {
+function createSignupHeader () {
     // check for element creation errors
     if (elementCreationErrors('signupHeader')) return;
 
@@ -93,7 +93,7 @@ function getSignupHeader () {
 }
 
 // returns signup button
-function getSignupButton () {
+function createSignupButton () {
     // check for element creation errors
     if (elementCreationErrors('signupButton')) return;
 

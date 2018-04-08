@@ -51,7 +51,7 @@ function storeUserSessionData (session) {
 //
 
 // returns form for logging in
-function getLoginForm () {
+function createLoginForm () {
     // check for element creation errors
     if (elementCreationErrors('loginForm')) return;
 
@@ -62,10 +62,10 @@ function getLoginForm () {
     loginForm.setAttribute('id', 'loginForm');
 
     // add elements
-    loginForm.appendChild(getLoginHeader());
-    loginForm.appendChild(getUsernameInputField());
-    loginForm.appendChild(getPasswordInputField());
-    loginForm.appendChild(getLoginButton());
+    loginForm.appendChild(createLoginHeader());
+    loginForm.appendChild(createUsernameInputField());
+    loginForm.appendChild(createPasswordInputField());
+    loginForm.appendChild(createLoginButton());
 
     // add listeners
     loginForm.addEventListener('submit', login);
@@ -87,7 +87,7 @@ function removeLoginForm () {
 }
 
 // returns login form header
-function getLoginHeader () {
+function createLoginHeader () {
     // check for element creation errors
     if (elementCreationErrors('loginHeader')) return;
 
@@ -103,7 +103,7 @@ function getLoginHeader () {
 }
 
 // returns login button
-function getLoginButton () {
+function createLoginButton () {
     // check for element creation errors
     if (elementCreationErrors('loginButton')) return;
 

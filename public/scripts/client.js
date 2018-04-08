@@ -16,7 +16,7 @@ function removeSessionInfo () {
 // loads the inital view when you refresh/open this page
 function initView () {
     // load page header
-    const pageHeader = getPageHeader();
+    const pageHeader = createPageHeader();
     if (pageHeader) document.body.appendChild(pageHeader);
 
     // ready the page
@@ -27,7 +27,7 @@ function initView () {
 // if user session data exists, sends user to game screen
 function loadMainScreen () {
     // present login/signup choice
-    const loginSignupChoice = getLoginSignupChoice();
+    const loginSignupChoice = createLoginSignupChoice();
     if (loginSignupChoice) document.body.appendChild(loginSignupChoice);
 
     // check for user session data

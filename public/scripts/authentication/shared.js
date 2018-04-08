@@ -3,7 +3,7 @@
 //
 
 // returns username input field
-function getUsernameInputField () {
+function createUsernameInputField () {
     // check for element creation errors
     if (elementCreationErrors('usernameInputField')) return;
 
@@ -23,7 +23,7 @@ function getUsernameInputField () {
 }
 
 // returns password input field
-function getPasswordInputField () {
+function createPasswordInputField () {
     // check for element creation errors
     if (elementCreationErrors('passwordInputField')) return;
 
@@ -43,7 +43,7 @@ function getPasswordInputField () {
 }
 
 // returns repassword input field (for re-entering password)
-function getRepasswordInputField () {
+function createRepasswordInputField () {
     // check for element creation errors
     if (elementCreationErrors('repasswordInputField')) return;
 

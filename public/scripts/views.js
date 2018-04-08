@@ -7,11 +7,11 @@ function chooseSignup () {
     removeLoginSignupChoice();
 
     // load back button
-    const backButton = getBackButton('signup');
+    const backButton = createBackButton('signup');
     if(backButton) document.body.appendChild(backButton);
 
     // load signup form
-    const signupForm = getSignupForm();
+    const signupForm = createSignupForm();
     if (signupForm) document.body.appendChild(signupForm);
 }
 
@@ -20,11 +20,11 @@ function chooseLogin () {
     removeLoginSignupChoice();
 
     // load back button
-    const backButton = getBackButton('login');
+    const backButton = createBackButton('login');
     if (backButton) document.body.appendChild(backButton);
 
     // load login form
-    const loginForm = getLoginForm();
+    const loginForm = createLoginForm();
     if (loginForm) document.body.appendChild(loginForm);
 }
 
@@ -43,7 +43,7 @@ function resetHome (e) {
     removeBackButton();
 
     // present login/signup choice
-    const loginSignupChoice = getLoginSignupChoice();
+    const loginSignupChoice = createLoginSignupChoice();
     if (loginSignupChoice) document.body.appendChild(loginSignupChoice);
 }
 
@@ -52,7 +52,7 @@ function resetHome (e) {
 //
 
 // returns page header
-function getPageHeader () {
+function createPageHeader () {
     // check for element creation errors
     if (elementCreationErrors('pageHeader')) return;
 
@@ -68,7 +68,7 @@ function getPageHeader () {
 }
 
 // returns login/signup choice
-function getLoginSignupChoice () {
+function createLoginSignupChoice () {
     // check for element creation errors
     if (elementCreationErrors('loginSignupChoice')) return;
 
@@ -79,10 +79,10 @@ function getLoginSignupChoice () {
     loginSignupChoice.setAttribute('id', 'loginSignupChoice');
 
     // add elements
-    const loginButton = getLoginButton();
+    const loginButton = createLoginButton();
     loginSignupChoice.appendChild(loginButton);
 
-    const signupButton = getSignupButton();
+    const signupButton = createSignupButton();
     loginSignupChoice.appendChild(signupButton);
 
     // add listeners
@@ -107,7 +107,7 @@ function removeLoginSignupChoice () {
 }
 
 // returns back button; name: 'login' | 'signup'
-function getBackButton (name) {
+function createBackButton (name) {
     // check for element creation errors
     if (elementCreationErrors('backButton')) return;
 
