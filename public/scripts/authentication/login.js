@@ -46,10 +46,10 @@ function loginFailure (err) {
 // stores user session information to browser local storage on successful login
 function storeUserSessionData (session) {
     // set id
-    localStorage.setItem('Bungalow-session-id', session.id);
+    localStorage.setItem('Oasis-session-id', session.id);
 
     // set username
-    localStorage.setItem('Bungalow-session-username', session.username);
+    localStorage.setItem('Oasis-session-username', session.username);
 }
 
 //

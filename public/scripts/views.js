@@ -60,7 +60,7 @@ function createPageHeader () {
     const pageHeader = document.createElement('h1');
 
     // set attributes
-    pageHeader.innerHTML = "Bungalow";
+    pageHeader.innerHTML = "Oasis";
     pageHeader.setAttribute('id', 'pageHeader');
 
     // return completed page header

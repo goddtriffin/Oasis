@@ -1,3 +1,3 @@
-# Bungalow
+# Oasis
 
-Simple realtime virtual rooms.
+Simple realtime multiplayer landscape.

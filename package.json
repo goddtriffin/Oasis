@@ -1,28 +1,28 @@
 {
-  "name": "bungalow",
+  "name": "oasis",
   "version": "1.0.0",
-  "description": "Simple realtime virtual rooms.",
+  "description": "Simple realtime multiplayer landscape.",
   "main": "server/app.js",
   "scripts": {
-    "start": "nodemon server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "npm install",
+    "start": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MagnusFrater/Bungalow.git"
+    "url": "git+https://github.com/MagnusFrater/Oasis.git"
   },
   "keywords": [
     "simple",
     "realtime",
-    "virtual",
-    "rooms"
+    "multiplayer",
+    "landscape"
   ],
   "author": "Todd Griffin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MagnusFrater/Bungalow/issues"
+    "url": "https://github.com/MagnusFrater/Oasis/issues"
   },
-  "homepage": "https://github.com/MagnusFrater/Bungalow#readme",
+  "homepage": "https://github.com/MagnusFrater/Oasis#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "express": "^4.16.3",

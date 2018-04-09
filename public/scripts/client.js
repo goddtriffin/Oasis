@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // removes user session info
 function removeSessionInfo () {
-    localStorage.removeItem('Bungalow-session-id');
-    localStorage.removeItem('Bungalow-session-username');
+    localStorage.removeItem('Oasis-session-id');
+    localStorage.removeItem('Oasis-session-username');
 }
 
 // loads the inital view when you refresh/open this page
@@ -31,8 +31,8 @@ function loadMainScreen () {
     if (loginSignupChoice) document.body.appendChild(loginSignupChoice);
 
     // check for user session data
-    const sessionID = localStorage.getItem('Bungalow-session-id');
-    const sessionUsername = localStorage.getItem('Bungalow-session-username');
+    const sessionID = localStorage.getItem('Oasis-session-id');
+    const sessionUsername = localStorage.getItem('Oasis-session-username');
 
     // if both session variables exist/not-null, send to game
     if (sessionID && sessionUsername) {
