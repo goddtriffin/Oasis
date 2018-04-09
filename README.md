@@ -2,6 +2,10 @@
 
 Simple realtime multiplayer landscape.
 
+## Author
+
+Todd Griffin, MagnusFrater, griff170@purdue.edu
+
 ## Requirements
 
 Must have npm installed.
@@ -20,11 +24,11 @@ This project was lab 6 for Purdue's CS252, Systems Programming.
 
 ## Stack
 
-Node/Express
+Web Framework: Node/Express
 
-Socket.io
+Realtime Data: Socket.io
 
-Sqlite3
+Database: Sqlite3
 
 ## Developers
 
