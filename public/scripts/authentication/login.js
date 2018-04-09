@@ -62,10 +62,17 @@ function createLoginForm () {
     loginForm.setAttribute('id', 'loginForm');
 
     // add elements
-    loginForm.appendChild(createLoginHeader());
-    loginForm.appendChild(createUsernameInputField());
-    loginForm.appendChild(createPasswordInputField());
-    loginForm.appendChild(createLoginButton());
+    const loginHeader = createLoginHeader();
+    if (loginHeader) loginForm.appendChild(loginHeader);
+
+    const usernameInputField = createUsernameInputField();
+    if (usernameInputField) loginForm.appendChild(usernameInputField);
+
+    const passwordInputField = createPasswordInputField();
+    if (passwordInputField) loginForm.appendChild(passwordInputField);
+
+    const loginButton = createLoginButton();
+    if (loginButton) loginForm.appendChild(loginButton);
 
     // add listeners
     loginForm.addEventListener('submit', login);

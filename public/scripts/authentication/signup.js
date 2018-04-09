@@ -51,11 +51,20 @@ function createSignupForm () {
     signupForm.setAttribute('id', 'signupForm');
 
     // add elements
-    signupForm.appendChild(createSignupHeader());
-    signupForm.appendChild(createUsernameInputField());
-    signupForm.appendChild(createPasswordInputField());
-    signupForm.appendChild(createRepasswordInputField());
-    signupForm.appendChild(createSignupButton());
+    const signupHeader = createSignupHeader();
+    if (signupHeader) signupForm.appendChild(signupHeader);
+
+    const usernameInputField = createUsernameInputField();
+    if (usernameInputField) signupForm.appendChild(usernameInputField);
+
+    const passwordInputField = createPasswordInputField();
+    if (passwordInputField) signupForm.appendChild(passwordInputField);
+
+    const repasswordInputField = createRepasswordInputField();
+    if (repasswordInputField) signupForm.appendChild(repasswordInputField);
+
+    const signupButton = createSignupButton();
+    if (signupButton) signupForm.appendChild(signupButton);
 
     // add listeners
     signupForm.addEventListener('submit', signup);
