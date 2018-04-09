@@ -1,7 +1,7 @@
 // on complete page load
 document.addEventListener('DOMContentLoaded', function() {
     // user session lasts until next page refresh or close tab
-    // removeSessionInfo();
+    removeSessionInfo();
 
     // initialize the view
     initView();

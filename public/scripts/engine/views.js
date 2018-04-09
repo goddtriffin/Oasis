@@ -8,7 +8,6 @@ function createGameCanvas () {
 
     // set attributes
     gameCanvas.setAttribute('id', 'gameCanvas');
-
     setCanvasFullscreen(gameCanvas);
 
     // return completed game canvas
