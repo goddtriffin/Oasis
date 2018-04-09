@@ -30,7 +30,7 @@ function signup (signup) {
 
     // make sure password and repassword match
     if (data.info.password !== data.info.repassword) {
-        signupFailure(data, 'passwords don\'t match');
+        signupFailure(data, {type: 'password', message: 'passwords don\'t match'});
         return;
     }
 
@@ -45,7 +45,7 @@ function signup (signup) {
 function createUser (data) {
     // catch error from last step
     if (data.err) {
-        signupFailure(data, 'sqlite3 error');
+        signupFailure(data, {type: 'database', message: 'sqlite3 error'});
         return;
     }
 
@@ -54,7 +54,7 @@ function createUser (data) {
         bcrypt.hash(data.info.password, saltRounds, function(err, hash) {
             // handle bcrypt error
             if (err) {
-                signupFailure(data, 'bcrypt error: ' + err);
+                signupFailure(data, {type: 'encryption', message: 'bcrypt error: ' + err});
                 return;
             }
 
@@ -67,7 +67,7 @@ function createUser (data) {
         });
     } else {
         // username already exists
-        signupFailure(data, 'username taken');
+        signupFailure(data, {type: 'username', message: 'username taken'});
     }
 }
 
@@ -75,7 +75,7 @@ function createUser (data) {
 function signupSuccess (data) {
     // catch error from last step
     if (data.err) {
-        signupFailure(data, 'sqlite3 error');
+        signupFailure(data, {type: 'database', message: 'sqlite3 error'});
     }
 
     // log

@@ -34,7 +34,13 @@ function loginSuccess (session) {
 
 // handles a login failure
 function loginFailure (err) {
-    console.log('login failed | err:', err);
+    // get login form, get username input field, create error alert
+    const loginForm = document.getElementById('loginForm');
+    const usernameInputField = document.getElementById('usernameInputField');
+    const errorAlert = createErrorAlert(err.message);
+
+    // put the error alert right above the username input field
+    loginForm.insertBefore(errorAlert, usernameInputField);
 }
 
 // stores user session information to browser local storage on successful login

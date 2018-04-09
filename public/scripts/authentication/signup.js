@@ -32,7 +32,13 @@ function signupSuccess () {
 
 // handles signup failure
 function signupFailure (err) {
-    console.log('signup failed | err:', err);
+    // get signup form, get username input field, create error alert
+    const signupForm = document.getElementById('signupForm');
+    const usernameInputField = document.getElementById('usernameInputField');
+    const errorAlert = createErrorAlert(err.message);
+
+    // put the error alert right above the username input field
+    signupForm.insertBefore(errorAlert, usernameInputField);
 }
 
 //

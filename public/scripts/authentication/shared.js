@@ -61,3 +61,16 @@ function createRepasswordInputField () {
     // return completed repassword input field
     return repasswordInputField;
 }
+
+// returns error alert paragraph
+function createErrorAlert (errorMessage) {
+    // create paragraph
+    const errorAlert = document.createElement('p');
+
+    // set attributes
+    errorAlert.innerHTML = errorMessage;
+    errorAlert.classList.add('errorAlert');
+
+    // return completed error alert paragraph
+    return errorAlert;
+}

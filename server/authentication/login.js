@@ -29,7 +29,7 @@ function login (login) {
 function authenticateUser (data) {
     // catch error from last step
     if (data.err) {
-        loginFailure(data, 'sqlite3 error');
+        loginFailure(data, {type: 'database', message: 'sqlite3 error'});
     }
 
     // username does exist
@@ -37,7 +37,7 @@ function authenticateUser (data) {
         // check if passwords match
         bcrypt.compare(data.info.password, data.row.hash, function(err, res) {
             if (err) {
-                loginFailure(data, 'bcrypt error: ' + err);
+                loginFailure(data, {type: 'encryption', message: 'bcrypt error: ' + err});
                 return;
             }
 
@@ -54,13 +54,13 @@ function authenticateUser (data) {
                 database.close(data.db);
             } else {
                 // passwords don't match
-                loginFailure(data, 'wrong password');
+                loginFailure(data, {type: 'password', message: 'wrong password'});
                 return;
             }
         });
     } else {
         // username doesn't exist
-        loginFailure(data, 'user doesn\'t exist');
+        loginFailure(data, {type: 'username', message: 'username doesn\'t exist'});
     }
 }
 
