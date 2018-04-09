@@ -7,8 +7,9 @@ const io = require('socket.io')(http);
 // clients
 const clients = require('./clients');
 
-// allow access to everything in public folder
+// allow access to everything in these folders
 app.use(express.static('public'));
+app.use(express.static('shared'));
 
 // home requested
 app.get('/', function (req, res) {

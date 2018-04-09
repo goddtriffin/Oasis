@@ -1,24 +1,48 @@
+//
+//      Initializers
+//
+
 // initializes the game
 function initGame () {
     // load game canvas (set as global var)
-    gameCanvas = createGameCanvas();
-    if (gameCanvas) document.body.appendChild(gameCanvas);
+    OasisCanvas = createGameCanvas();
+    if (OasisCanvas) document.body.appendChild(OasisCanvas);
 
     // get game canvas context (set as global var)
-    ctx = gameCanvas.getContext('2d');
+    OasisCanvasContext = OasisCanvas.getContext('2d');
 
-    // test
-    test();
+    // initialize this clients player
+    initPlayer();
+
+    // start game loop
+    startGameLoop(tick, render, 60);
 }
 
-// test
-function test () {
-    // set background color as red
-    ctx.fillStyle = "red";
-    ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+// starts the game loop
+function startGameLoop (tickCallback, renderCallback, desired_ups) {
+	setInterval(function () {
+		tickCallback();
+		renderCallback();
+	}, (1000 / desired_ups));
+}
 
-    // hello world
-    ctx.fillStyle = 'black';
-    ctx.font = "30px Arial";
-    ctx.fillText('Hello World!', 10, 50);
+// initializes this clients player
+function initPlayer () {
+    OasisPlayer = new Player(localStorage.getItem('Oasis-session-username'));
+}
+
+//
+//      Game Loops
+//
+
+// updates the state of all game data
+function tick () {
+    OasisPlayer.tick();
+}
+
+// renders all necessary game data to the screen
+function render () {
+    clearGameScreen('white');
+
+    OasisPlayer.render();
 }
