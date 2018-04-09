@@ -1,33 +1,34 @@
 {
-  "name": "oasis",
-  "version": "1.0.0",
-  "description": "Simple realtime multiplayer landscape.",
-  "main": "server/app.js",
-  "scripts": {
-    "setup": "npm install",
-    "start": "nodemon server/app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MagnusFrater/Oasis.git"
-  },
-  "keywords": [
-    "simple",
-    "realtime",
-    "multiplayer",
-    "landscape"
-  ],
-  "author": "Todd Griffin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MagnusFrater/Oasis/issues"
-  },
-  "homepage": "https://github.com/MagnusFrater/Oasis#readme",
-  "dependencies": {
-    "bcrypt": "^1.0.3",
-    "express": "^4.16.3",
-    "nodemon": "^1.17.3",
-    "socket.io": "^2.1.0",
-    "sqlite3": "^4.0.0"
-  }
+    "name": "oasis",
+    "version": "1.0.0",
+    "description": "Simple realtime multiplayer landscape.",
+    "main": "server/app.js",
+    "scripts": {
+        "setup": "npm install | mkdir db | node sqlite3-test.js production",
+        "start": "nodemon server/app.js",
+        "reset-db": "rm db/production.db | node sqlite3-test.js production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MagnusFrater/Oasis.git"
+    },
+    "keywords": [
+        "simple",
+        "realtime",
+        "multiplayer",
+        "landscape"
+    ],
+    "author": "Todd Griffin",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/MagnusFrater/Oasis/issues"
+    },
+    "homepage": "https://github.com/MagnusFrater/Oasis#readme",
+    "dependencies": {
+        "bcrypt": "^1.0.3",
+        "express": "^4.16.3",
+        "nodemon": "^1.17.3",
+        "socket.io": "^2.1.0",
+        "sqlite3": "^4.0.0"
+    }
 }
