@@ -2,12 +2,29 @@
 <html>
     <head>
         <title>Oasis</title>
+
+        <link rel="stylesheet" href="/style/authentication.css">
     </head>
 
     <body>
-        <h1>Oasis</h1>
-
+        <!-- socket.io -->
         <script src="/socket.io/socket.io.js"></script>
+        <script src="/scripts/initSocket.js"></script>
+
+        <!-- utils -->
+        <script src="/scripts/utils.js"></script>
+
+        <!-- authentication -->
+        <script src="/scripts/authentication/shared.js"></script>
+        <script src="/scripts/authentication/signup.js"></script>
+        <script src="/scripts/authentication/login.js"></script>
+
+        <!-- engine -->
+        <script src="/scripts/engine/views.js"></script>
+        <script src="/scripts/engine/game.js"></script>
+
+        <!-- client -->
+        <script src="/scripts/views.js"></script>
         <script src="/scripts/client.js"></script>
     </body>
 </html>
