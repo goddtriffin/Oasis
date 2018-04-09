@@ -36,6 +36,13 @@ function loadMainScreen () {
 
     // if both session variables exist/not-null, send to game
     if (sessionID && sessionUsername) {
-        console.log('send to game');
+        // get rid of header
+        removePageHeader();
+
+        // get rid of login/signup screen
+        removeLoginSignupChoice();
+
+        // start the game!
+        initGame();
     }
 }

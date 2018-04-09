@@ -67,6 +67,15 @@ function createPageHeader () {
     return pageHeader;
 }
 
+// removes page header
+function removePageHeader () {
+    // check for element removal errors
+    if (elementRemovalErrors('pageHeader')) return;
+
+    // remove page header
+    removeElement('pageHeader');
+}
+
 // returns login/signup choice
 function createLoginSignupChoice () {
     // check for element creation errors
