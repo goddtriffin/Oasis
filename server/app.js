@@ -19,6 +19,6 @@ app.get('/', function (req, res) {
 clients.init(io);
 
 // start server
-http.listen(3000, function () {
-    console.log('Server listening on *:3000');
+http.listen(8633, function () {
+    console.log('Server listening on *:8633!');
 });
