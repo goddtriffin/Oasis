@@ -1,0 +1,8 @@
+input {
+    display: block;
+}
+
+.errorAlert {
+    background-color: red;
+    color: white;
+}
