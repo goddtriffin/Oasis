@@ -50,5 +50,5 @@ function playerLeft (socketID) {
 
 // handles updating a player's location
 function updatePlayerLocation (socketID, location) {
-    OasisPlayers[socketID].stats.location = location;
+    OasisPlayers[socketID].location = location;
 }
