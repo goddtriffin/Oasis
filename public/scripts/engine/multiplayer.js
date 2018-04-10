@@ -37,14 +37,10 @@ function joinGame () {
 // handles a new player joining
 function playerJoined (socketID, username, stats) {
     OasisPlayers[socketID] = new OtherPlayer(username, stats);
-
-    // console.log(username, '(' + socketID + ')', 'joined the Oasis.');
 }
 
 // handles a player leaving
 function playerLeft (socketID) {
-    // console.log(OasisPlayers[socketID].username, '(' + socketID + ')', 'left the Oasis.');
-
     delete OasisPlayers[socketID];
 }
 

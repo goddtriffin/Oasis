@@ -5,4 +5,9 @@ class Location {
         this.x = x;
         this.y = y;
     }
+
+    // returns a String representation of this model's data
+    toString () {
+        return "(" + this.x + ", " + this.y + ")";
+    }
 }

@@ -75,10 +75,14 @@ function render () {
     clearGameScreen('white');
 
     // render all the other players
-    Object.keys(OasisPlayers).forEach(function (username) {
-        OasisPlayers[username].render();
-    });
+    renderOtherPlayers();
 
     // render this clients player
     OasisPlayer.render();
+}
+
+function renderOtherPlayers () {
+    Object.keys(OasisPlayers).forEach(function (socketID) {
+        OasisPlayers[socketID].render();
+    });
 }
