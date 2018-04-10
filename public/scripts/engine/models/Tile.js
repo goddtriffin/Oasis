@@ -13,11 +13,8 @@ class Tile {
         OasisCanvasContext.fillRect(tileX, tileY, Tile.size.width, Tile.size.height);
 
         // draw tile outline
-        /*
         OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.rect(tileX, tileY, Tile.size.width, Tile.size.height);
-        OasisCanvasContext.stroke();
-        */
+        OasisCanvasContext.strokeRect(tileX, tileY, Tile.size.width, Tile.size.height);
     }
 
     // returns a tile color from a tile type
@@ -35,4 +32,4 @@ class Tile {
 }
 
 // set static Tile size
-Tile.size = new Size(30, 30);
+Tile.size = new Size(100, 100);

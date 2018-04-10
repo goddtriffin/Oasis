@@ -28,13 +28,19 @@ class World {
     // renders the game world
     render () {
         // only render the tiles that can be seen on the screen
-        const yMin = 0;
-        const yMax = this.tiles.length;
+        let yMin = Math.floor(OasisCamera.location.y / Tile.size.height);
+        let yMax = Math.ceil((OasisCamera.location.y + OasisCanvas.height) / Tile.size.height);
 
-        const xMin = 0;
-        const xMax = this.tiles.length;
+        let xMin = Math.floor(OasisCamera.location.x / Tile.size.width);
+        let xMax = Math.ceil((OasisCamera.location.x + OasisCanvas.width) / Tile.size.width);
 
-        let tileCount = 0;
+        let tileCount = 0;  // TEMP
+
+        // boundary setting (FOR NOW)
+        if (yMin < 0) yMin = 0;
+        if (xMin < 0) xMin = 0;
+        if (yMax > this.tiles.length) yMax = this.tiles.length;
+        if (xMax > this.tiles.length) xMax = this.tiles.length;
 
         // cycle through every tile in the world
         for (let y = yMin; y < yMax; y++) {
@@ -46,11 +52,13 @@ class World {
         }
 
         // TEMP
-        /*
         OasisCanvasContext.fillStyle = 'black';
         OasisCanvasContext.font = "15px Arial";
         OasisCanvasContext.fillText(tileCount.toString(), 50, 50);
-        */
+
+        // OasisCanvasContext.fillStyle = 'black';
+        // OasisCanvasContext.font = "15px Arial";
+        OasisCanvasContext.fillText(OasisCamera.location.toString(), 150, 50);
     }
 }
 
