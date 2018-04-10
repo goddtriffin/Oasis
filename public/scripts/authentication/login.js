@@ -18,13 +18,13 @@ function login (e) {
     const password = document.getElementById('passwordInputField').value;
 
     // attempt login
-    socket.emit('login', {username, password});
+    socket.emit('login', username, password);
 }
 
 // handles a login success
-function loginSuccess (session) {
+function loginSuccess (sessionID, sessionUsername) {
     // store session
-    storeUserSessionData(session);
+    storeUserSessionData(sessionID, sessionUsername);
 
     // go back to main screen
     removeLoginForm();
@@ -33,23 +33,23 @@ function loginSuccess (session) {
 }
 
 // handles a login failure
-function loginFailure (err) {
+function loginFailure (errorType, errorMessage) {
     // get login form, get username input field, create error alert
     const loginForm = document.getElementById('loginForm');
     const usernameInputField = document.getElementById('usernameInputField');
-    const errorAlert = createErrorAlert(err.message);
+    const errorAlert = createErrorAlert(errorMessage);
 
     // put the error alert right above the username input field
     loginForm.insertBefore(errorAlert, usernameInputField);
 }
 
 // stores user session information to browser local storage on successful login
-function storeUserSessionData (session) {
+function storeUserSessionData (sessionID, sessionUsername) {
     // set id
-    localStorage.setItem('Oasis-session-id', session.id);
+    localStorage.setItem('Oasis-session-id', sessionID);
 
     // set username
-    localStorage.setItem('Oasis-session-username', session.username);
+    localStorage.setItem('Oasis-session-username', sessionUsername);
 }
 
 //

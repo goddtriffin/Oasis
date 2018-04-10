@@ -10,12 +10,12 @@ const login = require('./login').login;
 
 // handles signing up
 // signup = {username, password}
-function signup (signup) {
+function signup (username, password, repassword) {
     console.log('\nUser Signup\n===========');
 
     // get signup time
     const date = new Date();
-    signup.creationDate = date.toLocaleTimeString();
+    creationDate = date.toLocaleTimeString();
 
     // get database instance
     const db = database.getInstance();
@@ -24,13 +24,18 @@ function signup (signup) {
     const data = {
         'socket': this,
         db,
-        info: signup,
+        info: {
+            username,
+            password,
+            repassword,
+            creationDate
+        },
         err: false
     };
 
     // make sure password and repassword match
     if (data.info.password !== data.info.repassword) {
-        signupFailure(data, {type: 'password', message: 'passwords don\'t match'});
+        signupFailure(data, 'password', 'passwords don\'t match');
         return;
     }
 
@@ -45,7 +50,7 @@ function signup (signup) {
 function createUser (data) {
     // catch error from last step
     if (data.err) {
-        signupFailure(data, {type: 'database', message: 'sqlite3 error'});
+        signupFailure(data, 'database', 'sqlite3 error');
         return;
     }
 
@@ -54,7 +59,7 @@ function createUser (data) {
         bcrypt.hash(data.info.password, saltRounds, function(err, hash) {
             // handle bcrypt error
             if (err) {
-                signupFailure(data, {type: 'encryption', message: 'bcrypt error: ' + err});
+                signupFailure(data, 'encryption', 'bcrypt error: ' + err);
                 return;
             }
 
@@ -67,7 +72,7 @@ function createUser (data) {
         });
     } else {
         // username already exists
-        signupFailure(data, {type: 'username', message: 'username taken'});
+        signupFailure(data, 'username', 'username taken');
     }
 }
 
@@ -75,14 +80,14 @@ function createUser (data) {
 function signupSuccess (data) {
     // catch error from last step
     if (data.err) {
-        signupFailure(data, {type: 'database', message: 'sqlite3 error'});
+        signupFailure(data, 'database', 'sqlite3 error');
     }
 
     // log
     console.log(data.info.username, 'signed up.');
 
     // tell client
-    data.socket.emit('signup success', null);
+    data.socket.emit('signup success');
 
     // always
     database.close(data.db);
@@ -90,16 +95,16 @@ function signupSuccess (data) {
     // since successfully signed up, login
     // has to bind to socket (make 'this' refer to socket) because login sets its 'data.socket' var equal to 'this'
     const socketBindLogin = login.bind(data.socket);
-    socketBindLogin({username: data.info.username, password: data.info.password});
+    socketBindLogin(data.info.username, data.info.password);
 }
 
 // handles signup failure
-function signupFailure (data, err) {
+function signupFailure (data, errorType, errorMessage) {
     // log
-    console.log('signup failure:', err);
+    console.log('signup failure:', errorMessage);
 
     // tell client
-    data.socket.emit('signup failure', err);
+    data.socket.emit('signup failure', errorType, errorMessage);
 
     // always
     database.close(data.db);

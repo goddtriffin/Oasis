@@ -2,24 +2,27 @@
 const login = require('./authentication/login').login;
 const signup = require('./authentication/signup').signup;
 
+// game
+const game = require('./game');
+
 // initializes the handler for client connection
 function init (io) {
     // new connection
     io.on('connection', function (socket) {
-        console.log('user connected');
+        console.log('\n' + socket.id, 'connected.');
 
         // authentication
         socket.on('login', login);
         socket.on('signup', signup);
 
-        // disconnection
-        socket.on('disconnect', disconnect);
-    });
-}
+        // send connected players
+        socket.on('send connected players', game.sendConnectedPlayers);
+        socket.on('join', game.join);
+        socket.on('location update', game.updateLocation);
 
-// handles the disconnection of a user
-function disconnect () {
-    console.log('user disconnected');
+        // disconnection
+        socket.on('disconnect', game.disconnect);
+    });
 }
 
 // export

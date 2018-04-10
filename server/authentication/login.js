@@ -5,7 +5,7 @@ const database = require('../database');
 const bcrypt = require('bcrypt');
 
 // handles logging in a user
-function login (login) {
+function login (username, password) {
     console.log('\nUser Login\n==========');
 
     // get database instance
@@ -15,7 +15,10 @@ function login (login) {
     const data = {
         'socket': this,
         db,
-        info: login,
+        info: {
+            username,
+            password
+        },
         err: false
     };
 
@@ -29,7 +32,7 @@ function login (login) {
 function authenticateUser (data) {
     // catch error from last step
     if (data.err) {
-        loginFailure(data, {type: 'database', message: 'sqlite3 error'});
+        loginFailure(data, 'database', 'sqlite3 error');
     }
 
     // username does exist
@@ -37,7 +40,7 @@ function authenticateUser (data) {
         // check if passwords match
         bcrypt.compare(data.info.password, data.row.hash, function(err, res) {
             if (err) {
-                loginFailure(data, {type: 'encryption', message: 'bcrypt error: ' + err});
+                loginFailure(data, 'encryption', 'bcrypt error: ' + err);
                 return;
             }
 
@@ -48,29 +51,29 @@ function authenticateUser (data) {
                 console.log(data.info.username, 'logged in.');
 
                 // tell client
-                data.socket.emit('login success', {id: data.row.id, username: data.row.username});
+                data.socket.emit('login success', data.row.id, data.row.username);
 
                 // always
                 database.close(data.db);
             } else {
                 // passwords don't match
-                loginFailure(data, {type: 'password', message: 'wrong password'});
+                loginFailure(data, 'password', 'wrong password');
                 return;
             }
         });
     } else {
         // username doesn't exist
-        loginFailure(data, {type: 'username', message: 'username doesn\'t exist'});
+        loginFailure(data, 'username', 'username doesn\'t exist');
     }
 }
 
 // handles login failure
-function loginFailure (data, err) {
+function loginFailure (data, errorType, errorMessage) {
     // log
-    console.log('login failure:', err);
+    console.log('login failure:', errorMessage);
 
     // tell client
-    data.socket.emit('login failure', err);
+    data.socket.emit('login failure', errorType, errorMessage);
 
     // always
     database.close(data.db);
