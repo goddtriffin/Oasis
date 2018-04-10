@@ -34,7 +34,7 @@ class World {
         let xMin = Math.floor(OasisCamera.location.x / Tile.size.width);
         let xMax = Math.ceil((OasisCamera.location.x + OasisCanvas.width) / Tile.size.width);
 
-        let tileCount = 0;  // TEMP
+        // let tileCount = 0;  // TEMP
 
         // boundary setting (FOR NOW)
         if (yMin < 0) yMin = 0;
@@ -51,6 +51,7 @@ class World {
             }
         }
 
+        /*
         // TEMP
         OasisCanvasContext.fillStyle = 'black';
         OasisCanvasContext.font = "15px Arial";
@@ -59,6 +60,7 @@ class World {
         // OasisCanvasContext.fillStyle = 'black';
         // OasisCanvasContext.font = "15px Arial";
         OasisCanvasContext.fillText(OasisCamera.location.toString(), 150, 50);
+        */
     }
 }
 
