@@ -24,8 +24,8 @@ function initGame () {
     // attach game listeners
     attachGameListeners();
 
-    // LOAD ALL RESOURCES NEEDED FROM THE SERVER
-    // ie. world map
+    // load world
+    initWorld();
 
     // initialize container for other players
     initOtherPlayers();
@@ -74,6 +74,9 @@ function render () {
     // wipe the screen for the next render pass
     clearGameScreen('white');
 
+    // render the world
+    OasisWorld.render();
+
     // render all the other players
     renderOtherPlayers();
 
@@ -81,6 +84,7 @@ function render () {
     OasisPlayer.render();
 }
 
+// renders all the other players
 function renderOtherPlayers () {
     Object.keys(OasisPlayers).forEach(function (socketID) {
         OasisPlayers[socketID].render();
