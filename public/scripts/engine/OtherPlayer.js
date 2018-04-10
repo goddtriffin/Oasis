@@ -12,22 +12,10 @@ class OtherPlayer extends Player {
             // is on screen
 
             // render body
-            OasisCanvasContext.fillStyle = this.color;
-            OasisCanvasContext.fillRect(
-                (this.location.x - (this.size.width / 2)) - OasisCamera.location.x,
-                (this.location.y - (this.size.height / 2)) - OasisCamera.location.y,
-                this.size.width,
-                this.size.height
-            );
+            this.renderBody();
             
             // render username
-            OasisCanvasContext.fillStyle = 'black';
-            OasisCanvasContext.font = "15px Arial";
-            OasisCanvasContext.fillText(
-                this.username,
-                (this.location.x - (this.size.width / 2)) - OasisCamera.location.x,
-                (this.location.y - this.size.height) - OasisCamera.location.y
-            );
+            this.renderUsername();
         } else {
             // not on screen
             OasisCanvasContext.fillStyle = this.color;
@@ -68,8 +56,10 @@ class OtherPlayer extends Player {
         }
     }
 
+    /*
     // handles player movement
     move () {
         // TODO (potentially): interpolation
     }
+    */
 }

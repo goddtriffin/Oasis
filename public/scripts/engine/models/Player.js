@@ -16,35 +16,32 @@ class Player extends Entity {
     // render the player to the screen
     render () {
         // render body
+        this.renderBody();
+
+        // render username
+        this.renderUsername();
+    }
+
+    // renders the player's body
+    renderBody () {
         OasisCanvasContext.fillStyle = this.color;
         OasisCanvasContext.fillRect(
-            (this.location.x - (this.size.width / 2)) - OasisCamera.location.x,
-            (this.location.y - (this.size.height / 2)) - OasisCamera.location.y,
+            this.location.x - OasisCamera.location.x,
+            this.location.y - OasisCamera.location.y,
             this.size.width,
             this.size.height
         );
+    }
 
-        // render username
+    // renders the player's username
+    renderUsername () {
         OasisCanvasContext.fillStyle = 'black';
         OasisCanvasContext.font = "15px Arial";
         OasisCanvasContext.fillText(
             this.username,
-            (this.location.x - (this.size.width / 2)) - OasisCamera.location.x,
-            (this.location.y - this.size.height) - OasisCamera.location.y
+            this.location.x - OasisCamera.location.x,
+            this.location.y - OasisCamera.location.y - this.size.height + 5
         );
-
-        /*
-        // test
-        if (this.username === "Dad") {
-            OasisCanvasContext.fillStyle = 'black';
-            OasisCanvasContext.font = "15px Arial";
-            OasisCanvasContext.fillText(
-                this.getScreenLocation().toString(),
-                100,
-                100
-            );
-        }
-        */
     }
 
     // handles player movement
