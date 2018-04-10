@@ -17,7 +17,12 @@ class Player extends Entity {
     render () {
         // render body
         OasisCanvasContext.fillStyle = this.color;
-        OasisCanvasContext.fillRect(this.location.x - (this.size.width / 2), this.location.y - (this.size.height / 2), this.size.width, this.size.height);
+        OasisCanvasContext.fillRect(
+            (this.location.x - (this.size.width / 2)) + OasisCamera.location.x, 
+            (this.location.y - (this.size.height / 2)) + OasisCamera.location.y, 
+            this.size.width, 
+            this.size.height
+        );
 
         // render username
         OasisCanvasContext.fillStyle = 'black';

@@ -35,3 +35,8 @@ class Camera {
         }
     }
 }
+
+// initializes the game's camera
+function initGameCamera () {
+    OasisCamera = new Camera(new Location(0,0), null);
+}
