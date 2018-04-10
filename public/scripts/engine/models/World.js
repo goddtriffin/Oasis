@@ -47,7 +47,7 @@ class World {
             for (let x = xMin; x < xMax; x++) {
                 // and render it
                 Tile.render(x, y, this.tiles[y][x]);
-                tileCount++;
+                // tileCount++;
             }
         }
 
