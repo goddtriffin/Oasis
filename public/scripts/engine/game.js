@@ -14,6 +14,9 @@ function initGame () {
     // initialize this clients player
     initPlayer();
 
+    // initialize game camera
+    initGameCamera();
+
     // attach keyboard listeners
     attachKeyDownHandler();
     attachKeyUpHandler();
@@ -61,6 +64,9 @@ function tick () {
 
     // update this clients player data
     OasisPlayer.tick();
+
+    // update the game camera
+    OasisCamera.tick();
 }
 
 // renders all necessary game data to the screen
@@ -69,10 +75,14 @@ function render () {
     clearGameScreen('white');
 
     // render all the other players
-    Object.keys(OasisPlayers).forEach(function (username) {
-        OasisPlayers[username].render();
-    });
+    renderOtherPlayers();
 
     // render this clients player
     OasisPlayer.render();
+}
+
+function renderOtherPlayers () {
+    Object.keys(OasisPlayers).forEach(function (socketID) {
+        OasisPlayers[socketID].render();
+    });
 }

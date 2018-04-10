@@ -9,7 +9,6 @@ const clients = require('./clients');
 
 // allow access to everything in these folders
 app.use(express.static('public'));
-app.use(express.static('shared'));
 
 // home requested
 app.get('/', function (req, res) {

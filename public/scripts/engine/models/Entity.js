@@ -1,5 +1,5 @@
 // Entity model
-// (Location) location , (Size) size, (double) speed
+// (Location) location , (Size) size , (double) speed
 class Entity {
     constructor (location, size, speed) {
         this.location = location;
