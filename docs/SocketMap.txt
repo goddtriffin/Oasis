@@ -6,6 +6,8 @@ CLIENT
 'signup'                        username , password , repassword        Sent when ready to sign up with a user account. Expects server's 'signup success' or 'signup failure' in return.
 'login'                         username , password                     Sent when ready to log in. Expects server's 'login success' or 'login failure' in return.
 
+'load world'                    NULL                                    Sent when the game world is ready to be loaded.
+
 'send connected players'        NULL                                    Sent when ready to initialize the collection of OtherPlayers.
 'join'                          username , stats                        Sent when ready to visit the Oasis.
 'location update'               location                                Sent when the player's position has been updated.

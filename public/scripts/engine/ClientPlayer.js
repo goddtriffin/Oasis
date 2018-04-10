@@ -49,9 +49,9 @@ function initPlayer () {
 
     const stats = {};
     stats.location = new Location(0, 0);
-    stats.size = new Size(20, 20);
-    stats.speed = (username === 'Doctor Bees')? 10 : 5;
-    stats.color = (username === 'Doctor Bees')? 'gold' : 'red';
+    stats.size = new Size(50, 50);
+    stats.speed = (username === 'Doctor Bees' || username === 'Todd')? 12 : 8;
+    stats.color = (username === 'Doctor Bees' || username === 'Todd')? 'gold' : 'red';
 
     // create this clients player
     OasisPlayer = new ClientPlayer(username, stats);
