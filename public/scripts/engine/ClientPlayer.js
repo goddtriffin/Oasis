@@ -37,7 +37,22 @@ class ClientPlayer extends Player {
 
         // tell the server if movement updated
         if (updated) {
-            socket.emit('location update', this.username, this.location);
+            socket.emit('location update', this.location);
         }
     }
+}
+
+// initializes this clients player
+function initPlayer () {
+    // load client player stats
+    const username = localStorage.getItem('Oasis-session-username');
+
+    const stats = {};
+    stats.location = new Location(0, 0);
+    stats.size = new Size(20, 20);
+    stats.speed = (username === 'Doctor Bees')? 10 : 5;
+    stats.color = (username === 'Doctor Bees')? 'gold' : 'red';
+
+    // create this clients player
+    OasisPlayer = new ClientPlayer(username, stats);
 }

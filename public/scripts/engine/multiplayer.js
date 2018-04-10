@@ -2,61 +2,53 @@
 //      Callbacks
 //
 
-// handles a new player joining
-function playerJoined (username, stats) {
-    // ignore updates about myself
-    if (username === OasisPlayer.username)
-        return;
+// initializes the container for other players
+function initOtherPlayers () {
+    // create container
+    OasisPlayers = {};
 
-        OasisPlayers[username] = new OtherPlayer(username, stats);
-        console.log(username, 'joined the Oasis.');
-}
-
-// handles a player leaving
-function playerLeft (username) {
-    // ignore updates about myself
-    if (username === OasisPlayer.username)
-        return;
-
-    if (OasisPlayers[username]) {
-        delete OasisPlayers[username];
-        console.log(username, 'left the Oasis.');
-    } else {
-        console.error('player left:', 'username doesn\'t exist.');
-    }
-}
-
-// handles updating a player's location
-function updatePlayerLocation (username, location) {
-    // ignore updates about myself
-    if (username === OasisPlayer.username)
-        return;
-
-    if (OasisPlayers[username]) {
-        OasisPlayers[username].location = location;
-    } else {
-        console.error('update location:', 'username doesn\'t exist.');
-    }
+    // ask for all the users
+    socket.emit('send connected players');
 }
 
 // loads data on all currently connected players
 function loadConnectedPlayers (players) {
-    Object.keys(players).forEach(function (username) {
-        OasisPlayers[username] = new OtherPlayer(username, players[username]);
+    Object.keys(players).forEach(function (socketID) {
+        OasisPlayers[socketID] = new OtherPlayer(players[socketID].username, players[socketID].stats);
     });
 }
 
 // join the Oasis
 function joinGame () {
-    // prep user data
+    // prep username
     const username = OasisPlayer.username;
 
+    // prep other user stats
     const stats = {};
     stats.location = OasisPlayer.location;
     stats.size = OasisPlayer.size;
     stats.speed = OasisPlayer.speed;
-    stats.color = 'blue';
+    stats.color = OasisPlayer.color;
 
     // join
     socket.emit('join', username, stats);
+}
+
+// handles a new player joining
+function playerJoined (socketID, username, stats) {
+    OasisPlayers[socketID] = new OtherPlayer(username, stats);
+
+    console.log(username, '(' + socketID + ')', 'joined the Oasis.');
+}
+
+// handles a player leaving
+function playerLeft (socketID) {
+    console.log(OasisPlayers[socketID].username, '(' + socketID + ')', 'left the Oasis.');
+
+    delete OasisPlayers[socketID];
+}
+
+// handles updating a player's location
+function updatePlayerLocation (socketID, location) {
+    OasisPlayers[socketID].stats.location = location;
 }
