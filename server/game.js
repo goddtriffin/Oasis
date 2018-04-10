@@ -39,7 +39,10 @@ function disconnect () {
 
 // handles a clean departure from the Oasis
 function leave (socket) {
-    // console.log(this);
+    // player wasn't in the Oasis yet
+    if (!players[socket.id]) {
+        return;
+    }
 
     // tell the others
     socket.broadcast.emit('player left', socket.id);
