@@ -24,19 +24,19 @@ class Camera {
 
     // update the camera's data
     tick () {
-        move();
+        this.move();
     }
 
     // handle the camera's movement
     move () {
         // update camera location only if following a player
         if (this.playerFollowing) {
-            // TODO
+            this.location = this.playerFollowing.location;
         }
     }
 }
 
 // initializes the game's camera
 function initGameCamera () {
-    OasisCamera = new Camera(new Location(0,0), null);
+    OasisCamera = new Camera(new Location(0,0), OasisPlayer);
 }
