@@ -60,7 +60,7 @@ function createPageHeader () {
     const pageHeader = document.createElement('h1');
 
     // set attributes
-    pageHeader.innerHTML = "Oasis";
+    pageHeader.innerHTML = "Welcome to Oasis, a simple realtime multiplayer landscape.";
     pageHeader.setAttribute('id', 'pageHeader');
 
     // return completed page header
@@ -113,6 +113,70 @@ function removeLoginSignupChoice () {
 
     // remove login/signup choice
     removeElement('loginSignupChoice');
+}
+
+// returns game description
+function createGameDescription () {
+    // check for element creation errors
+    if (elementCreationErrors('gameDescription')) return;
+
+    // create container
+    const gameDescription = document.createElement('div');
+
+    // set attributes
+    gameDescription.setAttribute('id', 'gameDescription');
+
+    // add elements
+    gameDescription.appendChild(createParagraphMessage('Log in to your account to start playing, or sign up if you don\'t have one yet!'));
+
+    const gameInstructions = createGameInstructions();
+    gameDescription.appendChild(gameInstructions);
+
+    // return completed login/signup choice
+    return gameDescription;
+}
+
+// removes game description
+function removeGameDescription () {
+    // check for element removal errors
+    if (elementRemovalErrors('gameDescription')) return;
+
+    // remove game description
+    removeElement('gameDescription');
+}
+
+// returns game instructions
+function createGameInstructions (message) {
+    // check for element creation errors
+    if (elementCreationErrors('gameInstructions')) return;
+
+    // create container
+    const gameInstructions = document.createElement('div');
+
+    // set attributes
+    gameInstructions.setAttribute('id', 'gameInstructions');
+
+    // add elements
+    gameInstructions.appendChild(createParagraphMessage('Instructions'));
+    gameInstructions.appendChild(createParagraphMessage('------------'));
+    gameInstructions.appendChild(createParagraphMessage('WASD    :  move your character'));
+    gameInstructions.appendChild(createParagraphMessage('arrows  :  change your player\' direction'));
+
+    // return completed login/signup choice
+    return gameInstructions;
+}
+
+// returns a paragraph message
+function createParagraphMessage (message) {
+    // create container
+    const paragraphMessage = document.createElement('p');
+
+    // set attributes
+    paragraphMessage.innerHTML = message;
+    paragraphMessage.classList.add('paragraphMessage');
+
+    // return completed login/signup choice
+    return paragraphMessage;
 }
 
 // returns back button; name: 'login' | 'signup'

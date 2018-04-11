@@ -30,6 +30,10 @@ function loadMainScreen () {
     const loginSignupChoice = createLoginSignupChoice();
     if (loginSignupChoice) document.body.appendChild(loginSignupChoice);
 
+    // present game description
+    const gameDescription = createGameDescription();
+    if (gameDescription) document.body.appendChild(gameDescription);
+
     // check for user session data
     const sessionID = localStorage.getItem('Oasis-session-id');
     const sessionUsername = localStorage.getItem('Oasis-session-username');
@@ -41,6 +45,9 @@ function loadMainScreen () {
 
         // get rid of login/signup screen
         removeLoginSignupChoice();
+
+        // get rid of game instructions
+        removeGameDescription();
 
         // start the game!
         initGame();
