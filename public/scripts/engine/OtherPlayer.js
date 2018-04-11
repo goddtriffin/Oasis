@@ -9,6 +9,7 @@ class OtherPlayer extends Player {
 
     tick () {
         this.updateRenderLocation();
+        this.updateHands();
 
         /*
         // TEMP
@@ -23,10 +24,8 @@ class OtherPlayer extends Player {
         if (this.isOnScreen()) {
             // is on screen
 
-            // render body
             this.renderBody();
-            
-            // render username
+            this.renderHands();
             this.renderUsername();
         } else {
             // not on screen

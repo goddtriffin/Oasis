@@ -29,6 +29,7 @@ function joinGame () {
     stats.size = OasisPlayer.size;
     stats.speed = OasisPlayer.speed;
     stats.color = OasisPlayer.color;
+    stats.facing = OasisPlayer.facing;
 
     // join
     socket.emit('join', username, stats);
