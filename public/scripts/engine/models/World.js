@@ -84,5 +84,5 @@ class World {
 
 // initializes the game world
 function initWorld () {
-    OasisWorld = new World(new Size(20, 20));
+    OasisWorld = new World(new Size(100, 100));
 }
