@@ -1,7 +1,9 @@
 // World model
-// 
+// (Size) size
 class World {
-    constructor () {
+    constructor (size) {
+        this.size = size;
+
         // load the actual world tiles from the server
         this.load();
     }
@@ -16,9 +18,10 @@ class World {
 
         // generate the world
         this.tiles = [];
-        for (let y = 0; y < 100; y++) {
+        for (let y = 0; y < this.size.height; y++) {
             let column = [];
-            for (let x = 0; x < 100; x++) {
+            for (let x = 0; x < this.size.width; x++) {
+                // column.push((y + x) % this.size.width);
                 column.push(0);
             }
             this.tiles.push(column);
@@ -34,31 +37,46 @@ class World {
         let xMin = Math.floor(OasisCamera.location.x / Tile.size.width);
         let xMax = Math.ceil((OasisCamera.location.x + OasisCanvas.width) / Tile.size.width);
 
-        // let tileCount = 0;  // TEMP
+        // track how many tiles are being rendered
+        let tileCount = 0;
 
-        // boundary setting (FOR NOW)
-        if (yMin < 0) yMin = 0;
-        if (xMin < 0) xMin = 0;
-        if (yMax > this.tiles.length) yMax = this.tiles.length;
-        if (xMax > this.tiles.length) xMax = this.tiles.length;
+        // cycle through only the screen-visible tiles
+        for (let worldY = yMin; worldY < yMax; worldY++) {
+            for (let worldX = xMin; worldX < xMax; worldX++) {
+                let tilemapX = worldX;
+                let tilemapY = worldY;
 
-        // cycle through every tile in the world
-        for (let y = yMin; y < yMax; y++) {
-            for (let x = xMin; x < xMax; x++) {
+                // above/left of world
+                if (worldY < 0) {
+                    tilemapY += 1;
+                    tilemapY = this.size.height - ((-tilemapY) % this.size.height) - 1;
+                }
+                if (worldX < 0) {
+                    tilemapX += 1;
+                    tilemapX = this.size.width - ((-tilemapX) % this.size.width) - 1;
+                }
+
+                // below/right of world
+                if (worldY > this.size.height - 1) tilemapY %= (this.size.height);
+                if (worldX > this.size.width - 1) tilemapX %= (this.size.width);
+
+                // catch tilemap out-of-bounds errors
+                if (tilemapY < 0 || tilemapY > this.size.height - 1) console.error('worldY:', worldY, 'tilemapY:', tilemapY);
+                if (tilemapX < 0 || tilemapX > this.size.width - 1) console.error('worldX:', worldX, 'tilemapX:', tilemapX);
+
                 // and render it
-                Tile.render(x, y, this.tiles[y][x]);
-                // tileCount++;
+                Tile.render(worldX, worldY, this.tiles[tilemapY][tilemapX], tilemapX, tilemapY);
+                tileCount++;
             }
         }
 
-        /*
         // TEMP
+        /*
         OasisCanvasContext.fillStyle = 'black';
         OasisCanvasContext.font = "15px Arial";
         OasisCanvasContext.fillText(tileCount.toString(), 50, 50);
 
         // OasisCanvasContext.fillStyle = 'black';
-        // OasisCanvasContext.font = "15px Arial";
         OasisCanvasContext.fillText(OasisCamera.location.toString(), 150, 50);
         */
     }
@@ -66,5 +84,5 @@ class World {
 
 // initializes the game world
 function initWorld () {
-    OasisWorld = new World();
+    OasisWorld = new World(new Size(20, 20));
 }

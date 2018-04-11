@@ -60,7 +60,7 @@ function startGameLoop (tickCallback, renderCallback, desired_ups) {
 // updates the state of all game data
 function tick () {
     // update all other player's data
-    // ???
+    tickOtherPlayers();
 
     // update this clients player data
     OasisPlayer.tick();
@@ -82,11 +82,4 @@ function render () {
 
     // render this clients player
     OasisPlayer.render();
-}
-
-// renders all the other players
-function renderOtherPlayers () {
-    Object.keys(OasisPlayers).forEach(function (socketID) {
-        OasisPlayers[socketID].render();
-    });
 }
