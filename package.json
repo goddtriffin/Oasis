@@ -4,9 +4,9 @@
     "description": "Simple realtime multiplayer landscape.",
     "main": "server/app.js",
     "scripts": {
-        "setup": "npm install && mkdir db && node sqlite3-test.js production",
+        "setup": "npm install && mkdir db && node dev/sqlite3-tool.js production",
         "start": "nodemon server/app.js",
-        "reset-db": "rm db/production.db && node sqlite3-test.js production"
+        "reset-db": "rm db/production.db && node dev/sqlite3-tool.js production"
     },
     "repository": {
         "type": "git",
