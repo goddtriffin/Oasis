@@ -15,10 +15,11 @@ function init (io) {
         socket.on('login', login);
         socket.on('signup', signup);
 
-        // send connected players
+        // game
         socket.on('send connected players', game.sendConnectedPlayers);
         socket.on('join', game.join);
         socket.on('location update', game.updateLocation);
+        socket.on('direction update', game.updateDirection);
 
         // disconnection
         socket.on('disconnect', game.disconnect);

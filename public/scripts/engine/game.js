@@ -43,6 +43,7 @@ function attachGameListeners () {
     socket.on('player joined', playerJoined);
     socket.on('player left', playerLeft);
     socket.on('update player location', updatePlayerLocation);
+    socket.on('update player direction', updatePlayerDirection);
 }
 
 // starts the game loop

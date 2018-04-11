@@ -2,7 +2,6 @@
 // (String) username , ({}) stats
 class Player extends Entity {
     constructor (username, stats) {
-        console.log(stats);
         super(stats.location, stats.size);
 
         // initialize player stats

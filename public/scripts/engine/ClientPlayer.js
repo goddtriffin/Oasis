@@ -62,10 +62,11 @@ class ClientPlayer extends Player {
     // update the direction the player is facing
     // ('up' || 'down' || 'left' || 'right') direction
     face (direction) {
-        this.facing = direction;
+        // tell the others
+        socket.emit('direction update', direction);
 
-        // tell all the others
-        // TODO
+        // update it locally
+        this.facing = direction;
     }
 }
 

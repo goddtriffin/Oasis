@@ -49,3 +49,8 @@ function playerLeft (socketID) {
 function updatePlayerLocation (socketID, location) {
     OasisPlayers[socketID].location = location;
 }
+
+// handles updating a player's direction
+function updatePlayerDirection (socketID, direction) {
+    OasisPlayers[socketID].facing = direction;
+}

@@ -29,6 +29,15 @@ function updateLocation (location) {
     players[this.id].stats.location = location;
 }
 
+// handles a player updating their direction
+function updateDirection (direction) {
+    // tell the others
+    this.broadcast.emit('update player direction', this.id, direction);
+
+    // update this player's record
+    players[this.id].stats.direction = direction;
+}
+
 // handles a socket closure
 function disconnect () {
     // leave the Oasis
@@ -62,5 +71,6 @@ module.exports = {
     sendConnectedPlayers,
     join,
     updateLocation,
+    updateDirection,
     disconnect
 }
