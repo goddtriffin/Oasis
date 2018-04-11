@@ -5,6 +5,7 @@
 // handles choosing to signup
 function chooseSignup () {
     removeLoginSignupChoice();
+    removeGameDescription();
 
     // load back button
     const backButton = createBackButton('signup');
@@ -18,6 +19,7 @@ function chooseSignup () {
 // handles choosing to login
 function chooseLogin () {
     removeLoginSignupChoice();
+    removeGameDescription();
 
     // load back button
     const backButton = createBackButton('login');
@@ -45,6 +47,10 @@ function resetHome (e) {
     // present login/signup choice
     const loginSignupChoice = createLoginSignupChoice();
     if (loginSignupChoice) document.body.appendChild(loginSignupChoice);
+
+    // present game description
+    const gameDescription = createGameDescription();
+    if (gameDescription) document.body.appendChild(gameDescription);
 }
 
 //
