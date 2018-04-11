@@ -6,12 +6,13 @@ CLIENT
 'signup'                        username , password , repassword        Sent when ready to sign up with a user account. Expects server's 'signup success' or 'signup failure' in return.
 'login'                         username , password                     Sent when ready to log in. Expects server's 'login success' or 'login failure' in return.
 
-'load world'                    NULL                                    Sent when the game world is ready to be loaded.
+// 'load world'                    NULL                                    Sent when the game world is ready to be loaded.
 
 'send connected players'        NULL                                    Sent when ready to initialize the collection of OtherPlayers.
 'join'                          username , stats                        Sent when ready to visit the Oasis.
 'location update'               location                                Sent when the player's position has been updated.
 
+'direction update'              direction                               Sent when the player's direction has been updated.
 
 SERVER
 =============
@@ -28,5 +29,7 @@ SERVER
 'player left'                   socketID                                On client "disconnect", send the client's ID so that everyone else can remove them from their local connected Oasis members list.
 
 'update player location'        socketID , location                     On client "location update", send the new location to everyone but the sender.
+
+'update player direction'       socketID , direction                    On client "direction update", send the new direction to everyone but the sender.
 
 'disconnect'                    NULL                                    On the closure of a socket, the player should be removed from the connected Oasis members list if they were among those who were.

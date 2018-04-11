@@ -12,32 +12,37 @@ function attachKeyUpHandler () {
 function keyDownCallback (e) {
 	switch (e.key) {
 		case "w":
-			// up
+			// move up
 			OasisPlayer.up = true;
 			break;
 		case "s":
-			// down
+			// move down
 			OasisPlayer.down = true;
 			break;
 		case "a":
-			// left
+			// move left
 			OasisPlayer.left = true;
 			break;
 		case "d":
-			// right
+			// move right
 			OasisPlayer.right = true;
 			break;
+
 		case "ArrowUp":
-			// up
+			// face up
+			OasisPlayer.face('up');
 			break;
 		case "ArrowDown":
-			// down
+			// face down
+			OasisPlayer.face('down');
 			break;
 		case "ArrowLeft":
-			// left
+			// face left
+			OasisPlayer.face('left');
 			break;
 		case "ArrowRight":
-			// right
+			// face right
+			OasisPlayer.face('right');
 			break;
 	}
 }
@@ -46,32 +51,33 @@ function keyDownCallback (e) {
 function keyUpCallback (e) {
 	switch (e.key) {
 		case "w":
-			// up
+			// move up
 			OasisPlayer.up = false;
 			break;
 		case "s":
-			// down
+			// move down
 			OasisPlayer.down = false;
 			break;
 		case "a":
-			// left
+			// move left
 			OasisPlayer.left = false;
 			break;
 		case "d":
-			// right
+			// move right
 			OasisPlayer.right = false;
 			break;
+
 		case "ArrowUp":
-			// up
+			// face up
 			break;
 		case "ArrowDown":
-			// down
+			// face down
 			break;
 		case "ArrowLeft":
-			// left
+			// face left
 			break;
 		case "ArrowRight":
-			// right
+			// face right
 			break;
 	}
 }

@@ -29,6 +29,7 @@ function joinGame () {
     stats.size = OasisPlayer.size;
     stats.speed = OasisPlayer.speed;
     stats.color = OasisPlayer.color;
+    stats.facing = OasisPlayer.facing;
 
     // join
     socket.emit('join', username, stats);
@@ -47,4 +48,9 @@ function playerLeft (socketID) {
 // handles updating a player's location
 function updatePlayerLocation (socketID, location) {
     OasisPlayers[socketID].location = location;
+}
+
+// handles updating a player's direction
+function updatePlayerDirection (socketID, direction) {
+    OasisPlayers[socketID].facing = direction;
 }

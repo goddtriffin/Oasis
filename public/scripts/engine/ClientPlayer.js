@@ -15,21 +15,25 @@ class ClientPlayer extends Player {
         // handle movement
         let updated = false;
 
+        // move up
         if (this.up) {
             this.location.y -= this.speed;
             updated = true;
         }
 
+        // move down
         if (this.down) {
             this.location.y += this.speed;
             updated = true;
         }
 
+        // move left
         if (this.left) {
             this.location.x -= this.speed;
             updated = true;
         }
 
+        // move right
         if (this.right) {
             this.location.x += this.speed;
             updated = true;
@@ -54,6 +58,16 @@ class ClientPlayer extends Player {
             socket.emit('location update', this.location);
         }
     }
+
+    // update the direction the player is facing
+    // ('up' || 'down' || 'left' || 'right') direction
+    face (direction) {
+        // tell the others
+        socket.emit('direction update', direction);
+
+        // update it locally
+        this.facing = direction;
+    }
 }
 
 // initializes this clients player
@@ -66,6 +80,7 @@ function initPlayer () {
     stats.size = new Size(50, 50);
     stats.speed = (username === 'Doctor Bees' || username === 'Todd')? 12 : 8;
     stats.color = (username === 'Doctor Bees' || username === 'Todd')? 'gold' : 'red';
+    stats.facing = 'up';
 
     // create this clients player
     OasisPlayer = new ClientPlayer(username, stats);
