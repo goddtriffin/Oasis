@@ -37,6 +37,20 @@ class ClientPlayer extends Player {
 
         // tell the server if movement updated
         if (updated) {
+            // if player has ventured too far from classical tilemap bounds {(0,0) <=> (tilemap.width, tilemap.height)},
+            // reset player location to within the classical tilemap bounds
+            const tooFarY = (OasisWorld.tiles.length * Tile.size.height) / 2;
+            const tooFarX = (OasisWorld.tiles.length * Tile.size.width) / 2;
+
+            // too far up/left
+            if (this.location.y < -(tooFarY)) this.location.y += (tooFarY * 2);
+            if (this.location.x < -(tooFarX)) this.location.x += (tooFarX * 2);
+
+            // too far down/right
+            if (this.location.y > tooFarY) this.location.y -= (tooFarY * 2);
+            if (this.location.x > tooFarX) this.location.x -= (tooFarX * 2);
+
+            // tell the others
             socket.emit('location update', this.location);
         }
     }

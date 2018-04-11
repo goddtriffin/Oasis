@@ -15,9 +15,9 @@ class World {
 
         // generate the world
         this.tiles = [];
-        for (let y = 0; y < 5; y++) {
+        for (let y = 0; y < 20; y++) {
             let column = [];
-            for (let x = 0; x < 5; x++) {
+            for (let x = 0; x < 20; x++) {
                 // column.push((y + x) % 5);
                 column.push(0);
             }
