@@ -3,6 +3,31 @@
 class OtherPlayer extends Player {
     constructor (username, stats) {
         super(username, stats);
+
+        this.renderLocation = stats.location;
+    }
+
+    tick () {
+        // reset render location
+        this.renderLocation = this.location;
+
+        // if OtherPlayer is more than one tilemap's width/height away client's player, render it closer
+        const tooFarY = (OasisWorld.size.height * Tile.size.height) / 2;
+        const tooFarX = (OasisWorld.size.width * Tile.size.width) / 2;
+
+        // up/left
+        if (this.renderLocation.y <= OasisPlayer.location.y - tooFarY) this.renderLocation.y += (tooFarY * 2);
+        if (this.renderLocation.x <= OasisPlayer.location.x - tooFarX) this.renderLocation.x += (tooFarX * 2);
+
+        // down/right
+        if (this.renderLocation.y >= OasisPlayer.location.y + tooFarY) this.renderLocation.y -= (tooFarY * 2);
+        if (this.renderLocation.x >= OasisPlayer.location.x + tooFarX) this.renderLocation.x -= (tooFarX * 2);
+
+        /*
+        // TEMP
+        console.log('actualLocation:', this.location);
+        console.log('renderLocation:', this.renderLocation);
+        */
     }
 
     // renders the OtherPlayer
@@ -18,41 +43,47 @@ class OtherPlayer extends Player {
             this.renderUsername();
         } else {
             // not on screen
-            OasisCanvasContext.fillStyle = this.color;
-            const lineThickness = 5;
+            this.renderLocationGhost();
+        }
+    }
 
-            // prepare coordinates
-            const screenLocation = this.getScreenLocation();
-            let x = screenLocation.x;
-            let y = screenLocation.y;
+    // renders the ghost of the OtherPlayer (line(s) on the game screens walls),
+    // instead of the OtherPlayer's body ONLY if can't be seen on the game screen inherently
+    renderLocationGhost () {
+        OasisCanvasContext.fillStyle = this.color;
+        const lineThickness = 5;
 
-            // make sure x is within the bounds of the screen
-            if (x < 0) x = 0;
-            if (x + this.size.width > OasisCanvas.width) x = OasisCanvas.width - this.size.width;
+        // prepare coordinates
+        const screenLocation = this.getScreenLocation();
+        let x = screenLocation.x;
+        let y = screenLocation.y;
 
-            // make sure y is within the bounds of the screen
-            if (y < 0) y = 0;
-            if (y + this.size.height > OasisCanvas.height) y = OasisCanvas.height - this.size.height;
+        // make sure x is within the bounds of the screen
+        if (x < 0) x = 0;
+        if (x + this.size.width > OasisCanvas.width) x = OasisCanvas.width - this.size.width;
 
-            // above
-            if (this.isAboveScreen()) {
-                OasisCanvasContext.fillRect(x, 0, this.size.width, lineThickness);
-            }
+        // make sure y is within the bounds of the screen
+        if (y < 0) y = 0;
+        if (y + this.size.height > OasisCanvas.height) y = OasisCanvas.height - this.size.height;
 
-            // below
-            if (this.isBelowScreen()) {
-                OasisCanvasContext.fillRect(x, OasisCanvas.height - lineThickness, this.size.width, lineThickness);
-            }
+        // above
+        if (this.isAboveScreen()) {
+            OasisCanvasContext.fillRect(x, 0, this.size.width, lineThickness);
+        }
 
-            // left
-            if (this.isLeftOfScreen()) {
-                OasisCanvasContext.fillRect(0, y, lineThickness, this.size.height);
-            }
+        // below
+        if (this.isBelowScreen()) {
+            OasisCanvasContext.fillRect(x, OasisCanvas.height - lineThickness, this.size.width, lineThickness);
+        }
 
-            // right
-            if (this.isRightOfScreen()) {
-                OasisCanvasContext.fillRect(OasisCanvas.width - lineThickness, y, lineThickness, this.size.height);
-            }
+        // left
+        if (this.isLeftOfScreen()) {
+            OasisCanvasContext.fillRect(0, y, lineThickness, this.size.height);
+        }
+
+        // right
+        if (this.isRightOfScreen()) {
+            OasisCanvasContext.fillRect(OasisCanvas.width - lineThickness, y, lineThickness, this.size.height);
         }
     }
 
@@ -62,4 +93,18 @@ class OtherPlayer extends Player {
         // TODO (potentially): interpolation
     }
     */
+}
+
+// updates all the other players
+function tickOtherPlayers () {
+    Object.keys(OasisPlayers).forEach(function (socketID) {
+        OasisPlayers[socketID].tick();
+    });
+}
+
+// renders all the other players
+function renderOtherPlayers () {
+    Object.keys(OasisPlayers).forEach(function (socketID) {
+        OasisPlayers[socketID].render();
+    });
 }

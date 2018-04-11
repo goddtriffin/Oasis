@@ -9,21 +9,42 @@ class Tile {
 
         // draw tile body
         OasisCanvasContext.fillStyle = Tile.getColor(tileType);
-        OasisCanvasContext.fillRect(tileX, tileY, Tile.size.width, Tile.size.height);
+        OasisCanvasContext.fillRect(
+            tileX,
+            tileY,
+            Tile.size.width,
+            Tile.size.height
+        );
 
         // draw tile outline
         OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.strokeRect(tileX, tileY, Tile.size.width, Tile.size.height);
+        OasisCanvasContext.strokeRect(
+            tileX,
+            tileY,
+            Tile.size.width,
+            Tile.size.height
+        );
 
+        // TEMP
+        /*
         // draw tile coordinate
         OasisCanvasContext.fillStyle = 'black';
         OasisCanvasContext.font = "15px Arial";
-        OasisCanvasContext.fillText('(' + worldX + ', ' + worldY + ')', tileX + (Tile.size.width / 2) - 10, tileY + (Tile.size.height / 2));
+        OasisCanvasContext.fillText(
+            '(' + worldX + ', ' + worldY + ')',
+            tileX + (Tile.size.width / 2) - 10,
+            tileY + (Tile.size.height / 2)
+        );
 
         // draw tilemap coordinate
         OasisCanvasContext.fillStyle = 'black';
         OasisCanvasContext.font = "15px Arial";
-        OasisCanvasContext.fillText('(' + tilemapX + ', ' + tilemapY + ')', tileX + (Tile.size.width / 2) - 10, tileY + (Tile.size.height / 2) + 15);
+        OasisCanvasContext.fillText(
+            '(' + tilemapX + ', ' + tilemapY + ')',
+            tileX + (Tile.size.width / 2) - 10,
+            tileY + (Tile.size.height / 2) + 15
+        );
+        */
     }
 
     // returns a tile color from a tile type

@@ -1,6 +1,9 @@
 // World model
+// (Size) size
 class World {
-    constructor () {
+    constructor (size) {
+        this.size = size;
+
         // load the actual world tiles from the server
         this.load();
     }
@@ -15,10 +18,10 @@ class World {
 
         // generate the world
         this.tiles = [];
-        for (let y = 0; y < 20; y++) {
+        for (let y = 0; y < this.size.height; y++) {
             let column = [];
-            for (let x = 0; x < 20; x++) {
-                // column.push((y + x) % 5);
+            for (let x = 0; x < this.size.width; x++) {
+                // column.push((y + x) % this.size.width);
                 column.push(0);
             }
             this.tiles.push(column);
@@ -46,20 +49,20 @@ class World {
                 // above/left of world
                 if (worldY < 0) {
                     tilemapY += 1;
-                    tilemapY = this.tiles.length - ((-tilemapY) % this.tiles.length) - 1;
+                    tilemapY = this.size.height - ((-tilemapY) % this.size.height) - 1;
                 }
                 if (worldX < 0) {
                     tilemapX += 1;
-                    tilemapX = this.tiles.length - ((-tilemapX) % this.tiles.length) - 1;
+                    tilemapX = this.size.width - ((-tilemapX) % this.size.width) - 1;
                 }
 
                 // below/right of world
-                if (worldY > this.tiles.length - 1) tilemapY %= (this.tiles.length);
-                if (worldX > this.tiles.length - 1) tilemapX %= (this.tiles.length);
+                if (worldY > this.size.height - 1) tilemapY %= (this.size.height);
+                if (worldX > this.size.width - 1) tilemapX %= (this.size.width);
 
                 // catch tilemap out-of-bounds errors
-                if (tilemapX < 0 || tilemapX > this.tiles.length - 1) console.error('worldY:', worldY, 'tilemapY:', tilemapY);
-                if (tilemapX < 0 || tilemapX > this.tiles.length - 1) console.error('worldX:', worldX, 'tilemapX:', tilemapX);
+                if (tilemapY < 0 || tilemapY > this.size.height - 1) console.error('worldY:', worldY, 'tilemapY:', tilemapY);
+                if (tilemapX < 0 || tilemapX > this.size.width - 1) console.error('worldX:', worldX, 'tilemapX:', tilemapX);
 
                 // and render it
                 Tile.render(worldX, worldY, this.tiles[tilemapY][tilemapX], tilemapX, tilemapY);
@@ -68,16 +71,18 @@ class World {
         }
 
         // TEMP
+        /*
         OasisCanvasContext.fillStyle = 'black';
         OasisCanvasContext.font = "15px Arial";
         OasisCanvasContext.fillText(tileCount.toString(), 50, 50);
 
         // OasisCanvasContext.fillStyle = 'black';
         OasisCanvasContext.fillText(OasisCamera.location.toString(), 150, 50);
+        */
     }
 }
 
 // initializes the game world
 function initWorld () {
-    OasisWorld = new World();
+    OasisWorld = new World(new Size(20, 20));
 }
