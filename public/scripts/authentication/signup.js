@@ -61,6 +61,7 @@ function createSignupForm () {
     if (signupHeader) signupForm.appendChild(signupHeader);
 
     signupForm.appendChild(createErrorAlert('Pick a dummy password! 1) The server doesn\'t use HTTPS. 2) My password hasher is `bcrypt` (Google it), so it\'s up to you if you trust that. 3) Don\'t trust anyone.'));
+    signupForm.appendChild(createErrorAlert('To log out, simply refresh or close the tab.'));
 
     const usernameInputField = createUsernameInputField();
     if (usernameInputField) signupForm.appendChild(usernameInputField);

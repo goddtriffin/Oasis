@@ -71,6 +71,8 @@ function createLoginForm () {
     const loginHeader = createLoginHeader();
     if (loginHeader) loginForm.appendChild(loginHeader);
 
+    loginForm.appendChild(createErrorAlert('To log out, simply refresh or close the tab.'));
+
     const usernameInputField = createUsernameInputField();
     if (usernameInputField) loginForm.appendChild(usernameInputField);
 
