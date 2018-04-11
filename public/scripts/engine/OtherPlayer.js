@@ -8,20 +8,7 @@ class OtherPlayer extends Player {
     }
 
     tick () {
-        // reset render location
-        this.renderLocation = this.location;
-
-        // if OtherPlayer is more than one tilemap's width/height away client's player, render it closer
-        const tooFarY = (OasisWorld.size.height * Tile.size.height) / 2;
-        const tooFarX = (OasisWorld.size.width * Tile.size.width) / 2;
-
-        // up/left
-        if (this.renderLocation.y <= OasisPlayer.location.y - tooFarY) this.renderLocation.y += (tooFarY * 2);
-        if (this.renderLocation.x <= OasisPlayer.location.x - tooFarX) this.renderLocation.x += (tooFarX * 2);
-
-        // down/right
-        if (this.renderLocation.y >= OasisPlayer.location.y + tooFarY) this.renderLocation.y -= (tooFarY * 2);
-        if (this.renderLocation.x >= OasisPlayer.location.x + tooFarX) this.renderLocation.x -= (tooFarX * 2);
+        this.updateRenderLocation();
 
         /*
         // TEMP
