@@ -10,12 +10,6 @@ class OtherPlayer extends Player {
     tick () {
         this.updateRenderLocation();
         this.updateHands();
-
-        /*
-        // TEMP
-        console.log('actualLocation:', this.location);
-        console.log('renderLocation:', this.renderLocation);
-        */
     }
 
     // renders the OtherPlayer
@@ -41,8 +35,8 @@ class OtherPlayer extends Player {
 
         // prepare coordinates
         const screenLocation = this.getScreenLocation();
-        let x = screenLocation.x;
-        let y = screenLocation.y;
+        let x = screenLocation.x + (this.size.width / 2);
+        let y = screenLocation.y + (this.size.height / 2);
 
         // make sure x is within the bounds of the screen
         if (x < 0) x = 0;
