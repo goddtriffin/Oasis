@@ -46,7 +46,7 @@ function updateDirection (direction) {
     this.broadcast.emit('update player direction', this.id, direction);
 
     // update this player's record
-    players[this.id].stats.direction = direction;
+    players[this.id].stats.facing = direction;
 }
 
 // handles a socket closure
