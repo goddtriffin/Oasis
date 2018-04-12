@@ -32,8 +32,8 @@ class Camera {
         // update camera location only if following a player
         if (this.playerFollowing) {
             // center the player in the camera
-            this.location.x = this.playerFollowing.location.x - (this.playerFollowing.size.width / 2) - (OasisCanvas.width / 2);
-            this.location.y = this.playerFollowing.location.y - (this.playerFollowing.size.height / 2) - (OasisCanvas.height / 2);
+            this.location.x = this.playerFollowing.location.x - (OasisCanvas.width / 2) + (this.playerFollowing.size.width / 2);
+            this.location.y = this.playerFollowing.location.y - (OasisCanvas.height / 2) + (this.playerFollowing.size.height / 2);
         }
     }
 }
