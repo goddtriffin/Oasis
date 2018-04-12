@@ -78,8 +78,8 @@ function initPlayer () {
     const stats = {};
     stats.location = new Location(0, 0);
     stats.size = new Size(50, 50);
-    stats.speed = (username === 'Doctor Bees' || username === 'Todd')? 12 : 8;
-    stats.color = (username === 'Doctor Bees' || username === 'Todd')? 'gold' : 'red';
+    stats.speed = 10;
+    stats.color = 'red';
     stats.facing = 'up';
 
     // create this clients player
