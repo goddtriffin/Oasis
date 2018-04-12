@@ -4,6 +4,8 @@
 
 // loads world tilemap from server
 function loadWorld (tilemap) {
+    console.log('received world:', tilemap);
+
     // set world's tilemap
     OasisWorld.tilemap = tilemap;
 

@@ -1,6 +1,7 @@
 // world
 const world = require('./world');
-world.generateRandom(100, 100);
+// world.generateRandom(100, 100);
+world.generateRealistic(1000, 1000, 5);
 
 // game
 const players = {};  // socketID: { username , stats }
