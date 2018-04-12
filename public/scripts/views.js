@@ -66,7 +66,7 @@ function createPageHeader () {
     const pageHeader = document.createElement('h1');
 
     // set attributes
-    pageHeader.innerHTML = "Welcome to Oasis, a simple realtime multiplayer landscape.";
+    pageHeader.innerHTML = "Welcome to Oasis: a simple, realtime multiplayer landscape.";
     pageHeader.setAttribute('id', 'pageHeader');
 
     // return completed page header
@@ -166,7 +166,7 @@ function createGameInstructions (message) {
     gameInstructions.appendChild(createParagraphMessage('Instructions'));
     gameInstructions.appendChild(createParagraphMessage('------------'));
     gameInstructions.appendChild(createParagraphMessage('WASD    :  move your character'));
-    gameInstructions.appendChild(createParagraphMessage('arrows  :  change your player\' direction'));
+    gameInstructions.appendChild(createParagraphMessage('Arrows  :  change your player\'s direction'));
 
     // return completed login/signup choice
     return gameInstructions;
