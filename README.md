@@ -1,6 +1,6 @@
 # Oasis
 
-Simple realtime multiplayer landscape.
+Simple, realtime multiplayer landscape.
 
 ## Author
 
