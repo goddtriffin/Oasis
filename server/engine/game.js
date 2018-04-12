@@ -1,8 +1,19 @@
+// world
+const world = require('./world');
+// world.generateRandom(100, 100);
+world.generateRealistic(1000, 1000, 5);
+
+// game
 const players = {};  // socketID: { username , stats }
 
 //
 //      Callbacks
 //
+
+// handles sending world tilemap data to the joining user
+function sendWorld () {
+    this.emit('load world', world.getTilemap());
+}
 
 // handles sending data on all of the currently connected players
 function sendConnectedPlayers () {
@@ -68,9 +79,10 @@ function leave (socket) {
 
 // exports
 module.exports = {
+    sendWorld,
     sendConnectedPlayers,
     join,
     updateLocation,
     updateDirection,
     disconnect
-}
+};

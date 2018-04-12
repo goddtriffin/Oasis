@@ -16,55 +16,52 @@ class Tile {
             Tile.size.height
         );
 
-        // draw tile outline
-        OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.strokeRect(
-            tileX,
-            tileY,
-            Tile.size.width,
-            Tile.size.height
-        );
+        // draw debug info
+        if (debug) {
+            // draw tile outline
+            OasisCanvasContext.fillStyle = 'black';
+            OasisCanvasContext.strokeRect(
+                tileX,
+                tileY,
+                Tile.size.width,
+                Tile.size.height
+            );
 
-        // TEMP
-        /*
-        // draw tile coordinate
-        OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.font = "15px Arial";
-        OasisCanvasContext.fillText(
-            '(' + worldX + ', ' + worldY + ')',
-            tileX + (Tile.size.width / 2) - 10,
-            tileY + (Tile.size.height / 2)
-        );
+            // draw tile coordinate
+            OasisCanvasContext.fillStyle = 'black';
+            OasisCanvasContext.font = "15px Arial";
+            OasisCanvasContext.fillText(
+                '(' + worldX + ', ' + worldY + ')',
+                tileX + (Tile.size.width / 2) - 10,
+                tileY + (Tile.size.height / 2)
+            );
 
-        // draw tilemap coordinate
-        OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.font = "15px Arial";
-        OasisCanvasContext.fillText(
-            '(' + tilemapX + ', ' + tilemapY + ')',
-            tileX + (Tile.size.width / 2) - 10,
-            tileY + (Tile.size.height / 2) + 15
-        );
-        */
+            // draw tilemap coordinate
+            OasisCanvasContext.fillStyle = 'black';
+            OasisCanvasContext.font = "15px Arial";
+            OasisCanvasContext.fillText(
+                '(' + tilemapX + ', ' + tilemapY + ')',
+                tileX + (Tile.size.width / 2) - 10,
+                tileY + (Tile.size.height / 2) + 15
+            );
+        }
     }
 
     // returns a tile color from a tile type
     // (int) tileType
     static getColor (tileType) {
         switch (tileType) {
-            case 0:
-                return 'green';
+            case 0: // grass
+                return 'limegreen';
             
-            case 1:
-                return 'red';
+            case 1: // sand
+                return 'khaki';
 
-            case 2:
-                return 'blue';
+            case 2: // shore
+                return 'aquamarine';
 
-            case 3:
-                return 'yellow';
-            
-            case 4:
-                return 'purple';
+            case 3: // ocean
+                return 'dodgerblue';
             
             default:
                 console.error('unknown tileType:', tileType);

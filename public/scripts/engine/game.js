@@ -2,6 +2,12 @@
 //      Initializers
 //
 
+// container for all things that need to be loaded
+const loading = {
+    world: false,
+    otherPlayers: false
+}
+
 // initializes the game
 function initGame () {
     // load game canvas (set as global var)
@@ -30,20 +36,36 @@ function initGame () {
     // initialize container for other players
     initOtherPlayers();
 
-    // THE WHOLE GAME HAS LOADED
-    joinGame();
-
-    // start game loop
-    startGameLoop(tick, render, 60);
+    // start the game!
+    startGame();
 }
 
 // attaches game listeners
 function attachGameListeners () {
+    socket.on('load world', loadWorld);
     socket.on('load connected players', loadConnectedPlayers);
     socket.on('player joined', playerJoined);
     socket.on('player left', playerLeft);
     socket.on('update player location', updatePlayerLocation);
     socket.on('update player direction', updatePlayerDirection);
+}
+
+// joins the Oasis and starts game loop (if all game data has been loaded)
+function startGame () {
+    // check to see if everything has been loaded
+    let everythingLoaded = true;
+    Object.keys(loading).forEach(function (key) {
+        if (!loading[key]) everythingLoaded = false;
+    });
+
+    // only join the Oasis and start ticking/rendering if all game data has been loaded
+    if (everythingLoaded) {
+        // THE WHOLE GAME HAS LOADED
+        joinGame();
+
+        // start game loop
+        startGameLoop(tick, render, 60);
+    }
 }
 
 // starts the game loop
