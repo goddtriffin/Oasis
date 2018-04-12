@@ -16,17 +16,17 @@ class Tile {
             Tile.size.height
         );
 
-        // draw tile outline
-        OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.strokeRect(
-            tileX,
-            tileY,
-            Tile.size.width,
-            Tile.size.height
-        );
-
         // draw debug info
         if (debug) {
+            // draw tile outline
+            OasisCanvasContext.fillStyle = 'black';
+            OasisCanvasContext.strokeRect(
+                tileX,
+                tileY,
+                Tile.size.width,
+                Tile.size.height
+            );
+
             // draw tile coordinate
             OasisCanvasContext.fillStyle = 'black';
             OasisCanvasContext.font = "15px Arial";
@@ -52,16 +52,16 @@ class Tile {
     static getColor (tileType) {
         switch (tileType) {
             case 0: // grass
-                return 'green';
+                return 'limegreen';
             
             case 1: // sand
-                return 'yellow';
+                return 'khaki';
 
             case 2: // shore
-                return 'lightblue';
+                return 'aquamarine';
 
             case 3: // ocean
-                return 'blue';
+                return 'dodgerblue';
             
             default:
                 console.error('unknown tileType:', tileType);
