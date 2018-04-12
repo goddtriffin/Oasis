@@ -4,7 +4,14 @@
 
 // loads world tilemap from server
 function loadWorld (tilemap) {
+    // set world's tilemap
     OasisWorld.tilemap = tilemap;
+
+    // update that the world has been loaded
+    loading.world = true;
+
+    // world tilemap loaded, start game!
+    startGame();
 }
 
 // initializes the container for other players
@@ -18,9 +25,16 @@ function initOtherPlayers () {
 
 // loads data on all currently connected players
 function loadConnectedPlayers (players) {
+    // load all connected players locally
     Object.keys(players).forEach(function (socketID) {
         OasisPlayers[socketID] = new OtherPlayer(players[socketID].username, players[socketID].stats);
     });
+
+    // update that all other players have been loaded
+    loading.otherPlayers = true;
+
+    // all other players loaded, start the game!
+    startGame();
 }
 
 // join the Oasis
