@@ -43,8 +43,8 @@ class ClientPlayer extends Player {
         if (updated) {
             // if player has ventured too far from classical tilemap bounds {(0,0) <=> (tilemap.width, tilemap.height)},
             // reset player location to within the classical tilemap bounds
-            const tooFarY = (OasisWorld.tiles.length * Tile.size.height) / 2;
-            const tooFarX = (OasisWorld.tiles.length * Tile.size.width) / 2;
+            const tooFarY = (OasisWorld.tilemap.length * Tile.size.height) / 2;
+            const tooFarX = (OasisWorld.tilemap.length * Tile.size.width) / 2;
 
             // too far up/left
             if (this.location.y < -(tooFarY)) this.location.y += (tooFarY * 2);

@@ -2,6 +2,11 @@
 //      Callbacks
 //
 
+// loads world tilemap from server
+function loadWorld (tilemap) {
+    OasisWorld.tilemap = tilemap;
+}
+
 // initializes the container for other players
 function initOtherPlayers () {
     // create container

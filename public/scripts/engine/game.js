@@ -39,6 +39,7 @@ function initGame () {
 
 // attaches game listeners
 function attachGameListeners () {
+    socket.on('load world', loadWorld);
     socket.on('load connected players', loadConnectedPlayers);
     socket.on('player joined', playerJoined);
     socket.on('player left', playerLeft);

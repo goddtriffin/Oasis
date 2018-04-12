@@ -1,31 +1,14 @@
 // World model
 // (Size) size
 class World {
-    constructor (size) {
-        this.size = size;
-
+    constructor () {
         // load the actual world tiles from the server
         this.load();
     }
 
     // loads the game world from the server
     load () {
-        /*
-        socket.emit('load world', function () {
-            // TODO
-        });
-        */
-
-        // generate the world
-        this.tiles = [];
-        for (let y = 0; y < this.size.height; y++) {
-            let column = [];
-            for (let x = 0; x < this.size.width; x++) {
-                // column.push((y + x) % this.size.width);
-                column.push(0);
-            }
-            this.tiles.push(column);
-        }
+        socket.emit('send world');
     }
 
     // renders the game world
@@ -49,40 +32,38 @@ class World {
                 // above/left of world
                 if (worldY < 0) {
                     tilemapY += 1;
-                    tilemapY = this.size.height - ((-tilemapY) % this.size.height) - 1;
+                    tilemapY = this.tilemap.length - ((-tilemapY) % this.tilemap.length) - 1;
                 }
                 if (worldX < 0) {
                     tilemapX += 1;
-                    tilemapX = this.size.width - ((-tilemapX) % this.size.width) - 1;
+                    tilemapX = this.tilemap.length - ((-tilemapX) % this.tilemap.length) - 1;
                 }
 
                 // below/right of world
-                if (worldY > this.size.height - 1) tilemapY %= (this.size.height);
-                if (worldX > this.size.width - 1) tilemapX %= (this.size.width);
-
-                // catch tilemap out-of-bounds errors
-                if (tilemapY < 0 || tilemapY > this.size.height - 1) console.error('worldY:', worldY, 'tilemapY:', tilemapY);
-                if (tilemapX < 0 || tilemapX > this.size.width - 1) console.error('worldX:', worldX, 'tilemapX:', tilemapX);
+                if (worldY > this.tilemap.length - 1) tilemapY %= this.tilemap.length;
+                if (worldX > this.tilemap.length - 1) tilemapX %= this.tilemap.length;
 
                 // and render it
-                Tile.render(worldX, worldY, this.tiles[tilemapY][tilemapX], tilemapX, tilemapY);
+                Tile.render(worldX, worldY, this.tilemap[tilemapY][tilemapX], tilemapX, tilemapY);
                 tileCount++;
             }
         }
 
-        // TEMP
-        /*
-        OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.font = "15px Arial";
-        OasisCanvasContext.fillText(tileCount.toString(), 50, 50);
-
-        // OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.fillText(OasisCamera.location.toString(), 150, 50);
-        */
+        // draw debug info
+        if (debug) {
+            // draw tiles rendered count
+            OasisCanvasContext.fillStyle = 'black';
+            OasisCanvasContext.font = "15px Arial";
+            OasisCanvasContext.fillText(
+                '' + tilecount,
+                100,
+                100
+            );
+        }
     }
 }
 
 // initializes the game world
 function initWorld () {
-    OasisWorld = new World(new Size(100, 100));
+    OasisWorld = new World();
 }

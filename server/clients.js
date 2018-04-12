@@ -3,7 +3,7 @@ const login = require('./authentication/login').login;
 const signup = require('./authentication/signup').signup;
 
 // game
-const game = require('./game');
+const game = require('./engine/game');
 
 // initializes the handler for client connection
 function init (io) {
@@ -16,6 +16,7 @@ function init (io) {
         socket.on('signup', signup);
 
         // game
+        socket.on('send world', game.sendWorld);
         socket.on('send connected players', game.sendConnectedPlayers);
         socket.on('join', game.join);
         socket.on('location update', game.updateLocation);

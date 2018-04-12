@@ -12,8 +12,8 @@ class Entity {
         this.renderLocation = this.location;
 
         // if OtherPlayer is more than one tilemap's width/height away client's player, render it closer
-        const tooFarY = (OasisWorld.size.height * Tile.size.height) / 2;
-        const tooFarX = (OasisWorld.size.width * Tile.size.width) / 2;
+        const tooFarY = (OasisWorld.tilemap.length * Tile.size.height) / 2;
+        const tooFarX = (OasisWorld.tilemap.length * Tile.size.width) / 2;
 
         // up/left
         if (this.renderLocation.y <= OasisPlayer.location.y - tooFarY) this.renderLocation.y += (tooFarY * 2);
