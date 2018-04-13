@@ -15,6 +15,7 @@ class ClientPlayer extends Player {
         super.tick();
 
         this.updateTileStandingOn();
+        this.updateSpeed();
     }
 
     // renders the player's character
@@ -63,6 +64,35 @@ class ClientPlayer extends Player {
 
         // set tile standing on
         this.tileStandingOn = OasisWorld.tilemap[tileY][tileX];
+    }
+
+    // updates the player's speed, dependent on tile type stood on and direction facing
+    updateSpeed () {
+        // initially set speed dependent on tile type stood on
+        switch (this.tileStandingOn) {
+            case 0: // grass
+                this.speed = 9;
+                break;
+
+            case 1: // sand
+                this.speed = 6;
+                break;
+
+            case 2: // shore
+                this.speed = 3;
+                break;
+
+            case 3: // ocean
+                this.speed = 1;
+                break;
+            
+            default:
+                console.error('unknown tile type stood on:', this.tileStandingOn);
+                return;
+        }
+
+        // manipulate speed dependent on the direction the player is facing
+        // TODO
     }
 
     // handles player movement
