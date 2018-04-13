@@ -10,6 +10,91 @@ class ClientPlayer extends Player {
         this.right = false;
     }
 
+    // updates player's data
+    tick () {
+        super.tick();
+
+        this.updateTileStandingOn();
+        this.updateSpeed();
+    }
+
+    // renders the player's character
+    render () {
+        super.render();
+
+        // draw tile coordinate
+        OasisCanvasContext.fillStyle = 'black';
+        OasisCanvasContext.font = "15px Arial";
+        OasisCanvasContext.fillText(
+            this.tileStandingOn,
+            200,
+            200
+        );
+    }
+
+    // updates the tile the player is standing on
+    updateTileStandingOn () {
+        // get coordinate of tile beneath player
+        let tileY = Math.floor((this.location.y + (this.size.height / 2)) / Tile.size.height);
+        let tileX = Math.floor((this.location.x + (this.size.width / 2)) / Tile.size.width);
+
+        // above/left of world
+        if (tileY < 0) {
+            tileY += 1;
+            tileY = OasisWorld.tilemap.length - ((-tileY) % OasisWorld.tilemap.length) - 1;
+        }
+        if (tileX < 0) {
+            tileX += 1;
+            tileX = OasisWorld.tilemap.length - ((-tileX) % OasisWorld.tilemap.length) - 1;
+        }
+
+        // below/right of world
+        if (tileY > OasisWorld.tilemap.length - 1) tileY %= OasisWorld.tilemap.length;
+        if (tileX > OasisWorld.tilemap.length - 1) tileX %= OasisWorld.tilemap.length;
+
+        // test
+        if (tileY < 0 || tileY > OasisWorld.tilemap.length) {
+            console.error('improper tileY:', tileY);
+            return;
+        }
+        if (tileX < 0 || tileX > OasisWorld.tilemap.length) {
+            console.error('improper tileX:', tileX);
+            return;
+        }
+
+        // set tile standing on
+        this.tileStandingOn = OasisWorld.tilemap[tileY][tileX];
+    }
+
+    // updates the player's speed, dependent on tile type stood on and direction facing
+    updateSpeed () {
+        // initially set speed dependent on tile type stood on
+        switch (this.tileStandingOn) {
+            case 0: // grass
+                this.speed = 9;
+                break;
+
+            case 1: // sand
+                this.speed = 6;
+                break;
+
+            case 2: // shore
+                this.speed = 3;
+                break;
+
+            case 3: // ocean
+                this.speed = 1;
+                break;
+            
+            default:
+                console.error('unknown tile type stood on:', this.tileStandingOn);
+                return;
+        }
+
+        // manipulate speed dependent on the direction the player is facing
+        // TODO
+    }
+
     // handles player movement
     move () {
         // handle movement
