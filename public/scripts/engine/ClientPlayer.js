@@ -10,6 +10,47 @@ class ClientPlayer extends Player {
         this.right = false;
     }
 
+    // updates player's data
+    tick () {
+        super.tick();
+
+        this.updateTileStandingOn();
+    }
+
+    // renders the player's character
+    render () {
+        super.render();
+
+        // draw tile coordinate
+        OasisCanvasContext.fillStyle = 'black';
+        OasisCanvasContext.font = "15px Arial";
+        OasisCanvasContext.fillText(
+            this.tileStandingOn,
+            200,
+            200
+        );
+    }
+
+    // updates the tile the player is standing on
+    updateTileStandingOn () {
+        // get coordinate of tile beneath player
+        let tileY = Math.floor((this.location.y + (this.size.height / 2)) / Tile.size.height);
+        let tileX = Math.floor((this.location.x + (this.size.width / 2)) / Tile.size.width);
+
+        // test
+        if (tileY < 0 || tileY > OasisWorld.tilemap.length) {
+            console.error('improper tileY:', tileY);
+            return;
+        }
+        if (tileX < 0 || tileX > OasisWorld.tilemap.length) {
+            console.error('improper tileX:', tileX);
+            return;
+        }
+
+        // set tile standing on
+        this.tileStandingOn = OasisWorld.tilemap[tileY][tileX];
+    }
+
     // handles player movement
     move () {
         // handle movement
