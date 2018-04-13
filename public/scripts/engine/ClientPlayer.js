@@ -37,6 +37,20 @@ class ClientPlayer extends Player {
         let tileY = Math.floor((this.location.y + (this.size.height / 2)) / Tile.size.height);
         let tileX = Math.floor((this.location.x + (this.size.width / 2)) / Tile.size.width);
 
+        // above/left of world
+        if (tileY < 0) {
+            tileY += 1;
+            tileY = OasisWorld.tilemap.length - ((-tileY) % OasisWorld.tilemap.length) - 1;
+        }
+        if (tileX < 0) {
+            tileX += 1;
+            tileX = OasisWorld.tilemap.length - ((-tileX) % OasisWorld.tilemap.length) - 1;
+        }
+
+        // below/right of world
+        if (tileY > OasisWorld.tilemap.length - 1) tileY %= OasisWorld.tilemap.length;
+        if (tileX > OasisWorld.tilemap.length - 1) tileX %= OasisWorld.tilemap.length;
+
         // test
         if (tileY < 0 || tileY > OasisWorld.tilemap.length) {
             console.error('improper tileY:', tileY);
