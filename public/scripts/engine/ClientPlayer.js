@@ -22,14 +22,16 @@ class ClientPlayer extends Player {
     render () {
         super.render();
 
-        // draw tile coordinate
-        OasisCanvasContext.fillStyle = 'black';
-        OasisCanvasContext.font = "15px Arial";
-        OasisCanvasContext.fillText(
-            this.tileStandingOn,
-            200,
-            200
-        );
+        if (debug) {
+            // draw tile coordinate
+            OasisCanvasContext.fillStyle = 'black';
+            OasisCanvasContext.font = "15px Arial";
+            OasisCanvasContext.fillText(
+                this.tileStandingOn,
+                200,
+                200
+            );
+        }
     }
 
     // updates the tile the player is standing on
