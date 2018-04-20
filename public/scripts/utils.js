@@ -36,3 +36,11 @@ function elementRemovalErrors (elementID) {
     // we gucci
     return false;
 }
+
+// removes a specific item from a list
+function removeFromList (list, item) {
+    const index = list.indexOf(item);
+    if (index > -1) {
+        list.splice(index, 1);
+    }
+}

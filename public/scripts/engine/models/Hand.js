@@ -57,6 +57,26 @@ class Hand extends Entity {
                     handX = playerRight - (this.size.width / 2);
                     handY = playerTop + (player.size.height * 0.15);
                     break;
+
+                case 'north-west':
+                    handX = playerLeft - (this.size.width / 2);
+                    handY = playerTop + (player.size.height * 0.15);
+                    break;
+
+                case 'north-east':
+                    handX = playerRight - this.size.width - (player.size.width * 0.15);
+                    handY = playerTop - (this.size.height / 2);
+                    break;
+
+                case 'south-west':
+                    handX = playerLeft + (player.size.width * 0.15);
+                    handY = playerBottom - (this.size.height / 2);
+                    break;
+
+                case 'south-east':
+                    handX = playerRight - (this.size.width / 2);
+                    handY = playerBottom - this.size.height - (player.size.height * 0.15);
+                    break;
     
                 default:
                     console.error('unknown facing direction:', player.facing);
@@ -83,6 +103,26 @@ class Hand extends Entity {
                 case 'east':
                     handX = playerRight - (this.size.width / 2);
                     handY = playerBottom - this.size.height - (player.size.height * 0.15);
+                    break;
+
+                case 'north-west':
+                    handX = playerLeft + (player.size.width * 0.15);
+                    handY = playerTop - (this.size.height / 2);
+                    break;
+
+                case 'north-east':
+                    handX = playerRight - (this.size.width / 2);
+                    handY = playerTop + (player.size.height * 0.15);
+                    break;
+
+                case 'south-west':
+                    handX = playerLeft - (this.size.width / 2);
+                    handY = playerBottom - (this.size.height) - (player.size.height * 0.15);
+                    break;
+
+                case 'south-east':
+                    handX = playerRight - this.size.width - (player.size.width * 0.15);
+                    handY = playerBottom - (this.size.height / 2);
                     break;
     
                 default:

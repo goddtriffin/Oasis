@@ -8,6 +8,8 @@ class ClientPlayer extends Player {
         this.down = false;
         this.left = false;
         this.right = false;
+
+        this.directionalKeys = [];
     }
 
     // updates player's data
@@ -16,6 +18,7 @@ class ClientPlayer extends Player {
 
         this.updateTileStandingOn();
         this.updateSpeed();
+        this.updateDirectionFacing();
     }
 
     // renders the player's character
@@ -146,8 +149,43 @@ class ClientPlayer extends Player {
         }
     }
 
+    // updates the direction the player is facing
+    updateDirectionFacing () {
+        // handle combo directional facing
+        if (this.directionalKeys.includes('up') && this.directionalKeys.includes('left')) {
+            // facing north-west
+            OasisPlayer.face('north-west');
+        } else
+        if (this.directionalKeys.includes('up') && this.directionalKeys.includes('right')) {
+            // facing north-east
+            OasisPlayer.face('north-east');
+        } else
+        if (this.directionalKeys.includes('down') && this.directionalKeys.includes('left')) {
+            // facing south-west
+            OasisPlayer.face('south-west');
+        } else
+        if (this.directionalKeys.includes('down') && this.directionalKeys.includes('right')) {
+            // facing south-east
+            OasisPlayer.face('south-east');
+        } else {
+            // handle the last 4 facing directions
+            if (this.directionalKeys.includes('up')) {
+                OasisPlayer.face('north');
+            } else
+            if (this.directionalKeys.includes('down')) {
+                OasisPlayer.face('south');
+            } else
+            if (this.directionalKeys.includes('left')) {
+                OasisPlayer.face('west');
+            } else
+            if (this.directionalKeys.includes('right')) {
+                OasisPlayer.face('east');
+            }
+        }
+    }
+
     // update the direction the player is facing
-    // ('north' || 'south' || 'west' || 'east') direction
+    // ('north' || 'south' || 'west' || 'east' || 'north-west' || 'north-east' || 'south-west' || 'south-east') direction
     face (direction) {
         // tell the others
         socket.emit('direction update', direction);
@@ -165,7 +203,6 @@ function initPlayer () {
     const stats = {};
     stats.location = new Location(0, 0);
     stats.size = new Size(50, 50);
-    stats.speed = 10;
     stats.color = 'red';
     stats.facing = 'north';
 
