@@ -8,6 +8,8 @@ class ClientPlayer extends Player {
         this.down = false;
         this.left = false;
         this.right = false;
+
+        this.directionalKeys = [];
     }
 
     // updates player's data
@@ -16,6 +18,7 @@ class ClientPlayer extends Player {
 
         this.updateTileStandingOn();
         this.updateSpeed();
+        this.updateDirectionFacing();
     }
 
     // renders the player's character
@@ -73,19 +76,19 @@ class ClientPlayer extends Player {
         // initially set speed dependent on tile type stood on
         switch (this.tileStandingOn) {
             case 0: // grass
-                this.speed = 9;
+                this.speed = 10;
                 break;
 
             case 1: // sand
-                this.speed = 6;
+                this.speed = 8;
                 break;
 
             case 2: // shore
-                this.speed = 3;
+                this.speed = 4;
                 break;
 
             case 3: // ocean
-                this.speed = 1;
+                this.speed = 2;
                 break;
             
             default:
@@ -94,7 +97,79 @@ class ClientPlayer extends Player {
         }
 
         // manipulate speed dependent on the direction the player is facing
-        // TODO
+        this.handleDirectionalFacingSpeedEffects();
+    }
+
+    // manipulates the player's speed depending on what direction the player is facing
+    handleDirectionalFacingSpeedEffects () {
+        // denotes which teir of movement impairment to apply
+        // (this heigher, the worse off)
+        let tier = 0;
+
+        if (this.up && this.left) {
+            // moving north-west
+            if (this.facing === 'west'          || this.facing === 'north')         tier = 1;
+            if (this.facing === 'south-west'    || this.facing === 'north-east')    tier = 2;
+            if (this.facing === 'south'         || this.facing === 'east')          tier = 3;
+            if (this.facing === 'south-east')                                       tier = 4;
+        } else
+        if (this.up && this.right) {
+            // moving north-east
+            if (this.facing === 'north'         || this.facing === 'east')          tier = 1;
+            if (this.facing === 'north-west'    || this.facing === 'south-east')    tier = 2;
+            if (this.facing === 'west'          || this.facing === 'south')         tier = 3;
+            if (this.facing === 'south-west')                                       tier = 4;
+        } else
+        if (this.down && this.left) {
+            // moving south-west
+            if (this.facing === 'south'         || this.facing === 'west')          tier = 1;
+            if (this.facing === 'south-east'    || this.facing === 'north-west')    tier = 2;
+            if (this.facing === 'north'         || this.facing === 'east')          tier = 3;
+            if (this.facing === 'north-east')                                       tier = 4;
+        } else
+        if (this.down && this.right) {
+            // moving south-east
+            if (this.facing === 'east'          || this.facing === 'south')         tier = 1;
+            if (this.facing === 'north-east'    || this.facing === 'south-west')    tier = 2;
+            if (this.facing === 'north'         || this.facing === 'west')          tier = 3;
+            if (this.facing === 'north-west')                                       tier = 4;
+        } else {
+            if (this.up) {
+                // moving north
+                if (this.facing === 'north-west'    || this.facing === 'north-east')    tier = 1;
+                if (this.facing === 'west'          || this.facing === 'east')          tier = 2;
+                if (this.facing === 'south-west'    || this.facing === 'south-east')    tier = 3;
+                if (this.facing === 'south')                                            tier = 4;
+            } else
+            if (this.down) {
+                // moving south
+                if (this.facing === 'south-west'    || this.facing === 'south-east')    tier = 1;
+                if (this.facing === 'west'          || this.facing === 'east')          tier = 2;
+                if (this.facing === 'north-west'    || this.facing === 'north-east')    tier = 3;
+                if (this.facing === 'north')                                            tier = 4;
+            } else
+            if (this.left) {
+                // moving west
+                if (this.facing === 'south-west'    || this.facing === 'north-west')    tier = 1;
+                if (this.facing === 'south'         || this.facing === 'north')         tier = 2;
+                if (this.facing === 'south-east'    || this.facing === 'north-east')    tier = 3;
+                if (this.facing === 'east')                                             tier = 4;
+            } else
+            if (this.right) {
+                // moving east
+                if (this.facing === 'north-east'    || this.facing === 'south-east')    tier = 1;
+                if (this.facing === 'north'         || this.facing === 'south')         tier = 2;
+                if (this.facing === 'north-west'    || this.facing === 'south-west')    tier = 3;
+                if (this.facing === 'west')                                             tier = 4;
+            }
+        }
+
+        // manipulate the player's speed
+        this.speed -= tier;
+
+        if (this.speed <= 0) {
+            this.speed = 0.5;
+        }
     }
 
     // handles player movement
@@ -128,6 +203,9 @@ class ClientPlayer extends Player {
 
         // tell the server if movement updated
         if (updated) {
+            // lock face direction with movement direction if no directional keys are currently being pressed
+            if (this.directionalKeys.length === 0) this.lockMoveDirectionAndFaceDirection();
+
             // if player has ventured too far from classical tilemap bounds {(0,0) <=> (tilemap.width, tilemap.height)},
             // reset player location to within the classical tilemap bounds
             const tooFarY = (OasisWorld.tilemap.length * Tile.size.height) / 2;
@@ -146,8 +224,72 @@ class ClientPlayer extends Player {
         }
     }
 
+    // sets face direction to movement direction
+    lockMoveDirectionAndFaceDirection () {
+        if (this.up && this.left) {
+            this.face('north-west');
+        } else
+        if (this.up && this.right) {
+            this.face('north-east');
+        } else
+        if (this.down && this.left) {
+            this.face('south-west');
+        } else
+        if (this.down && this.right) {
+            this.face('south-east');
+        } else {
+            if (this.up) {
+                this.face('north');
+            } else
+            if (this.down) {
+                this.face('south');
+            } else
+            if (this.left) {
+                this.face('west');
+            } else
+            if (this.right) {
+                this.face('east');
+            }
+        }
+    }
+
+    // updates the direction the player is facing
+    updateDirectionFacing () {
+        // handle combo directional facing
+        if (this.directionalKeys.includes('up') && this.directionalKeys.includes('left')) {
+            // facing north-west
+            this.face('north-west');
+        } else
+        if (this.directionalKeys.includes('up') && this.directionalKeys.includes('right')) {
+            // facing north-east
+            this.face('north-east');
+        } else
+        if (this.directionalKeys.includes('down') && this.directionalKeys.includes('left')) {
+            // facing south-west
+            this.face('south-west');
+        } else
+        if (this.directionalKeys.includes('down') && this.directionalKeys.includes('right')) {
+            // facing south-east
+            this.face('south-east');
+        } else {
+            // handle the last 4 facing directions
+            if (this.directionalKeys.includes('up')) {
+                this.face('north');
+            } else
+            if (this.directionalKeys.includes('down')) {
+                this.face('south');
+            } else
+            if (this.directionalKeys.includes('left')) {
+                this.face('west');
+            } else
+            if (this.directionalKeys.includes('right')) {
+                this.face('east');
+            }
+        }
+    }
+
     // update the direction the player is facing
-    // ('up' || 'down' || 'left' || 'right') direction
+    // ('north' || 'south' || 'west' || 'east' || 'north-west' || 'north-east' || 'south-west' || 'south-east') direction
     face (direction) {
         // tell the others
         socket.emit('direction update', direction);
@@ -165,9 +307,8 @@ function initPlayer () {
     const stats = {};
     stats.location = new Location(0, 0);
     stats.size = new Size(50, 50);
-    stats.speed = 10;
     stats.color = 'red';
-    stats.facing = 'up';
+    stats.facing = 'north';
 
     // create this clients player
     OasisPlayer = new ClientPlayer(username, stats);

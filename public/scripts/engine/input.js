@@ -10,6 +10,7 @@ function attachKeyUpHandler () {
 
 // handles the event of keys being pressed down
 function keyDownCallback (e) {
+	// handle what to do on key press downs
 	switch (e.key) {
 		case "w":
 			// move up
@@ -29,20 +30,20 @@ function keyDownCallback (e) {
 			break;
 
 		case "ArrowUp":
-			// face up
-			OasisPlayer.face('up');
+			// face north
+			if (OasisPlayer.directionalKeys.indexOf('up') === -1) OasisPlayer.directionalKeys.push('up');
 			break;
 		case "ArrowDown":
-			// face down
-			OasisPlayer.face('down');
+			// face south
+			if (OasisPlayer.directionalKeys.indexOf('down') === -1) OasisPlayer.directionalKeys.push('down');
 			break;
 		case "ArrowLeft":
-			// face left
-			OasisPlayer.face('left');
+			// face west
+			if (OasisPlayer.directionalKeys.indexOf('left') === -1) OasisPlayer.directionalKeys.push('left');
 			break;
 		case "ArrowRight":
-			// face right
-			OasisPlayer.face('right');
+			// face east
+			if (OasisPlayer.directionalKeys.indexOf('right') === -1) OasisPlayer.directionalKeys.push('right');
 			break;
 	}
 }
@@ -51,33 +52,37 @@ function keyDownCallback (e) {
 function keyUpCallback (e) {
 	switch (e.key) {
 		case "w":
-			// move up
+			// stop move up
 			OasisPlayer.up = false;
 			break;
 		case "s":
-			// move down
+			// stop move down
 			OasisPlayer.down = false;
 			break;
 		case "a":
-			// move left
+			// stop move left
 			OasisPlayer.left = false;
 			break;
 		case "d":
-			// move right
+			// stop move right
 			OasisPlayer.right = false;
 			break;
 
 		case "ArrowUp":
-			// face up
+			// stop face north
+			removeFromList(OasisPlayer.directionalKeys, 'up');
 			break;
 		case "ArrowDown":
-			// face down
+			// stop face south
+			removeFromList(OasisPlayer.directionalKeys, 'down');
 			break;
 		case "ArrowLeft":
-			// face left
+			// stop face west
+			removeFromList(OasisPlayer.directionalKeys, 'left');
 			break;
 		case "ArrowRight":
-			// face right
+			// stop face east
+			removeFromList(OasisPlayer.directionalKeys, 'right');
 			break;
 	}
 }
