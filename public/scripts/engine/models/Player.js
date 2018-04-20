@@ -104,3 +104,12 @@ class Player extends Entity {
         );
     }
 }
+
+// vaiety of human-like colors for player's color
+// https://htmlcolorcodes.com/color-names/
+Player.colors = [
+    'lightsalmon', 'darksalmon',
+    'bisque', 'navajowhite', 'wheat',
+    'burlywood', 'tan', 'peru',
+    'chocolate', 'saddlebrown', 'sienna'
+]

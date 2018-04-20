@@ -74,4 +74,4 @@ class Tile {
 }
 
 // set static Tile size
-Tile.size = new Size(100, 100);
+Tile.size = new Size(85, 85);

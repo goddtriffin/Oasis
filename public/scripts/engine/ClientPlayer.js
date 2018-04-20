@@ -306,8 +306,8 @@ function initPlayer () {
 
     const stats = {};
     stats.location = new Location(0, 0);
-    stats.size = new Size(50, 50);
-    stats.color = 'red';
+    stats.size = new Size(45, 45);
+    stats.color = Player.colors[getRandInt(0, 10)];
     stats.facing = 'north';
 
     // create this clients player
