@@ -131,6 +131,9 @@ class ClientPlayer extends Player {
 
         // tell the server if movement updated
         if (updated) {
+            // lock face direction with movement direction if no directional keys are currently being pressed
+            if (this.directionalKeys.length === 0) this.lockMoveDirectionAndFaceDirection();
+
             // if player has ventured too far from classical tilemap bounds {(0,0) <=> (tilemap.width, tilemap.height)},
             // reset player location to within the classical tilemap bounds
             const tooFarY = (OasisWorld.tilemap.length * Tile.size.height) / 2;
@@ -149,37 +152,66 @@ class ClientPlayer extends Player {
         }
     }
 
+    // sets face direction to movement direction
+    lockMoveDirectionAndFaceDirection () {
+        if (this.up && this.left) {
+            this.face('north-west');
+        } else
+        if (this.up && this.right) {
+            this.face('north-east');
+        } else
+        if (this.down && this.left) {
+            this.face('south-west');
+        } else
+        if (this.down && this.right) {
+            this.face('south-east');
+        } else {
+            if (this.up) {
+                this.face('north');
+            } else
+            if (this.down) {
+                this.face('south');
+            } else
+            if (this.left) {
+                this.face('west');
+            } else
+            if (this.right) {
+                this.face('east');
+            }
+        }
+    }
+
     // updates the direction the player is facing
     updateDirectionFacing () {
         // handle combo directional facing
         if (this.directionalKeys.includes('up') && this.directionalKeys.includes('left')) {
             // facing north-west
-            OasisPlayer.face('north-west');
+            this.face('north-west');
         } else
         if (this.directionalKeys.includes('up') && this.directionalKeys.includes('right')) {
             // facing north-east
-            OasisPlayer.face('north-east');
+            this.face('north-east');
         } else
         if (this.directionalKeys.includes('down') && this.directionalKeys.includes('left')) {
             // facing south-west
-            OasisPlayer.face('south-west');
+            this.face('south-west');
         } else
         if (this.directionalKeys.includes('down') && this.directionalKeys.includes('right')) {
             // facing south-east
-            OasisPlayer.face('south-east');
+            this.face('south-east');
         } else {
             // handle the last 4 facing directions
             if (this.directionalKeys.includes('up')) {
-                OasisPlayer.face('north');
+                this.face('north');
             } else
             if (this.directionalKeys.includes('down')) {
-                OasisPlayer.face('south');
+                this.face('south');
             } else
             if (this.directionalKeys.includes('left')) {
-                OasisPlayer.face('west');
+                this.face('west');
             } else
             if (this.directionalKeys.includes('right')) {
-                OasisPlayer.face('east');
+                this.face('east');
             }
         }
     }
