@@ -147,7 +147,7 @@ class ClientPlayer extends Player {
     }
 
     // update the direction the player is facing
-    // ('up' || 'down' || 'left' || 'right') direction
+    // ('north' || 'south' || 'west' || 'east') direction
     face (direction) {
         // tell the others
         socket.emit('direction update', direction);
@@ -167,7 +167,7 @@ function initPlayer () {
     stats.size = new Size(50, 50);
     stats.speed = 10;
     stats.color = 'red';
-    stats.facing = 'up';
+    stats.facing = 'north';
 
     // create this clients player
     OasisPlayer = new ClientPlayer(username, stats);

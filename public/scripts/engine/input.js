@@ -29,20 +29,20 @@ function keyDownCallback (e) {
 			break;
 
 		case "ArrowUp":
-			// face up
-			OasisPlayer.face('up');
+			// face north
+			OasisPlayer.face('north');
 			break;
 		case "ArrowDown":
-			// face down
-			OasisPlayer.face('down');
+			// face south
+			OasisPlayer.face('south');
 			break;
 		case "ArrowLeft":
-			// face left
-			OasisPlayer.face('left');
+			// face west
+			OasisPlayer.face('west');
 			break;
 		case "ArrowRight":
-			// face right
-			OasisPlayer.face('right');
+			// face east
+			OasisPlayer.face('east');
 			break;
 	}
 }
@@ -68,16 +68,16 @@ function keyUpCallback (e) {
 			break;
 
 		case "ArrowUp":
-			// face up
+			// face north
 			break;
 		case "ArrowDown":
-			// face down
+			// face south
 			break;
 		case "ArrowLeft":
-			// face left
+			// face west
 			break;
 		case "ArrowRight":
-			// face right
+			// face east
 			break;
 	}
 }
