@@ -76,19 +76,19 @@ class ClientPlayer extends Player {
         // initially set speed dependent on tile type stood on
         switch (this.tileStandingOn) {
             case 0: // grass
-                this.speed = 9;
+                this.speed = 10;
                 break;
 
             case 1: // sand
-                this.speed = 6;
+                this.speed = 8;
                 break;
 
             case 2: // shore
-                this.speed = 3;
+                this.speed = 4;
                 break;
 
             case 3: // ocean
-                this.speed = 1;
+                this.speed = 2;
                 break;
             
             default:
@@ -97,7 +97,79 @@ class ClientPlayer extends Player {
         }
 
         // manipulate speed dependent on the direction the player is facing
-        // TODO
+        this.handleDirectionalFacingSpeedEffects();
+    }
+
+    // manipulates the player's speed depending on what direction the player is facing
+    handleDirectionalFacingSpeedEffects () {
+        // denotes which teir of movement impairment to apply
+        // (this heigher, the worse off)
+        let tier = 0;
+
+        if (this.up && this.left) {
+            // moving north-west
+            if (this.facing === 'west'          || this.facing === 'north')         tier = 1;
+            if (this.facing === 'south-west'    || this.facing === 'north-east')    tier = 2;
+            if (this.facing === 'south'         || this.facing === 'east')          tier = 3;
+            if (this.facing === 'south-east')                                       tier = 4;
+        } else
+        if (this.up && this.right) {
+            // moving north-east
+            if (this.facing === 'north'         || this.facing === 'east')          tier = 1;
+            if (this.facing === 'north-west'    || this.facing === 'south-east')    tier = 2;
+            if (this.facing === 'west'          || this.facing === 'south')         tier = 3;
+            if (this.facing === 'south-west')                                       tier = 4;
+        } else
+        if (this.down && this.left) {
+            // moving south-west
+            if (this.facing === 'south'         || this.facing === 'west')          tier = 1;
+            if (this.facing === 'south-east'    || this.facing === 'north-west')    tier = 2;
+            if (this.facing === 'north'         || this.facing === 'east')          tier = 3;
+            if (this.facing === 'north-east')                                       tier = 4;
+        } else
+        if (this.down && this.right) {
+            // moving south-east
+            if (this.facing === 'east'          || this.facing === 'south')         tier = 1;
+            if (this.facing === 'north-east'    || this.facing === 'south-west')    tier = 2;
+            if (this.facing === 'north'         || this.facing === 'west')          tier = 3;
+            if (this.facing === 'north-west')                                       tier = 4;
+        } else {
+            if (this.up) {
+                // moving north
+                if (this.facing === 'north-west'    || this.facing === 'north-east')    tier = 1;
+                if (this.facing === 'west'          || this.facing === 'east')          tier = 2;
+                if (this.facing === 'south-west'    || this.facing === 'south-east')    tier = 3;
+                if (this.facing === 'south')                                            tier = 4;
+            } else
+            if (this.down) {
+                // moving south
+                if (this.facing === 'south-west'    || this.facing === 'south-east')    tier = 1;
+                if (this.facing === 'west'          || this.facing === 'east')          tier = 2;
+                if (this.facing === 'north-west'    || this.facing === 'north-east')    tier = 3;
+                if (this.facing === 'north')                                            tier = 4;
+            } else
+            if (this.left) {
+                // moving west
+                if (this.facing === 'south-west'    || this.facing === 'north-west')    tier = 1;
+                if (this.facing === 'south'         || this.facing === 'north')         tier = 2;
+                if (this.facing === 'south-east'    || this.facing === 'north-east')    tier = 3;
+                if (this.facing === 'east')                                             tier = 4;
+            } else
+            if (this.right) {
+                // moving east
+                if (this.facing === 'north-east'    || this.facing === 'south-east')    tier = 1;
+                if (this.facing === 'north'         || this.facing === 'south')         tier = 2;
+                if (this.facing === 'north-west'    || this.facing === 'south-west')    tier = 3;
+                if (this.facing === 'west')                                             tier = 4;
+            }
+        }
+
+        // manipulate the player's speed
+        this.speed -= tier;
+
+        if (this.speed <= 0) {
+            this.speed = 0.5;
+        }
     }
 
     // handles player movement
