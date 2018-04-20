@@ -44,6 +44,10 @@ function generateRealistic (width, height, smoothLevel) {
     // calculate difference between min/max heights
     const deltaHeight = maxHeight - minHeight;
 
+    console.log('maxHeight:', maxHeight);
+    console.log('minHeight:', minHeight);
+    console.log('deltaHeight:', deltaHeight);
+
     // track tile type counts
     let stoneCount  = 0;
     let grassCount  = 0;
@@ -57,15 +61,15 @@ function generateRealistic (width, height, smoothLevel) {
             const height = tilemap[y][x];
 
             // calculate desired tile type percentages
-            const stonePercentage = maxHeight - (deltaHeight * 0.20);
-            const grassPercentage = stonePercentage - (deltaHeight * 0.20);
-            const sandPercentage = grassPercentage - (deltaHeight * 0.20);
-            const shorePercentage = sandPercentage - (deltaHeight * 0.20);
+            const stonePercentage = maxHeight - (deltaHeight * 0.30);
+            const grassPercentage = stonePercentage - (deltaHeight * 0.30);
+            const sandPercentage = grassPercentage - (deltaHeight * 0.03);
+            const shorePercentage = sandPercentage - (deltaHeight * 0.08);
             const oceanPercentage = minHeight;
 
             if (height >= stonePercentage) { // stone
                 tilemap[y][x] = 4;
-                StoneCount++;
+                stoneCount++;
             } else
             if (height >= grassPercentage) { // grass
                 tilemap[y][x] = 0;
@@ -91,7 +95,7 @@ function generateRealistic (width, height, smoothLevel) {
     console.log('sand:', sandCount);
     console.log('shore:', shoreCount);
     console.log('ocean:', oceanCount);
-    console.log('total:', grassCount + sandCount + shoreCount + oceanCount);
+    console.log('total:', grassCount + sandCount + shoreCount + oceanCount + stoneCount);
     console.log('Finished generating realistic terrain.');
 }
 

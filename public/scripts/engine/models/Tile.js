@@ -62,6 +62,9 @@ class Tile {
 
             case 3: // ocean
                 return 'dodgerblue';
+
+            case 4: // stone
+                return 'slategrey';
             
             default:
                 console.error('unknown tileType:', tileType);
