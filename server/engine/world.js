@@ -45,10 +45,11 @@ function generateRealistic (width, height, smoothLevel) {
     const deltaHeight = maxHeight - minHeight;
 
     // track tile type counts
-    let grassCount = 0;
-    let sandCount = 0;
-    let shoreCount = 0;
-    let oceanCount = 0;
+    let stoneCount  = 0;
+    let grassCount  = 0;
+    let sandCount   = 0;
+    let shoreCount  = 0;
+    let oceanCount  = 0;
 
     // assign each point in height map an actual tile type
     for (let y=0; y<tilemap.length; y++) {
@@ -56,11 +57,16 @@ function generateRealistic (width, height, smoothLevel) {
             const height = tilemap[y][x];
 
             // calculate desired tile type percentages
-            const grassPercentage = maxHeight - (deltaHeight * 0.45);
-            const sandPercentage = grassPercentage - (deltaHeight * 0.08);
-            const shorePercentage = sandPercentage - (deltaHeight * 0.10);
+            const stonePercentage = maxHeight - (deltaHeight * 0.20);
+            const grassPercentage = stonePercentage - (deltaHeight * 0.20);
+            const sandPercentage = grassPercentage - (deltaHeight * 0.20);
+            const shorePercentage = sandPercentage - (deltaHeight * 0.20);
             const oceanPercentage = minHeight;
 
+            if (height >= stonePercentage) { // stone
+                tilemap[y][x] = 4;
+                StoneCount++;
+            } else
             if (height >= grassPercentage) { // grass
                 tilemap[y][x] = 0;
                 grassCount++;
@@ -80,6 +86,7 @@ function generateRealistic (width, height, smoothLevel) {
         }
     }
 
+    console.log('stone:', stoneCount);
     console.log('grass:', grassCount);
     console.log('sand:', sandCount);
     console.log('shore:', shoreCount);
