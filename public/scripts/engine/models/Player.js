@@ -46,7 +46,7 @@ class Player extends Entity {
     // thrusts the specified hand outward for punching
     // ('left' || 'right') hand
     punch (hand) {
-        console.log('hand punched:', hand);
+        this.hands[(hand === 'left')? 0 : 1].punch();
     }
 
     // renders the player's body

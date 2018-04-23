@@ -10,12 +10,87 @@ class Hand extends Entity {
             )
         );
 
+        // ('left' || 'right')
         this.type = type;
+
+        // true if currently in the punched state
+        this.punched = false;
+
+        // how fast the hand is moving on a punch
+        this.velocity = 0;
+
+        // hand location offset during a punch
+        this.xOffset = 0;
+        this.yOffset = 0;
     }
 
     // update hand data
     // (Player) player
     tick (player) {
+        if (this.punched) this.move(player);
+        this.setHandLocation(player);
+    }
+
+    // handles hand movement during a punch
+    move (player) {
+        // update xOffset/yOffset
+        switch (player.facing) {
+            case 'north':
+                    this.yOffset -= this.velocity;
+                break;
+
+            case 'south':
+                    this.yOffset += this.velocity;
+                break;
+            
+            case 'west':
+                this.xOffset -= this.velocity;
+                break;
+
+            case 'east':
+                this.xOffset += this.velocity;
+                break;
+
+            case 'north-west':
+                this.xOffset -= this.velocity;
+                this.yOffset -= this.velocity;
+                break;
+
+            case 'north-east':
+                this.xOffset += this.velocity;
+                this.yOffset -= this.velocity;
+                break;
+
+            case 'south-west':
+                this.xOffset -= this.velocity;
+                this.yOffset += this.velocity;
+                break;
+
+            case 'south-east':
+                this.xOffset += this.velocity;
+                this.yOffset += this.velocity;
+                break;
+
+            default:
+                console.error('unknown facing direction:', player.facing);
+                return;
+        }
+
+        // manipulate hand velocity
+        this.velocity--;
+
+        // stop the hand movement when done
+        if (this.velocity <= -Hand.maxVelocity) {
+            this.velocity = 0;
+            this.xOffset = 0;
+            this.yOffset = 0;
+
+            this.punched = false;
+        }
+    }
+
+    // sets the hand position based on where the player is, and what hand it is
+    setHandLocation (player) {
         // use regular location
         let playerX = player.location.x;
         let playerY = player.location.y;
@@ -27,9 +102,9 @@ class Hand extends Entity {
         }
 
         // prep data
-        const playerTop = player.location.y; // - (player.size.height / 2);
+        const playerTop = player.location.y;
         const playerBottom = playerTop + player.size.height;
-        const playerLeft = player.location.x; // - (player.size.width / 2);
+        const playerLeft = player.location.x;
         const playerRight = playerLeft + player.size.width;
 
         let handX;
@@ -134,7 +209,7 @@ class Hand extends Entity {
         }
 
         // update hand location
-        this.location = new Location(handX, handY);
+        this.location = new Location(handX + this.xOffset, handY + this.yOffset);
     }
 
     // render the hand to the screen
@@ -158,4 +233,17 @@ class Hand extends Entity {
             this.size.height
         );
     }
+
+    // thrusts itself outward
+    punch () {
+        this.punched = true;
+
+        this.xOffset = 0;
+        this.yOffset = 0;
+
+        this.velocity = Hand.maxVelocity;
+    }
 }
+
+// the fastest the hand should ever move
+Hand.maxVelocity = 8;
