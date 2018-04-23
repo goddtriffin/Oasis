@@ -297,6 +297,16 @@ class ClientPlayer extends Player {
         // update it locally
         this.facing = direction;
     }
+
+    // update all connected players with punch event
+    // ('left' || 'right') hand
+    punch (hand) {
+        super.punch(hand);
+
+        socket.emit('punch', hand);
+
+        console.log('I punched:', hand);
+    }
 }
 
 // initializes this clients player

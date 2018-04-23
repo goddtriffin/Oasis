@@ -49,6 +49,15 @@ function updateDirection (direction) {
     players[this.id].stats.facing = direction;
 }
 
+// handles a player's punch event
+function punch (hand) {
+    // tell the others
+    this.broadcast.emit('punch', this.id, hand);
+
+    // do collision detection here (?)
+    // TODO
+}
+
 // handles a socket closure
 function disconnect () {
     // leave the Oasis
@@ -84,5 +93,6 @@ module.exports = {
     join,
     updateLocation,
     updateDirection,
+    punch,
     disconnect
 };

@@ -6,19 +6,24 @@ CLIENT
 'signup'                        username , password , repassword        Sent when ready to sign up with a user account. Expects server's 'signup success' or 'signup failure' in return.
 'login'                         username , password                     Sent when ready to log in. Expects server's 'login success' or 'login failure' in return.
 
-'send world'                    NULL                                    Sent when the game world is ready to be loaded.
-'send connected players'        NULL                                    Sent when ready to initialize the collection of OtherPlayers.
+'send world'                    N/A                                     Sent when the game world is ready to be loaded.
+'send connected players'        N/A                                     Sent when ready to initialize the collection of OtherPlayers.
 
 'join'                          username , stats                        Sent when ready to visit the Oasis.
-'location update'               location                                Sent when the player's position has been updated.
 
+'location update'               location                                Sent when the player's position has been updated.
 'direction update'              direction                               Sent when the player's direction has been updated.
+
+'punch'                         hand                                    Sent when the player punches.
+
+'disconnect'                    N/A                                     Received when the socket loses connection to the server.
+
 
 SERVER
 =============
 'connection'                    socket                                  On new client "connection", attach all of the necessary listeners to the new client.
 
-'signup success'                NULL                                    On client "signup", send this back if the user was successfully signed up.
+'signup success'                N/A                                     On client "signup", send this back if the user was successfully signed up.
 'signup failure'                errorType , errorMessage                On client "signup", send this back if the user could not be signed in for whatever reason.
 'login success'                 sessionID , sessionUsername             On client "login", send this back if the user was successfully logged in.
 'login failure'                 errorType , errorMessage                On client "login", send this back if the user could not be logged in for whatever reason.
@@ -30,7 +35,8 @@ SERVER
 'player left'                   socketID                                On client "disconnect", send the client's ID so that everyone else can remove them from their local connected Oasis members list.
 
 'update player location'        socketID , location                     On client "location update", send the new location to everyone but the sender.
-
 'update player direction'       socketID , direction                    On client "direction update", send the new direction to everyone but the sender.
 
-'disconnect'                    NULL                                    On the closure of a socket, the player should be removed from the connected Oasis members list if they were among those who were.
+'punch'                         socketID , hand                         On client "punch", send the punch to everyone but the sender.
+
+'disconnect'                    N/A                                     On the closure of a socket, the player should be removed from the connected Oasis members list if they were among those who were.
