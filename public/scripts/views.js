@@ -165,8 +165,9 @@ function createGameInstructions (message) {
     // add elements
     gameInstructions.appendChild(createParagraphMessage('Instructions'));
     gameInstructions.appendChild(createParagraphMessage('------------'));
-    gameInstructions.appendChild(createParagraphMessage('WASD    :  move your character'));
-    gameInstructions.appendChild(createParagraphMessage('Arrows  :  change your player\'s direction'));
+    gameInstructions.appendChild(createParagraphMessage('WASD     :  move your character'));
+    gameInstructions.appendChild(createParagraphMessage('Arrows   :  change your player\'s direction'));
+    gameInstructions.appendChild(createParagraphMessage('Spacebar : punch'));
 
     // return completed login/signup choice
     return gameInstructions;
