@@ -21,6 +21,7 @@ function init (io) {
         socket.on('join', game.join);
         socket.on('location update', game.updateLocation);
         socket.on('direction update', game.updateDirection);
+        socket.on('punch', game.punch);
 
         // disconnection
         socket.on('disconnect', game.disconnect);

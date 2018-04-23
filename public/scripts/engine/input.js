@@ -45,6 +45,11 @@ function keyDownCallback (e) {
 			// face east
 			if (OasisPlayer.directionalKeys.indexOf('right') === -1) OasisPlayer.directionalKeys.push('right');
 			break;
+
+		case " ":
+			// punch
+			OasisPlayer.punch((getRandInt(0, 1) === 1)? 'left' : 'right');
+			break;
 	}
 }
 

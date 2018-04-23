@@ -4,11 +4,13 @@ class ClientPlayer extends Player {
     constructor (username, stats) {
         super(username, stats);
 
+        // directional movement keys
         this.up = false;
         this.down = false;
         this.left = false;
         this.right = false;
 
+        // directional facing keys
         this.directionalKeys = [];
     }
 
@@ -296,6 +298,14 @@ class ClientPlayer extends Player {
 
         // update it locally
         this.facing = direction;
+    }
+
+    // update all connected players with punch event
+    // ('left' || 'right') hand
+    punch (hand) {
+        super.punch(hand);
+
+        socket.emit('punch', hand);
     }
 }
 

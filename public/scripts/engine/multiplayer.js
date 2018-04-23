@@ -73,3 +73,8 @@ function updatePlayerLocation (socketID, location) {
 function updatePlayerDirection (socketID, direction) {
     OasisPlayers[socketID].facing = direction;
 }
+
+// handles a player's punch event
+function playerPunched (socketID, hand) {
+    OasisPlayers[socketID].punch(hand);
+}
