@@ -89,3 +89,20 @@ function playerHit (socketID) {
         OasisPlayers[socketId].hurt();
     }
 }
+
+// handles a player being killed
+function playerKilled (socketID) {
+    // you died
+    if (socketID === socket.id) {
+        respawn();
+    }
+}
+
+// handles respawning a player
+function respawn () {
+    // tell everyone you're back at the origin
+    socket.emit('location update', new Location(0, 0));
+
+    // actually move player to origin
+    OasisPlayer.location = new Location(0, 0);
+}

@@ -61,10 +61,13 @@ function hit (socketID, damage) {
 
     // damage the player being hit
     players[socketID].stats.health -= damage;
-    console.log(players[socketID].stats);
 
-    // damage the player accordingly
-    // TODO
+    // if player health is 0 or below, send kill player event
+    if (players[socketID].stats.health <= 0) {
+        this.broadcast.emit('player killed', socketID);
+
+        players[socketID].stats.health = 100;
+    }
 }
 
 // handles a socket closure
