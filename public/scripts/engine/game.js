@@ -110,6 +110,15 @@ function render () {
     // render this clients player
     OasisPlayer.render();
 
+    // render live players
+    renderLivePlayers();
+
+    // render all kill counts
+    renderLeaderboard();
+}
+
+// renders the count of all players currently connected to the Oasis
+function renderLivePlayers () {
     // render number of players currently logged into the Oasis
     OasisCanvasContext.fillStyle = 'black';
     OasisCanvasContext.font = "20px Arial";
@@ -118,4 +127,36 @@ function render () {
         OasisCanvas.width - 200,
         50
     );
+}
+
+// render all kill counts to the screen
+function renderLeaderboard () {
+    // set font color/size
+    OasisCanvasContext.fillStyle = 'black';
+    OasisCanvasContext.font = "17px Arial";
+
+    // render leaderboard title
+    OasisCanvasContext.fillText(
+        'Leaderboard:',
+        OasisCanvas.width - 200,
+        75
+    );
+
+    // render client's kill count first
+    OasisCanvasContext.fillText(
+        '' + OasisPlayer.username + ': ' + OasisPlayer.killCount,
+        OasisCanvas.width - 200,
+        75 + 17
+    );
+
+    // get all connected player's socket ids
+    const socketIDs = Object.keys(OasisPlayers);
+
+    for (let i=0; i<socketIDs.length; i++) {
+        OasisCanvasContext.fillText(
+            '' + OasisPlayers[socketIDs[i]].username + ': ' + OasisPlayers[socketIDs[i]].killCount,
+            OasisCanvas.width - 200,
+            90 + (i * 15) + 17
+        );
+    }
 }

@@ -116,9 +116,7 @@ function respawn () {
 function updateKillCount (socketID, killCount) {
     if (socketID === socket.id) {
         OasisPlayer.killCount = killCount;
-        console.log('my kill count is now:', OasisPlayer.killCount);
     } else {
         OasisPlayers[socketID].killCount = killCount;
-        console.log(OasisPlayers[socketID].username + '\'s kill count is now:', OasisPlayers[socketID].killCount);
     }
 }
