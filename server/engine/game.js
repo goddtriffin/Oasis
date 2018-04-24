@@ -1,6 +1,5 @@
 // world
 const world = require('./world');
-// world.generateRandom(100, 100);
 world.generateRealistic(1000, 1000, 25);
 
 // game
@@ -59,6 +58,10 @@ function punch (hand) {
 function hit (socketID, damage) {
     // tell the others
     this.broadcast.emit('player hit', socketID);
+
+    // damage the player being hit
+    players[socketID].stats.health -= damage;
+    console.log(players[socketID].stats);
 
     // damage the player accordingly
     // TODO

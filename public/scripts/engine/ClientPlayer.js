@@ -12,6 +12,9 @@ class ClientPlayer extends Player {
 
         // directional facing keys
         this.directionalKeys = [];
+
+        // health for damage
+        this.health = stats.health;
     }
 
     // updates player's data
@@ -328,6 +331,7 @@ function initPlayer () {
     stats.size = new Size(45, 45);
     stats.color = Player.colors[getRandInt(0, 10)];
     stats.facing = 'north';
+    stats.health = 100;
 
     // create this clients player
     OasisPlayer = new ClientPlayer(username, stats);
