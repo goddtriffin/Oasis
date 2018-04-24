@@ -51,6 +51,7 @@ function attachGameListeners () {
     socket.on('punch', playerPunched);
     socket.on('player hit', playerHit);
     socket.on('player killed', playerKilled);
+    socket.on('update kill count', updateKillCount);
 }
 
 // joins the Oasis and starts game loop (if all game data has been loaded)

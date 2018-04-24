@@ -4,7 +4,11 @@ class OtherPlayer extends Player {
     constructor (username, stats) {
         super(username, stats);
 
+        // initially set render location to real location
         this.renderLocation = stats.location;
+
+        // set initial kill count
+        this.killCount = stats.killCount;
     }
 
     tick () {

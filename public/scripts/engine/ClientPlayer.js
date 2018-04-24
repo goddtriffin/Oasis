@@ -15,6 +15,9 @@ class ClientPlayer extends Player {
 
         // health for damage
         this.health = stats.health;
+
+        // track kill count for current duration of life
+        this.killCount = stats.killCount;
     }
 
     // updates player's data
@@ -345,6 +348,7 @@ function initPlayer () {
     stats.color = Player.colors[getRandInt(0, 10)];
     stats.facing = 'north';
     stats.health = 100;
+    stats.killCount = 0;
 
     // create this clients player
     OasisPlayer = new ClientPlayer(username, stats);
