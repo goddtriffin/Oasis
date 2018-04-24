@@ -50,6 +50,7 @@ function joinGame () {
     stats.color = OasisPlayer.color;
     stats.facing = OasisPlayer.facing;
     stats.health = OasisPlayer.health;
+    stats.killCount = OasisPlayer.killCount;
 
     // join
     socket.emit('join', username, stats);
@@ -109,4 +110,13 @@ function respawn () {
 
     // reset client side health
     OasisPlayer.health = 100;
+}
+
+// handles updating a player's killCount
+function updateKillCount (socketID, killCount) {
+    if (socketID === socket.id) {
+        OasisPlayer.killCount = killCount;
+    } else {
+        OasisPlayers[socketID].killCount = killCount;
+    }
 }

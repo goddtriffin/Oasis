@@ -66,7 +66,13 @@ function hit (socketID, damage) {
     if (players[socketID].stats.health <= 0) {
         this.broadcast.emit('player killed', socketID);
 
+        // reset killed player's health
         players[socketID].stats.health = 100;
+
+        // increase killer's killCount
+        players[this.id].stats.killCount++;
+        this.broadcast.emit('update kill count', this.id, players[this.id].stats.killCount);
+        this.emit('update kill count', this.id, players[this.id].stats.killCount);
     }
 }
 
