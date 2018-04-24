@@ -108,4 +108,13 @@ function render () {
 
     // render this clients player
     OasisPlayer.render();
+
+    // render number of players currently logged into the Oasis
+    OasisCanvasContext.fillStyle = 'black';
+    OasisCanvasContext.font = "20px Arial";
+    OasisCanvasContext.fillText(
+        '' + (Object.keys(OasisPlayers).length + 1) + ' players live',
+        OasisCanvas.width - 200,
+        50
+    );
 }
