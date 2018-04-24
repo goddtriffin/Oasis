@@ -250,7 +250,6 @@ class Hand extends Entity {
 
     // handles a player punching a player
     checkPunchPlayer (player) {
-        /*
         const hand = this;
 
         // only check for collisions if you're the client
@@ -269,17 +268,13 @@ class Hand extends Entity {
                     size: OasisPlayers[socketID].size
                 };
 
-                // calculate intersection
-                const intersects = rectangleIntersects(rect1, rect2);
-
                 // check for collision
-                if (intersects) {
-                    // this.velocity = Math.abs(this.velocity) * -1;
-                    console.log('hand collision');
+                if (intersects(rect1, rect2)) {
+                    hand.velocity = Math.abs(hand.velocity) * -1;
+                    // console.log('hand collision');
                 }
             });
         }
-        */
     }
 }
 

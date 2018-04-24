@@ -14,7 +14,48 @@ function intersects (primaryRect, secondaryRect) {
 
 // returns true on upwards collision (one step in the future), false otherwise
 function collideUp (primaryRect, secondaryRect, step) {
+	// make sure step is positive
 	step = Math.abs(step);
 
+	// create temporary test location
+	primaryRect.location.y -= step;
 
+	// check if future location will intersect
+	return intersects(primaryRect, secondaryRect);
+}
+
+// returns true on downwards collision (one step in the future), false otherwise
+function collideDown (primaryRect, secondaryRect, step) {
+	// make sure step is positive
+	step = Math.abs(step);
+
+	// create temporary test location
+	primaryRect.location.y += step;
+
+	// check if future location will intersect
+	return intersects(primaryRect, secondaryRect);
+}
+
+// returns true on leftwards collision (one step in the future), false otherwise
+function collideLeft (primaryRect, secondaryRect, step) {
+	// make sure step is positive
+	step = Math.abs(step);
+
+	// create temporary test location
+	primaryRect.location.x -= step;
+
+	// check if future location will intersect
+	return intersects(primaryRect, secondaryRect);
+}
+
+// returns true on rightwards collision (one step in the future), false otherwise
+function collideUp (primaryRect, secondaryRect, step) {
+	// make sure step is positive
+	step = Math.abs(step);
+
+	// create temporary test location
+	primaryRect.location.x += step;
+
+	// check if future location will intersect
+	return intersects(primaryRect, secondaryRect);
 }
