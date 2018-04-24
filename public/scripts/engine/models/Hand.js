@@ -87,6 +87,9 @@ class Hand extends Entity {
 
             this.punched = false;
         }
+
+        // check for punch collisions
+        this.checkPunchPlayer(player);
     }
 
     // sets the hand position based on where the player is, and what hand it is
@@ -236,12 +239,47 @@ class Hand extends Entity {
 
     // thrusts itself outward
     punch () {
+        // turn punch mode on
         this.punched = true;
 
+        // reset punching data
         this.xOffset = 0;
         this.yOffset = 0;
-
         this.velocity = Hand.maxVelocity;
+    }
+
+    // handles a player punching a player
+    checkPunchPlayer (player) {
+        /*
+        const hand = this;
+
+        // only check for collisions if you're the client
+        if (player === OasisPlayer) {
+            // cycle through all the players
+            Object.keys(OasisPlayers).forEach(function (socketID) {
+                // client's rectangle
+                const rect1 = {
+                    location: hand.location,
+                    size: hand.size
+                };
+
+                // OtherPlayer's rectangle
+                const rect2 = {
+                    location: OasisPlayers[socketID].location,
+                    size: OasisPlayers[socketID].size
+                };
+
+                // calculate intersection
+                const intersects = rectangleIntersects(rect1, rect2);
+
+                // check for collision
+                if (intersects) {
+                    // this.velocity = Math.abs(this.velocity) * -1;
+                    console.log('hand collision');
+                }
+            });
+        }
+        */
     }
 }
 

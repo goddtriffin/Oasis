@@ -181,26 +181,34 @@ class ClientPlayer extends Player {
 
         // move up
         if (this.up) {
-            this.location.y -= this.speed;
-            updated = true;
+            for (let i=0; i<this.speed; i++) {
+                this.location.y -= 1;
+                updated = true;
+            }
         }
 
         // move down
         if (this.down) {
-            this.location.y += this.speed;
-            updated = true;
+            for (let i=0; i<this.speed; i++) {
+                this.location.y += 1;
+                updated = true;
+            }
         }
 
         // move left
         if (this.left) {
-            this.location.x -= this.speed;
-            updated = true;
+            for (let i=0; i<this.speed; i++) {
+                this.location.x -= 1;
+                updated = true;
+            }
         }
 
         // move right
         if (this.right) {
-            this.location.x += this.speed;
-            updated = true;
+            for (let i=0; i<this.speed; i++) {
+                this.location.x += 1;
+                updated = true;
+            }
         }
 
         // tell the server if movement updated
@@ -305,6 +313,7 @@ class ClientPlayer extends Player {
     punch (hand) {
         super.punch(hand);
 
+        // tell everyone
         socket.emit('punch', hand);
     }
 }

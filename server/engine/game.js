@@ -53,9 +53,6 @@ function updateDirection (direction) {
 function punch (hand) {
     // tell the others
     this.broadcast.emit('punch', this.id, hand);
-
-    // do collision detection here (?)
-    // TODO
 }
 
 // handles a socket closure
