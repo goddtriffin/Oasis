@@ -16,6 +16,9 @@ class Hand extends Entity {
         // true if currently in the punched state
         this.punched = false;
 
+        // true if hand has already hit somebody/something during the current punch
+        this.hit = true;
+
         // how fast the hand is moving on a punch
         this.velocity = 0;
 
@@ -243,6 +246,7 @@ class Hand extends Entity {
         this.punched = true;
 
         // reset punching data
+        this.hit = false;
         this.xOffset = 0;
         this.yOffset = 0;
         this.velocity = Hand.maxVelocity;
@@ -256,6 +260,8 @@ class Hand extends Entity {
         if (player === OasisPlayer) {
             // cycle through all the players
             Object.keys(OasisPlayers).forEach(function (socketID) {
+                if (hand.hit) return;
+
                 // client's rectangle
                 const rect1 = {
                     location: hand.location,
@@ -270,8 +276,9 @@ class Hand extends Entity {
 
                 // check for collision
                 if (intersects(rect1, rect2)) {
+                    hand.hit = true;
                     hand.velocity = Math.abs(hand.velocity) * -1;
-                    // console.log('hand collision');
+                    console.log('punch');
                 }
             });
         }
