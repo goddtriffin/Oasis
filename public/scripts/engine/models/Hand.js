@@ -276,9 +276,15 @@ class Hand extends Entity {
 
                 // check for collision
                 if (intersects(rect1, rect2)) {
+                    // tell the server immediately
+                    socket.emit('hit', socketID, Hand.damage);
+
+                    // update the hand's data
                     hand.hit = true;
                     hand.velocity = Math.abs(hand.velocity) * -1;
-                    console.log('punch');
+
+                    // tell the player hit to show that it got hit
+                    OasisPlayers[socketID].hurt();
                 }
             });
         }
@@ -287,3 +293,4 @@ class Hand extends Entity {
 
 // the fastest the hand should ever move
 Hand.maxVelocity = 8;
+Hand.damage = 5;

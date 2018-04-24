@@ -55,6 +55,15 @@ function punch (hand) {
     this.broadcast.emit('punch', this.id, hand);
 }
 
+// handles a player being successfully punched
+function hit (socketID, damage) {
+    // tell the others
+    this.broadcast.emit('player hit', socketID);
+
+    // damage the player accordingly
+    // TODO
+}
+
 // handles a socket closure
 function disconnect () {
     // leave the Oasis
@@ -91,5 +100,6 @@ module.exports = {
     updateLocation,
     updateDirection,
     punch,
+    hit,
     disconnect
 };

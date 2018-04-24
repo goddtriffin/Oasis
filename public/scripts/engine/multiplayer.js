@@ -78,3 +78,13 @@ function updatePlayerDirection (socketID, direction) {
 function playerPunched (socketID, hand) {
     OasisPlayers[socketID].punch(hand);
 }
+
+// handles when a player has been hit
+function playerHit (socketID) {
+    if (socketID === socket.id) {
+        OasisPlayer.hurt();
+    } else {
+        // show that the player has been hurt
+        OasisPlayers[socketId].hurt();
+    }
+}
