@@ -1,6 +1,5 @@
 // world
 const world = require('./world');
-// world.generateRandom(100, 100);
 world.generateRealistic(1000, 1000, 25);
 
 // game
@@ -55,6 +54,22 @@ function punch (hand) {
     this.broadcast.emit('punch', this.id, hand);
 }
 
+// handles a player being successfully punched
+function hit (socketID, damage) {
+    // tell the others
+    this.broadcast.emit('player hit', socketID);
+
+    // damage the player being hit
+    players[socketID].stats.health -= damage;
+
+    // if player health is 0 or below, send kill player event
+    if (players[socketID].stats.health <= 0) {
+        this.broadcast.emit('player killed', socketID);
+
+        players[socketID].stats.health = 100;
+    }
+}
+
 // handles a socket closure
 function disconnect () {
     // leave the Oasis
@@ -91,5 +106,6 @@ module.exports = {
     updateLocation,
     updateDirection,
     punch,
+    hit,
     disconnect
 };

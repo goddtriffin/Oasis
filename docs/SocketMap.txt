@@ -15,6 +15,7 @@ CLIENT
 'direction update'              direction                               Sent when the player's direction has been updated.
 
 'punch'                         hand                                    Sent when the player punches.
+'hit'                           socketID , damage                       Sent when the player successfully punches another player.
 
 'disconnect'                    N/A                                     Received when the socket loses connection to the server.
 
@@ -38,5 +39,7 @@ SERVER
 'update player direction'       socketID , direction                    On client "direction update", send the new direction to everyone but the sender.
 
 'punch'                         socketID , hand                         On client "punch", send the punch to everyone but the sender.
+'player hit'                    socketID                                On client 'hit', send the successful punch to everyone but the sender.
+'player killed'                           socketID                                On client health below 0, tell everyone to kill the player.
 
 'disconnect'                    N/A                                     On the closure of a socket, the player should be removed from the connected Oasis members list if they were among those who were.

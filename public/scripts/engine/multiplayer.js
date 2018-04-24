@@ -49,6 +49,7 @@ function joinGame () {
     stats.speed = OasisPlayer.speed;
     stats.color = OasisPlayer.color;
     stats.facing = OasisPlayer.facing;
+    stats.health = OasisPlayer.health;
 
     // join
     socket.emit('join', username, stats);
@@ -77,4 +78,31 @@ function updatePlayerDirection (socketID, direction) {
 // handles a player's punch event
 function playerPunched (socketID, hand) {
     OasisPlayers[socketID].punch(hand);
+}
+
+// handles when a player has been hit
+function playerHit (socketID) {
+    if (socketID === socket.id) {
+        OasisPlayer.hurt();
+    } else {
+        // show that the player has been hurt
+        OasisPlayers[socketId].hurt();
+    }
+}
+
+// handles a player being killed
+function playerKilled (socketID) {
+    // you died
+    if (socketID === socket.id) {
+        respawn();
+    }
+}
+
+// handles respawning a player
+function respawn () {
+    // tell everyone you're back at the origin
+    socket.emit('location update', new Location(0, 0));
+
+    // actually move player to origin
+    OasisPlayer.location = new Location(0, 0);
 }

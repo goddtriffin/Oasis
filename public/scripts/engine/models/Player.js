@@ -15,6 +15,9 @@ class Player extends Entity {
             new Hand(this, 'left'),
             new Hand(this, 'right')
         ];
+
+        // true if recently taken damage, false otherwise
+        this.hurting = false;
     }
 
     // update the player's data
@@ -49,6 +52,11 @@ class Player extends Entity {
         this.hands[(hand === 'left')? 0 : 1].punch();
     }
 
+    // flashes the player red to show that they're hurt
+    hurt () {
+        this.hurting = true;
+    }
+
     // renders the player's body
     renderBody () {
         // use regular location
@@ -62,13 +70,16 @@ class Player extends Entity {
         }
 
         // render body
-        OasisCanvasContext.fillStyle = this.color;
+        OasisCanvasContext.fillStyle = (this.hurting)? 'red' : this.color;
         OasisCanvasContext.fillRect(
             x - OasisCamera.location.x,
             y - OasisCamera.location.y,
             this.size.width,
             this.size.height
         );
+
+        // reset hurt status
+        if (this.hurting) this.hurting = false;
 
         // render outline
         OasisCanvasContext.fillStyle = "black";

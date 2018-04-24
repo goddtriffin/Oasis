@@ -1,56 +1,61 @@
-// Checks for a collision one step in the future
-function collideUp (primaryTop, secondaryBottom, step) {
-	step = Math.abs(step);
+// ({location , size}) primaryRect - the one that's moving
+// ({location , size}) secondaryRect - the one to check against
+// (Integer) step - the number of pixels to look ahead
 
-	if (primaryTop - step < secondaryBottom) {
-		return true;
-	}
-
-	return false;
+// returns true if the rectangle's are intersecting
+function intersects (primaryRect, secondaryRect) {
+	return !(
+		primaryRect.location.y > secondaryRect.location.y + secondaryRect.size.height 	|| // r1.top 	> r2.bottom
+		primaryRect.location.y + primaryRect.size.height < secondaryRect.location.y 	|| // r1.bottom < r2.top
+		primaryRect.location.x > secondaryRect.location.x + secondaryRect.size.width	|| // r1.left 	> r2.right
+		primaryRect.location.x + primaryRect.size.width < secondaryRect.location.x		   // r1.right 	< r2.left
+	);
 }
 
-// Checks for a collision one step in the future
-function collideDown (primaryBottom, secondaryTop, step) {
+// returns true on upwards collision (one step in the future), false otherwise
+function collideUp (primaryRect, secondaryRect, step) {
+	// make sure step is positive
 	step = Math.abs(step);
 
-	if (primaryBottom + step > secondaryTop) {
-		return true;
-	}
+	// create temporary test location
+	primaryRect.location.y -= step;
 
-	return false;
+	// check if future location will intersect
+	return intersects(primaryRect, secondaryRect);
 }
 
-// Checks for a collision one step in the future
-function collideLeft (primaryLeft, secondaryRight, step) {
+// returns true on downwards collision (one step in the future), false otherwise
+function collideDown (primaryRect, secondaryRect, step) {
+	// make sure step is positive
 	step = Math.abs(step);
 
-	if (primaryLeft - step < secondaryRight) {
-		return true;
-	}
+	// create temporary test location
+	primaryRect.location.y += step;
 
-	return false;
+	// check if future location will intersect
+	return intersects(primaryRect, secondaryRect);
 }
 
-// Checks for a collision one step in the future
-function collideRight (primaryRight, secondaryLeft, step) {
+// returns true on leftwards collision (one step in the future), false otherwise
+function collideLeft (primaryRect, secondaryRect, step) {
+	// make sure step is positive
 	step = Math.abs(step);
 
-	if (primaryRight + step > secondaryLeft) {
-		return true;
-	}
+	// create temporary test location
+	primaryRect.location.x -= step;
 
-	return false;
+	// check if future location will intersect
+	return intersects(primaryRect, secondaryRect);
 }
 
-// checks if two rectangles intersect
-// ({location , size}) rect1 , ({location , size}) rect2
-function rectangleIntersects (rect1, rect2) {
-    // gather collision data
-    const up = collideUp(rect1.location.y, rect2.location.y + rect2.size.height, 0);
-    const down = collideDown(rect1.location.y + rect1.size.height, rect2.location.y, 0);
-    const left = collideLeft(rect1.location.x, rect2.location.x + rect2.size.width, 0);
-    const right = collideRight(rect1.location.x + rect1.size.width, rect2.location.x, 0);
+// returns true on rightwards collision (one step in the future), false otherwise
+function collideUp (primaryRect, secondaryRect, step) {
+	// make sure step is positive
+	step = Math.abs(step);
 
-    // check for possible collisions
-    return ((up && left) || (up && right) || (down && left) || (down && right));
+	// create temporary test location
+	primaryRect.location.x += step;
+
+	// check if future location will intersect
+	return intersects(primaryRect, secondaryRect);
 }

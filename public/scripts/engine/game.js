@@ -49,6 +49,8 @@ function attachGameListeners () {
     socket.on('update player location', updatePlayerLocation);
     socket.on('update player direction', updatePlayerDirection);
     socket.on('punch', playerPunched);
+    socket.on('player hit', playerHit);
+    socket.on('player killed', playerKilled);
 }
 
 // joins the Oasis and starts game loop (if all game data has been loaded)
