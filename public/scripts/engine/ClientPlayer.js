@@ -30,6 +30,8 @@ class ClientPlayer extends Player {
     render () {
         super.render();
 
+        this.renderHealth();
+
         if (debug) {
             // draw tile coordinate
             OasisCanvasContext.fillStyle = 'black';
@@ -318,6 +320,17 @@ class ClientPlayer extends Player {
 
         // tell everyone
         socket.emit('punch', hand);
+    }
+
+    // renders the player's current health
+    renderHealth () {
+        OasisCanvasContext.fillStyle = 'black';
+        OasisCanvasContext.font = "30px Arial";
+        OasisCanvasContext.fillText(
+            '' + OasisPlayer.health + ' / 100',
+            50,
+            50
+        );
     }
 }
 

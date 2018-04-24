@@ -81,9 +81,10 @@ function playerPunched (socketID, hand) {
 }
 
 // handles when a player has been hit
-function playerHit (socketID) {
+function playerHit (socketID, damage) {
     if (socketID === socket.id) {
         OasisPlayer.hurt();
+        OasisPlayer.health -= damage;
     } else {
         // show that the player has been hurt
         OasisPlayers[socketId].hurt();
@@ -105,4 +106,7 @@ function respawn () {
 
     // actually move player to origin
     OasisPlayer.location = new Location(0, 0);
+
+    // reset client side health
+    OasisPlayer.health = 100;
 }

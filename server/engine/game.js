@@ -57,7 +57,7 @@ function punch (hand) {
 // handles a player being successfully punched
 function hit (socketID, damage) {
     // tell the others
-    this.broadcast.emit('player hit', socketID);
+    this.broadcast.emit('player hit', socketID, damage);
 
     // damage the player being hit
     players[socketID].stats.health -= damage;
