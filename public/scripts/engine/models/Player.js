@@ -125,8 +125,10 @@ class Player extends Entity {
 // vaiety of human-like colors for player's color
 // https://htmlcolorcodes.com/color-names/
 Player.colors = [
-    'lightsalmon', 'darksalmon',
-    'bisque', 'navajowhite', 'wheat',
-    'burlywood', 'tan', 'peru',
-    'chocolate', 'saddlebrown', 'sienna'
+    'pink', 'orange', 'gold', 'yellow', 'darkkhaki',
+    'lavender', 'violet', 'fuschia', 'rebeccapurple', 'indigo', 'slateblue',
+    'greenyellow', 'lime', 'springgreen', 'seagreen', 'darkgreen', 'olive', 'darkcyan', 'teal',
+    'aqua', 'aquamarine', 'turquoise', 'cadetblue', 'steelblue', 'deepskyblue', 'dodgerblue', 'blue', 'navy',
+    'burlywood', 'sandybrown', 'chocolate', 'saddlebrown', 'brown',
+    'white', 'silver', 'darkgray', 'gray', 'lighslategray', 'darkslategray', 'black'
 ]
