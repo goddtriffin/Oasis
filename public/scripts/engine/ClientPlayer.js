@@ -232,6 +232,22 @@ class ClientPlayer extends Player {
             // tell the others
             socket.emit('location update', this.location);
         }
+
+        Object.keys(OasisPlayers).forEach(function (socketID) {
+            const rect1 = {
+                location: OasisPlayer.location,
+                size: OasisPlayer.size
+            };
+
+            const rect2 = {
+                location: OasisPlayers[socketID].location,
+                size: OasisPlayers[socketID].size
+            };
+
+            if (intersects(rect1, rect2)) {
+                console.log('intersecting');
+            }
+        });
     }
 
     // sets face direction to movement direction
