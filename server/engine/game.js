@@ -32,6 +32,10 @@ function join (username, stats) {
 
 // handles a player updating their location
 function updateLocation (location) {
+    if (!players[this.id]) {
+        return;
+    }
+
     // tell the others
     this.broadcast.emit('update player location', this.id, location);
 
@@ -41,6 +45,10 @@ function updateLocation (location) {
 
 // handles a player updating their direction
 function updateDirection (direction) {
+    if (!players[this.id]) {
+        return;
+    }
+
     // tell the others
     this.broadcast.emit('update player direction', this.id, direction);
 
@@ -56,6 +64,10 @@ function punch (hand) {
 
 // handles a player being successfully punched
 function hit (socketID, damage) {
+    if (!players[socketID]) {
+        return;
+    }
+
     // tell the others
     this.broadcast.emit('player hit', socketID, damage);
 
