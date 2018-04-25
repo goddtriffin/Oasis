@@ -121,8 +121,8 @@ class Player extends Entity {
                 // only add rectangle if tile is collidable
                 if (Tile.collidable(tileType)) {
                     // get coordinate of tile beneath player
-                    tileY = Math.floor((this.location.y + (this.size.height / 2)) / Tile.size.height) + (deltaY * Tile.size.height);
-                    tileX = Math.floor((this.location.x + (this.size.width / 2)) / Tile.size.width) + (deltaX * Tile.size.width);
+                    tileY = (Math.floor((this.location.y + (this.size.height / 2)) / Tile.size.height) * Tile.size.height) + (deltaY * Tile.size.height);
+                    tileX = (Math.floor((this.location.x + (this.size.width / 2)) / Tile.size.width) * Tile.size.width) + (deltaX * Tile.size.width);
 
                     // create rectangle
                     const rectangle = {

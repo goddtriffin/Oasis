@@ -49,7 +49,7 @@ function collideLeft (primaryRect, secondaryRect, step) {
 }
 
 // returns true on rightwards collision (one step in the future), false otherwise
-function collideUp (primaryRect, secondaryRect, step) {
+function collideRight (primaryRect, secondaryRect, step) {
 	// make sure step is positive
 	step = Math.abs(step);
 

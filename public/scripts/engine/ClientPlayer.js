@@ -160,7 +160,13 @@ class ClientPlayer extends Player {
     move () {
         // get a list of all collidable tiles near the player
         const collidableTilesNearPlayer = this.getCollidableTilesNearPlayer();
-        if (collidableTilesNearPlayer.length > 0) console.log(collidableTilesNearPlayer);
+        // if (collidableTilesNearPlayer.length > 0) console.log(collidableTilesNearPlayer);
+
+        // create player's collision rectangle
+        const primaryRect = {
+            location: new Location(this.location.x, this.location.y),
+            size: new Size(this.size.width, this.size.height)
+        }
 
         // handle movement
         let updated = false;
@@ -168,32 +174,64 @@ class ClientPlayer extends Player {
         // move up
         if (this.up) {
             for (let i=0; i<this.speed; i++) {
-                this.location.y -= 1;
-                updated = true;
+                let collidedUp = false;
+
+                for (let j=0; j<collidableTilesNearPlayer.length; j++) {
+                    if (collideUp(primaryRect, collidableTilesNearPlayer[j], 1)) collidedUp = true;
+                }
+
+                if (!collidedUp) {
+                    this.location.y -= 1;
+                    updated = true;
+                }
             }
         }
 
         // move down
         if (this.down) {
             for (let i=0; i<this.speed; i++) {
-                this.location.y += 1;
-                updated = true;
+                let collidedDown = false;
+
+                for (let j=0; j<collidableTilesNearPlayer.length; j++) {
+                    if (collideDown(primaryRect, collidableTilesNearPlayer[j], 1)) collidedDown = true;
+                }
+
+                if (!collidedDown) {
+                    this.location.y += 1;
+                    updated = true;
+                }
             }
         }
 
         // move left
         if (this.left) {
             for (let i=0; i<this.speed; i++) {
-                this.location.x -= 1;
-                updated = true;
+                let collidedLeft = false;
+
+                for (let j=0; j<collidableTilesNearPlayer.length; j++) {
+                    if (collideLeft(primaryRect, collidableTilesNearPlayer[j], 1)) collidedLeft = true;
+                }
+
+                if (!collidedLeft) {
+                    this.location.x -= 1;
+                    updated = true;
+                }
             }
         }
 
         // move right
         if (this.right) {
             for (let i=0; i<this.speed; i++) {
-                this.location.x += 1;
-                updated = true;
+                let collidedRight = false;
+
+                for (let j=0; j<collidableTilesNearPlayer.length; j++) {
+                    if (collideRight(primaryRect, collidableTilesNearPlayer[j], 1)) collidedRight = true;
+                }
+
+                if (!collidedRight) {
+                    this.location.x += 1;
+                    updated = true;
+                }
             }
         }
 
