@@ -75,6 +75,9 @@ class Tile {
 
             case 4: // stone
                 return 'slategrey';
+
+            case 5: // tree
+                return 'saddlebrown';
             
             default:
                 console.error('unknown tileType:', tileType);
@@ -100,6 +103,9 @@ class Tile {
 
             case 4: // stone
                 return 'stone';
+
+            case 5: // tree
+                return 'tree';
             
             default:
                 console.error('unknown tileType:', tileType);
@@ -112,6 +118,9 @@ class Tile {
     static collidable (tileType) {
         switch (tileType) {
             case 4: // stone
+                return true;
+            
+            case 5: // tree
                 return true;
             
             default: // everything else

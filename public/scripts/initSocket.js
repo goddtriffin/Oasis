@@ -1,8 +1,8 @@
 // handles turning on/off debug mode
-const debug = false;
+let debug = false;
 
 // turns on/off simple rendering
-const simpleRender = false;
+let simpleRender = false;
 
 // intitialize socket.io client socket
 const socket = io();
