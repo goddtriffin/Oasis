@@ -49,36 +49,10 @@ class ClientPlayer extends Player {
 
     // updates the tile the player is standing on
     updateTileStandingOn () {
-        // get coordinate of tile beneath player
-        let tileY = Math.floor((this.location.y + (this.size.height / 2)) / Tile.size.height);
-        let tileX = Math.floor((this.location.x + (this.size.width / 2)) / Tile.size.width);
-
-        // above/left of world
-        if (tileY < 0) {
-            tileY += 1;
-            tileY = OasisWorld.tilemap.length - ((-tileY) % OasisWorld.tilemap.length) - 1;
-        }
-        if (tileX < 0) {
-            tileX += 1;
-            tileX = OasisWorld.tilemap.length - ((-tileX) % OasisWorld.tilemap.length) - 1;
-        }
-
-        // below/right of world
-        if (tileY > OasisWorld.tilemap.length - 1) tileY %= OasisWorld.tilemap.length;
-        if (tileX > OasisWorld.tilemap.length - 1) tileX %= OasisWorld.tilemap.length;
-
-        // test
-        if (tileY < 0 || tileY > OasisWorld.tilemap.length) {
-            console.error('improper tileY:', tileY);
-            return;
-        }
-        if (tileX < 0 || tileX > OasisWorld.tilemap.length) {
-            console.error('improper tileX:', tileX);
-            return;
-        }
+        const tileStandingOnCoordinate = this.getTileStandingOnCoordinate();
 
         // set tile standing on
-        this.tileStandingOn = OasisWorld.tilemap[tileY][tileX];
+        this.tileStandingOn = OasisWorld.tilemap[tileStandingOnCoordinate.tileY][tileStandingOnCoordinate.tileX];
     }
 
     // updates the player's speed, dependent on tile type stood on and direction facing
@@ -184,6 +158,10 @@ class ClientPlayer extends Player {
 
     // handles player movement
     move () {
+        // get a list of all collidable tiles near the player
+        const collidableTilesNearPlayer = this.getCollidableTilesNearPlayer();
+        if (collidableTilesNearPlayer.length > 0) console.log(collidableTilesNearPlayer);
+
         // handle movement
         let updated = false;
 

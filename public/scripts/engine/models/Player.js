@@ -57,6 +57,88 @@ class Player extends Entity {
         this.hurting = true;
     }
 
+    // returns the coordinate of which tilemap tile the player is standing on
+    // returns {tileX , tileY}
+    getTileStandingOnCoordinate () {
+        // get coordinate of tile beneath player
+        let tileY = Math.floor((this.location.y + (this.size.height / 2)) / Tile.size.height);
+        let tileX = Math.floor((this.location.x + (this.size.width / 2)) / Tile.size.width);
+
+        // above/left of world
+        if (tileY < 0) {
+            tileY += 1;
+            tileY = OasisWorld.tilemap.length - ((-tileY) % OasisWorld.tilemap.length) - 1;
+        }
+        if (tileX < 0) {
+            tileX += 1;
+            tileX = OasisWorld.tilemap.length - ((-tileX) % OasisWorld.tilemap.length) - 1;
+        }
+
+        // below/right of world
+        if (tileY > OasisWorld.tilemap.length - 1) tileY %= OasisWorld.tilemap.length;
+        if (tileX > OasisWorld.tilemap.length - 1) tileX %= OasisWorld.tilemap.length;
+
+        // test
+        if (tileY < 0 || tileY > OasisWorld.tilemap.length) {
+            console.error('improper tileY:', tileY);
+            return;
+        }
+        if (tileX < 0 || tileX > OasisWorld.tilemap.length) {
+            console.error('improper tileX:', tileX);
+            return;
+        }
+
+        // we gucci
+        return {tileX, tileY};
+    }
+
+    // returns a list of collidable tiles (as rectangles) near the player
+    getCollidableTilesNearPlayer () {
+        // prep tiles (rectangles) container
+        const rectangles = [];
+
+        // get tile coordinate in tilemap of the tile currently being stood on
+        const tileStandingOnCoordinate = this.getTileStandingOnCoordinate();
+
+        // check the 9x9 grid surrounding the player
+        for (let deltaY = -1; deltaY <= 1; deltaY++) {
+            for (let deltaX = -1; deltaX <= 1; deltaX++) {
+                // calculate 9x9 grid current tile coordinate
+                let tileX = tileStandingOnCoordinate.tileX + deltaX;
+                let tileY = tileStandingOnCoordinate.tileY + deltaY;
+
+                // make sure it is within the bounds of the tilemap to
+                // correctly calculate the current tile type
+                if (tileX < 0) tileX += OasisWorld.tilemap.length;
+                if (tileY < 0) tileY += OasisWorld.tilemap.length;
+
+                if (tileX > OasisWorld.tilemap.length - 1) tileX -= OasisWorld.tilemap.length;
+                if (tileY > OasisWorld.tilemap.length - 1) tileY -= OasisWorld.tilemap.length;
+
+                // get the current tile type
+                const tileType = OasisWorld.tilemap[tileY][tileX];
+
+                // only add rectangle if tile is collidable
+                if (Tile.collidable(tileType)) {
+                    // get coordinate of tile beneath player
+                    tileY = Math.floor((this.location.y + (this.size.height / 2)) / Tile.size.height) + (deltaY * Tile.size.height);
+                    tileX = Math.floor((this.location.x + (this.size.width / 2)) / Tile.size.width) + (deltaX * Tile.size.width);
+
+                    // create rectangle
+                    const rectangle = {
+                        location: new Location(tileX, tileY),
+                        size: new Size(Tile.size.width, Tile.size.height)
+                    }
+
+                    // add to the collection
+                    rectangles.push(rectangle);
+                }
+            }
+        }
+
+        return rectangles;
+    }
+
     // renders the player's body
     renderBody () {
         // use regular location

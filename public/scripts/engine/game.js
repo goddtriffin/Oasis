@@ -53,8 +53,6 @@ function loadAssets () {
     OasisAssets['shore'] = getImage('../../res/', 'shore.png');
     OasisAssets['ocean'] = getImage('../../res/', 'ocean.png');
     OasisAssets['stone'] = getImage('../../res/', 'stone.png');
-
-    console.log(OasisAssets);
 }
 
 // attaches game listeners

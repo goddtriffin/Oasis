@@ -106,6 +106,18 @@ class Tile {
                 return 'unknown';
         }
     }
+
+    // returns true if tile is collidable
+    // (int) tileType
+    static collidable (tileType) {
+        switch (tileType) {
+            case 4: // stone
+                return true;
+            
+            default: // everything else
+                return false
+        }
+    }
 }
 
 // set static Tile size
