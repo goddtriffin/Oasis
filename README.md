@@ -8,6 +8,17 @@ Todd Griffin, MagnusFrater, griff170@purdue.edu
 
 ![cover photo](/public/res/cover-photo.png)
 
+## Features
+
+- realtime multiplayer
+- random, realistic world map generation (Stone, Grass, Sand, Shore, Ocean, Trees, Leaves)
+- finite tilemap w/ world wrap (seamlessly transition between tilemap borders)
+- 8 direction movement/facing
+- punching/killing/respawning
+- leaderboard for kill counts
+- terrain affects player max speed (Grass is fastest, Ocean is slowest)
+- directional facing affects player max speed (side-stepping or backwards movement is slower than forwards movement)
+
 ## Requirements
 
 Must have npm installed.
