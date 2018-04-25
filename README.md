@@ -6,6 +6,8 @@ Simple, realtime multiplayer landscape.
 
 Todd Griffin, MagnusFrater, griff170@purdue.edu
 
+![cover photo](/public/res/cover-photo.png)
+
 ## Requirements
 
 Must have npm installed.
