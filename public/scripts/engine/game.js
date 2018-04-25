@@ -17,6 +17,9 @@ function initGame () {
     // get game canvas context (set as global var)
     OasisCanvasContext = OasisCanvas.getContext('2d');
 
+    // load all image assets
+    loadAssets();
+
     // initialize this clients player
     initPlayer();
 
@@ -38,6 +41,20 @@ function initGame () {
 
     // start the game!
     startGame();
+}
+
+// loads all game assets
+function loadAssets () {
+    OasisAssets = {};
+
+    // terrain
+    OasisAssets['grass'] = getImage('../../res/', 'grass.png');
+    OasisAssets['sand'] = getImage('../../res/', 'sand.png');
+    OasisAssets['shore'] = getImage('../../res/', 'shore.png');
+    OasisAssets['ocean'] = getImage('../../res/', 'ocean.png');
+    OasisAssets['stone'] = getImage('../../res/', 'stone.png');
+
+    console.log(OasisAssets);
 }
 
 // attaches game listeners

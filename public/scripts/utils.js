@@ -53,3 +53,12 @@ function getRandInt (min, max) {
 
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// Returns an image resource from a given resource path.
+// (String [path to image resource folder]) assetsPath
+// (String [image file name with extension]) fileName
+function getImage (assetsPath, fileName) {
+	const img = new Image();
+	img.src = assetsPath + fileName;
+	return img;
+}
