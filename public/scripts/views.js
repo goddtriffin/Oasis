@@ -138,6 +138,9 @@ function createGameDescription () {
     const gameInstructions = createGameInstructions();
     gameDescription.appendChild(gameInstructions);
 
+    const coolImage = createCoolImage();
+    gameDescription.appendChild(coolImage);
+
     // return completed login/signup choice
     return gameDescription;
 }
@@ -222,4 +225,20 @@ function removeBackButton () {
 
     // remove back button
     removeElement('backButton');
+}
+
+// returns the cover image
+function createCoolImage () {
+    // check for element creation errors
+    if (elementCreationErrors('coolImage')) return;
+
+    // create cool image
+    const coolImage = document.createElement('img');
+
+    // set attributes
+    coolImage.src = "../res/cover-photo.png";
+    coolImage.maxWidth = "200px";
+
+    // return completed cool image
+    return coolImage;
 }
