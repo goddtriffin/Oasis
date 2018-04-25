@@ -208,7 +208,7 @@ class Player extends Entity {
 // https://htmlcolorcodes.com/color-names/
 Player.colors = [
     'pink', 'orange', 'gold', 'yellow', 'darkkhaki',
-    'lavender', 'violet', 'fuschia', 'rebeccapurple', 'indigo', 'slateblue',
+    'lavender', 'violet', 'fuchsia', 'rebeccapurple', 'indigo', 'slateblue',
     'greenyellow', 'lime', 'springgreen', 'seagreen', 'darkgreen', 'olive', 'darkcyan', 'teal',
     'aqua', 'aquamarine', 'turquoise', 'cadetblue', 'steelblue', 'deepskyblue', 'dodgerblue', 'blue', 'navy',
     'burlywood', 'sandybrown', 'chocolate', 'saddlebrown', 'brown',
