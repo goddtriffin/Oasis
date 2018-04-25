@@ -53,6 +53,8 @@ function loadAssets () {
     OasisAssets['shore'] = getImage('../../res/', 'shore.png');
     OasisAssets['ocean'] = getImage('../../res/', 'ocean.png');
     OasisAssets['stone'] = getImage('../../res/', 'stone.png');
+    OasisAssets['tree'] = getImage('../../res/', 'tree.png');
+    OasisAssets['leaves'] = getImage('../../res/', 'leaves.png');
 }
 
 // attaches game listeners
@@ -124,6 +126,8 @@ function render () {
 
     // render this clients player
     OasisPlayer.render();
+
+    renderLeaves();
 
     // render live players
     renderLivePlayers();

@@ -54,6 +54,7 @@ function generateRealistic (width, height, smoothLevel) {
     let sandCount   = 0;
     let shoreCount  = 0;
     let oceanCount  = 0;
+    let treeCount   = 0;
 
     // assign each point in height map an actual tile type
     for (let y=0; y<tilemap.length; y++) {
@@ -72,8 +73,16 @@ function generateRealistic (width, height, smoothLevel) {
                 stoneCount++;
             } else
             if (height >= grassPercentage) { // grass
-                tilemap[y][x] = 0;
-                grassCount++;
+                // randomly plant trees
+                if (utils.getRandInt(0, 20) === 0) {
+                    // plant tree
+                    tilemap[y][x] = 5; // tree
+                    treeCount++;
+                } else {
+                    // just grass
+                    tilemap[y][x] = 0; // grass
+                    grassCount++;
+                }
             } else
             if (height >= sandPercentage) { // sand
                 tilemap[y][x] = 1;
@@ -96,6 +105,7 @@ function generateRealistic (width, height, smoothLevel) {
     console.log('shore:', shoreCount);
     console.log('ocean:', oceanCount);
     console.log('total:', grassCount + sandCount + shoreCount + oceanCount + stoneCount);
+    console.log('tree:', treeCount);
     console.log('Finished generating realistic terrain.');
 }
 

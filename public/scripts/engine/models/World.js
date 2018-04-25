@@ -1,3 +1,7 @@
+// container for all trees visible on the screen
+// contains [{worldX, worldY} , {worldX, worldY} , ...]
+let allVisibleTrees = [];
+
 // World model
 // (Size) size
 class World {
@@ -23,9 +27,12 @@ class World {
         // track how many tiles are being rendered
         let tileCount = 0;
 
+        // reset container for all trees visible on the map
+        allVisibleTrees = [];
+
         // cycle through only the screen-visible tiles
-        for (let worldY = yMin; worldY < yMax; worldY++) {
-            for (let worldX = xMin; worldX < xMax; worldX++) {
+        for (let worldY = yMin - 1; worldY < yMax + 1; worldY++) {
+            for (let worldX = xMin - 1; worldX < xMax + 1; worldX++) {
                 let tilemapX = worldX;
                 let tilemapY = worldY;
 
@@ -46,6 +53,12 @@ class World {
                 // and render it
                 Tile.render(worldX, worldY, this.tilemap[tilemapY][tilemapX], tilemapX, tilemapY);
                 tileCount++;
+
+                // if tile being rendered is a tree, save it in trees array
+                if (this.tilemap[tilemapY][tilemapX] === 5) {
+                    const tree = {worldX, worldY};
+                    allVisibleTrees.push(tree);
+                }
             }
         }
 
@@ -61,6 +74,44 @@ class World {
             );
         }
     }
+}
+
+// renders all leaves around all the (visible) trees
+function renderLeaves () {
+    // cycle through all visible trees
+    allVisibleTrees.forEach(function (tree) {
+
+        // create 8 leaves blocks around each tree trunk
+        for (deltaY = -1; deltaY <= 1; deltaY++) {
+            for (deltaX = -1; deltaX <= 1; deltaX++) {
+                // don't put a leaf block in the center of the 3x3 grid
+                if (deltaY === 0 && deltaX === 0) continue;
+
+                // get tile coordinates
+                const tileX = (tree.worldX * Tile.size.width) + (deltaX * Tile.size.width) - OasisCamera.location.x;
+                const tileY = (tree.worldY * Tile.size.height) + (deltaY * Tile.size.height) - OasisCamera.location.y;
+
+                // draw tile body
+                if (simpleRender) {
+                    OasisCanvasContext.fillStyle = Tile.getColor(6);
+                    OasisCanvasContext.fillRect(
+                        tileX,
+                        tileY,
+                        Tile.size.width,
+                        Tile.size.height
+                    );
+                } else {
+                    OasisCanvasContext.drawImage(
+                        OasisAssets[Tile.getType(6)],
+                        tileX,
+                        tileY,
+                        Tile.size.width,
+                        Tile.size.height
+                    )
+                }
+            }
+        }
+    });
 }
 
 // initializes the game world
