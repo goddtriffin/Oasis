@@ -8,13 +8,23 @@ class Tile {
         const tileY = (worldY * Tile.size.height) - OasisCamera.location.y;
 
         // draw tile body
-        OasisCanvasContext.fillStyle = Tile.getColor(tileType);
-        OasisCanvasContext.fillRect(
-            tileX,
-            tileY,
-            Tile.size.width,
-            Tile.size.height
-        );
+        if (simpleRender) {
+            OasisCanvasContext.fillStyle = Tile.getColor(tileType);
+            OasisCanvasContext.fillRect(
+                tileX,
+                tileY,
+                Tile.size.width,
+                Tile.size.height
+            );
+        } else {
+            OasisCanvasContext.drawImage(
+                OasisAssets[this.getType(tileType)],
+                tileX,
+                tileY,
+                Tile.size.width,
+                Tile.size.height
+            )
+        }
 
         // draw debug info
         if (debug) {
@@ -69,6 +79,31 @@ class Tile {
             default:
                 console.error('unknown tileType:', tileType);
                 return 'black';
+        }
+    }
+
+    // returns a tile type as string from a tile type number
+    // (int) tileType
+    static getType (tileType) {
+        switch (tileType) {
+            case 0: // grass
+                return 'grass';
+            
+            case 1: // sand
+                return 'sand';
+
+            case 2: // shore
+                return 'shore';
+
+            case 3: // ocean
+                return 'ocean';
+
+            case 4: // stone
+                return 'stone';
+            
+            default:
+                console.error('unknown tileType:', tileType);
+                return 'unknown';
         }
     }
 }
