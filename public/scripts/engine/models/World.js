@@ -1,3 +1,7 @@
+// container for all trees visible on the screen
+// contains [{worldX, worldY} , {worldX, worldY} , ...]
+let allVisibleTrees = [];
+
 // World model
 // (Size) size
 class World {
@@ -23,6 +27,9 @@ class World {
         // track how many tiles are being rendered
         let tileCount = 0;
 
+        // reset container for all trees visible on the map
+        allVisibleTrees = [];
+
         // cycle through only the screen-visible tiles
         for (let worldY = yMin; worldY < yMax; worldY++) {
             for (let worldX = xMin; worldX < xMax; worldX++) {
@@ -46,6 +53,12 @@ class World {
                 // and render it
                 Tile.render(worldX, worldY, this.tilemap[tilemapY][tilemapX], tilemapX, tilemapY);
                 tileCount++;
+
+                // if tile being rendered is a tree, save it in trees array
+                if (this.tilemap[tilemapY][tilemapX] === 5) {
+                    const tree = {worldX, worldY};
+                    allVisibleTrees.push(tree);
+                }
             }
         }
 
@@ -61,6 +74,35 @@ class World {
             );
         }
     }
+}
+
+// renders all leaves around all the (visible) trees
+function renderLeaves () {
+    console.log(allVisibleTrees);
+    /*
+    // get tile coordinates
+    const tileX = (worldX * Tile.size.width) - OasisCamera.location.x;
+    const tileY = (worldY * Tile.size.height) - OasisCamera.location.y;
+
+    // draw tile body
+    if (simpleRender) {
+        OasisCanvasContext.fillStyle = Tile.getColor(tileType);
+        OasisCanvasContext.fillRect(
+            tileX,
+            tileY,
+            Tile.size.width,
+            Tile.size.height
+        );
+    } else {
+        OasisCanvasContext.drawImage(
+            OasisAssets[this.getType(tileType)],
+            tileX,
+            tileY,
+            Tile.size.width,
+            Tile.size.height
+        )
+    }
+    */
 }
 
 // initializes the game world

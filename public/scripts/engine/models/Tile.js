@@ -78,6 +78,9 @@ class Tile {
 
             case 5: // tree
                 return 'saddlebrown';
+
+            case 6: // leaves
+                return 'green';
             
             default:
                 console.error('unknown tileType:', tileType);
@@ -106,6 +109,9 @@ class Tile {
 
             case 5: // tree
                 return 'tree';
+
+            case 6: // leaves
+                return 'leaves';
             
             default:
                 console.error('unknown tileType:', tileType);
