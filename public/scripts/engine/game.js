@@ -127,13 +127,28 @@ function render () {
     // render this clients player
     OasisPlayer.render();
 
+    // render leaves around all the trees
     renderLeaves();
+
+    // render the player's health
+    renderHealth();
 
     // render live players
     renderLivePlayers();
 
     // render all kill counts
     renderLeaderboard();
+}
+
+// renders the player's current health
+function renderHealth () {
+    OasisCanvasContext.fillStyle = 'black';
+    OasisCanvasContext.font = "30px Arial";
+    OasisCanvasContext.fillText(
+        '' + OasisPlayer.health + ' / 100',
+        50,
+        50
+    );
 }
 
 // renders the count of all players currently connected to the Oasis
