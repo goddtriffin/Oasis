@@ -204,7 +204,7 @@ class Player extends Entity {
     }
 }
 
-// vaiety of human-like colors for player's color
+// vaiety of random colors for player's color
 // https://htmlcolorcodes.com/color-names/
 Player.colors = [
     'pink', 'orange', 'gold', 'yellow', 'darkkhaki',

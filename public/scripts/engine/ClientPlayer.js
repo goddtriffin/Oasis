@@ -158,7 +158,6 @@ class ClientPlayer extends Player {
     move () {
         // get a list of all collidable tiles near the player
         const collidableTilesNearPlayer = this.getCollidableTilesNearPlayer();
-        // if (collidableTilesNearPlayer.length > 0) console.log(collidableTilesNearPlayer);
 
         // create player's collision rectangle
         const primaryRect = {

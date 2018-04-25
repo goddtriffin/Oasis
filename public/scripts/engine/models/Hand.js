@@ -93,6 +93,7 @@ class Hand extends Entity {
 
         // check for punch collisions
         this.checkPunchPlayer(player);
+        this.checkPunchTile(player);
     }
 
     // sets the hand position based on where the player is, and what hand it is
@@ -287,6 +288,32 @@ class Hand extends Entity {
                     OasisPlayers[socketID].hurt();
                 }
             });
+        }
+    }
+
+    // handles a player punching a tile
+    checkPunchTile (player) {
+        if (this.hit) return;
+
+        // get a list of all collidable tiles near the player
+        const collidableTilesNearPlayer = player.getCollidableTilesNearPlayer();
+
+        // create player's hand collision rectangle
+        const primaryRect = {
+            location: new Location(this.location.x, this.location.y),
+            size: new Size(this.size.width, this.size.height)
+        }
+
+        // cycle through all nearby collidable tiles
+        for (let i=0; i<collidableTilesNearPlayer.length; i++) {
+            if (this.hit) break;
+
+            // if successful tile punch,
+            if (intersects(primaryRect, collidableTilesNearPlayer[i])) {
+                // update the hand's data
+                this.hit = true;
+                this.velocity = Math.abs(this.velocity) * -1;
+            }
         }
     }
 }
