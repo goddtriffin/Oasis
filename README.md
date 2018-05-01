@@ -4,7 +4,7 @@ Simple, realtime multiplayer landscape.
 
 ## Author
 
-Todd Griffin, MagnusFrater, griff170@purdue.edu
+Todd Griffin
 
 ![cover photo](/public/res/cover-photo.png)
 
