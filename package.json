@@ -5,8 +5,9 @@
     "main": "server/app.js",
     "scripts": {
         "setup": "npm install && mkdir db && node dev/sqlite3-tool.js production",
-        "start": "nodemon server/app.js",
-        "reset-db": "rm db/production.db && node dev/sqlite3-tool.js production"
+        "reset-db": "rm db/production.db && node dev/sqlite3-tool.js production",
+        "dev": "nodemon server/app.js",
+        "start": "rm -rf db && mkdir db && node dev/sqlite3-tool.js production && node server/app.js"
     },
     "repository": {
         "type": "git",
