@@ -2,7 +2,7 @@
 const database = require('../database');
 
 // bcrypt
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // handles logging in a user
 function login (username, password) {
