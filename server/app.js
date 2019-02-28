@@ -19,6 +19,6 @@ app.get('/', function (req, res) {
 clients.init(io);
 
 // start server
-http.listen(80, function () {
+http.listen(process.env.PORT || 80, function () {
     console.log('Server listening on *:8633!');
 });
