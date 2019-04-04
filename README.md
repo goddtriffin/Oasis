@@ -2,6 +2,10 @@
 
 Simple, realtime multiplayer landscape.
 
+## Live Demo
+
+https://oasis-io.herokuapp.com/
+
 ## Author
 
 Todd Griffin
