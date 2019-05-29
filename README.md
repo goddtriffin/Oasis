@@ -4,7 +4,11 @@ Simple, realtime multiplayer landscape.
 
 ## Live Demo
 
+**If this domain hasn't loaded in a while, it will take ~20 seconds!**
+
 https://oasis-io.herokuapp.com/
+
+This is due to me picking the cheapest hosting plan Heroku offers, which means it will sleep after 30 minutes of inactivity.
 
 ## Author
 
