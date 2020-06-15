@@ -1,35 +1,35 @@
 {
-    "name": "oasis",
-    "version": "1.0.0",
-    "description": "Simple realtime multiplayer landscape.",
-    "main": "server/app.js",
-    "scripts": {
-        "setup": "npm install && mkdir db && node dev/sqlite3-tool.js production",
-        "reset-db": "rm db/production.db && node dev/sqlite3-tool.js production",
-        "dev": "nodemon server/app.js",
-        "start": "rm -rf db && mkdir db && node dev/sqlite3-tool.js production && node server/app.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/MagnusFrater/Oasis.git"
-    },
-    "keywords": [
-        "simple",
-        "realtime",
-        "multiplayer",
-        "landscape"
-    ],
-    "author": "Todd Griffin",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/MagnusFrater/Oasis/issues"
-    },
-    "homepage": "https://github.com/MagnusFrater/Oasis#readme",
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "express": "^4.16.4",
-        "nodemon": "^1.18.9",
-        "socket.io": "^2.2.0",
-        "sqlite3": "^4.0.6"
-    }
+  "name": "oasis",
+  "version": "1.0.0",
+  "description": "Simple realtime multiplayer landscape.",
+  "main": "server/app.js",
+  "scripts": {
+    "setup": "npm install && mkdir -p db && node dev/sqlite3-tool.js production",
+    "reset-db": "rm db/production.db && node dev/sqlite3-tool.js production",
+    "dev": "nodemon server/app.js",
+    "start": "rm -rf db && mkdir -p db && node dev/sqlite3-tool.js production && node server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagnusFrater/Oasis.git"
+  },
+  "keywords": [
+    "simple",
+    "realtime",
+    "multiplayer",
+    "landscape"
+  ],
+  "author": "Todd Griffin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MagnusFrater/Oasis/issues"
+  },
+  "homepage": "https://github.com/MagnusFrater/Oasis#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "socket.io": "^2.3.0",
+    "sqlite3": "^4.2.0"
+  }
 }
