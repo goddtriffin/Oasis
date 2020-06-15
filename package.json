@@ -4,6 +4,7 @@
   "description": "Simple realtime multiplayer landscape.",
   "main": "server/app.js",
   "scripts": {
+    "upgrade-deps": "npm outdated && ncu -u && npm update && npm install",
     "setup": "npm install && mkdir -p db && node dev/sqlite3-tool.js production",
     "reset-db": "rm db/production.db && node dev/sqlite3-tool.js production",
     "dev": "nodemon server/app.js",
@@ -31,5 +32,8 @@
     "nodemon": "^2.0.4",
     "socket.io": "^2.3.0",
     "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^7.0.1"
   }
 }
