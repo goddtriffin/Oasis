@@ -30,7 +30,7 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "nodemon": "^2.0.4",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "sqlite3": "^4.2.0"
   },
   "devDependencies": {
