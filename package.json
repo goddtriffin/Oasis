@@ -1,39 +1,33 @@
 {
   "name": "oasis",
   "version": "1.0.0",
-  "description": "Simple realtime multiplayer landscape.",
+  "description": "Simple realtime multiplayer IO game.",
   "main": "server/app.js",
-  "scripts": {
-    "upgrade-deps": "npm outdated && ncu -u && npm update && npm install",
-    "setup": "npm install && mkdir -p db && node dev/sqlite3-tool.js production",
-    "reset-db": "rm db/production.db && node dev/sqlite3-tool.js production",
-    "dev": "nodemon server/app.js",
-    "start": "rm -rf db && mkdir -p db && node dev/sqlite3-tool.js production && node server/app.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MagnusFrater/Oasis.git"
+    "url": "git+https://github.com/goddtriffin/Oasis.git"
   },
   "keywords": [
     "simple",
     "realtime",
     "multiplayer",
-    "landscape"
+    "IO",
+    "game"
   ],
-  "author": "Todd Griffin",
+  "author": "Todd Everett Griffin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MagnusFrater/Oasis/issues"
+    "url": "https://github.com/goddtriffin/Oasis/issues"
   },
-  "homepage": "https://github.com/MagnusFrater/Oasis#readme",
+  "homepage": "https://github.com/goddtriffin/Oasis#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.4",
-    "socket.io": "^2.3.0",
-    "sqlite3": "^4.2.0"
+    "bcryptjs": "2.4.3",
+    "express": "4.17.3",
+    "socket.io": "4.4.1",
+    "sqlite3": "5.0.2"
   },
   "devDependencies": {
-    "npm-check-updates": "^7.0.1"
+    "nodemon": "2.0.15",
+    "npm-check-updates": "12.3.1"
   }
 }

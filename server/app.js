@@ -19,7 +19,7 @@ app.get("/", function (req, res) {
 clients.init(io);
 
 // start server
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 8080;
 http.listen(port, function () {
   console.log("Server listening on *:" + port + "!");
 });
