@@ -25,11 +25,11 @@ install: ## installs dependencies
 
 .PHONY: dev
 dev: ## runs the development binary in hot-reload watch mode
-	npx nodemon server/app.js
+	NODE_ENV=development npx nodemon server/app.js
 
 .PHONY: run
 run: init_db ## runs the production binary
-	node server/app.js
+	NODE_ENV=production node server/app.js
 
 .PHONY: init_db
 init_db: ## deletes the Sqlite database and re-initializes it

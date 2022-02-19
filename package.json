@@ -24,7 +24,8 @@
     "bcryptjs": "2.4.3",
     "express": "4.17.3",
     "socket.io": "4.4.1",
-    "sqlite3": "5.0.2"
+    "sqlite3": "5.0.2",
+    "axios": "0.26.0"
   },
   "devDependencies": {
     "nodemon": "2.0.15",
