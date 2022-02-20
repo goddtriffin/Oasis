@@ -1,18 +1,10 @@
 # Oasis
 
-Simple, realtime multiplayer landscape.
+Simple, realtime multiplayer IO game.
 
 ## Live Demo
 
-**If this domain hasn't loaded in a while, it will take ~20 seconds!**
-
-https://oasis-io.herokuapp.com/
-
-This is due to me picking the cheapest hosting plan Heroku offers, which means it will sleep after 30 minutes of inactivity.
-
-## Author
-
-Todd Griffin
+https://oasis.toddgriffin.me/
 
 ![cover photo](/public/res/cover-photo.png)
 
@@ -29,15 +21,17 @@ Todd Griffin
 
 ## Requirements
 
-Must have npm installed.
+- Make
+- NodeJS/NPM
+- Docker
 
 ## Setup
 
-On a fresh git clone run `npm run-script setup` to get up and running quickly!
+On a fresh git clone run `make install` to get up and running quickly!
 
 ## Try it out!
 
-Run `npm start` and with your favourite browser<sub>*coughchromecough*</sub> visit `localhost:8633`!
+Run `make dev` and with your favourite browser<sub>*coughchromecough*</sub> visit `localhost:8080`!
 
 ## Background
 
@@ -57,4 +51,4 @@ I tried my best heavily commenting the codebase, so good luck!
 
 ### Reset Database
 
-Run `npm run-script reset-db` to delete the current database and auto-generate a fresh one.
+Run `make init_db` to delete the current database and auto-generate a fresh one.

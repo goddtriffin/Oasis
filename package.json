@@ -1,7 +1,7 @@
 {
   "name": "oasis",
   "version": "1.0.0",
-  "description": "Simple realtime multiplayer IO game.",
+  "description": "Realtime multiplayer IO game.",
   "main": "server/app.js",
   "repository": {
     "type": "git",
