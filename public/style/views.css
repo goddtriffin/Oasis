@@ -1,3 +1,12 @@
 #gameInstructions {
+    display: inline-block;
+    padding: 20px;
+    border-radius: 20px;
     border: 1px solid black;
+}
+
+form {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
 }

@@ -1,4 +1,26 @@
 html, body {
     overflow: hidden;
-    display: block;
+    text-align: center;
+}
+
+html {
+  background-image: url("/res/cover-photo.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+body {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid black;
+    margin: 0 auto;
 }
