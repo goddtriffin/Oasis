@@ -4,7 +4,7 @@ html, body {
 }
 
 html {
-  background-image: url("/res/cover-photo.png");
+  background-image: url("/res/cover-photo.webp");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
