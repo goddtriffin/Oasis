@@ -1,4 +1,4 @@
-// express / socket.io
+require("log-timestamp");
 const express = require("express");
 const app = express();
 const http = require("http").Server(app);
@@ -15,12 +15,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // allow access to everything in these folders
 app.use(express.static("public"));
 
-// home
+// PAGE: home
 app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-// Plausible analytics
+// API: health
+app.get("/api/v1/health", function (req, res) {
+    res.sendStatus(200);
+});
+
+// API: Plausible Analytics
 app.post("/api/v1/scitylana", function (req, res) {
     const headers = {
         "User-Agent": req.body.user_agent,

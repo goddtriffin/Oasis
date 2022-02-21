@@ -1,3 +1,5 @@
+require("log-timestamp");
+
 // returns a random number between the bounds; both bounds inclusive
 // (int) min , (int) max
 function getRandInt (min, max) {
@@ -22,7 +24,7 @@ function generateRandomMap (width, height, min, max) {
         }
         map.push(column);
 	}
-	
+
 	// finished
 	return map;
 }

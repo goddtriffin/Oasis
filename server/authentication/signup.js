@@ -1,7 +1,6 @@
-// sqlite3
-const database = require('../database');
+require("log-timestamp");
 
-// bcrypt
+const database = require('../database');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
@@ -11,7 +10,7 @@ const login = require('./login').login;
 // handles signing up
 // signup = {username, password}
 function signup (username, password, repassword) {
-    console.log('\nUser Signup\n===========');
+    console.log('User Signup\n===========');
 
     // get signup time
     const date = new Date();

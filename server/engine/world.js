@@ -1,3 +1,5 @@
+require("log-timestamp");
+
 // rng
 const utils = require('./utils');
 
@@ -40,7 +42,7 @@ function generateRealistic (width, height, smoothLevel) {
             if (height > maxHeight) maxHeight = height;
         }
     }
-    
+
     // calculate difference between min/max heights
     const deltaHeight = maxHeight - minHeight;
 

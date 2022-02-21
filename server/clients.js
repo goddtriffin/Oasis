@@ -1,3 +1,5 @@
+require("log-timestamp");
+
 // authentication
 const login = require('./authentication/login').login;
 const signup = require('./authentication/signup').signup;
@@ -9,7 +11,7 @@ const game = require('./engine/game');
 function init (io) {
     // new connection
     io.on('connection', function (socket) {
-        console.log('\n' + socket.id, 'connected.');
+        console.log(socket.id, 'connected.');
 
         // authentication
         socket.on('login', login);

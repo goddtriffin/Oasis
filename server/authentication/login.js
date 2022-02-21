@@ -1,12 +1,10 @@
-// sqlite3
+require("log-timestamp");
 const database = require('../database');
-
-// bcrypt
 const bcrypt = require('bcryptjs');
 
 // handles logging in a user
 function login (username, password) {
-    console.log('\nUser Login\n==========');
+    console.log('User Login\n==========');
 
     // get database instance
     const db = database.getInstance();

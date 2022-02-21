@@ -25,7 +25,8 @@
     "express": "4.17.3",
     "socket.io": "4.4.1",
     "sqlite3": "5.0.2",
-    "axios": "0.26.0"
+    "axios": "0.26.0",
+    "log-timestamp": "0.3.0"
   },
   "devDependencies": {
     "nodemon": "2.0.15",

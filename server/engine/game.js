@@ -1,3 +1,5 @@
+require("log-timestamp");
+
 // world
 const world = require('./world');
 world.generateRealistic(1000, 1000, 25);
@@ -27,7 +29,7 @@ function join (username, stats) {
     // keep a record of this player
     players[this.id] = {username, stats};
 
-    console.log('\n' + username, '(' + this.id + ')', 'joined the Oasis.');
+    console.log(username, '(' + this.id + ')', 'joined the Oasis.');
 }
 
 // handles a player updating their location
@@ -110,7 +112,7 @@ function leave (socket) {
     // TODO
 
     // :(
-    console.log('\n' + players[socket.id].username, '(' + socket.id + ')', 'left the Oasis.');
+    console.log(players[socket.id].username, '(' + socket.id + ')', 'left the Oasis.');
 
     // delete the record of this player
     delete players[socket.id];

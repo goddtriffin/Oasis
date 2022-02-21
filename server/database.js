@@ -1,3 +1,5 @@
+require("log-timestamp");
+
 // initialize sqlite3
 const sqlite3 = require('sqlite3').verbose();
 const db = "./db/production.db";
