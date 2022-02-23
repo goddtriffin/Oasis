@@ -8,6 +8,7 @@ let simpleRender = false;
 const socket = io();
 
 // handle when the server goes down
-socket.on('disconnect', function () {
-    location.href = "../pages/serverdown/";
+socket.on("disconnect", function () {
+    console.log("server went down");
+    alert("Server went down! Please refresh the browser!");
 });

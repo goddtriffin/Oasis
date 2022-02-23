@@ -1,0 +1,17 @@
+     __         .' '.
+   _/__)        .   .       .
+  (8|)_}}- .      .        .
+   `\__)    '. . ' ' .  . '
+
+
+/* TEAM */
+
+Name: Todd Everett Griffin
+Site: https://www.toddgriffin.me
+From: Chicago Illinois USA, Fergus Ontario Canada
+
+/* SITE */
+
+Last Update: 2022/22/02
+Languages: English, JS/NodeJS/ExpressJS, HTML5, CSS3
+Technology: 2017 MacBook Pro, custom built Windows 11 rig + WSL 2 Ubuntu-20.04, Google Chrome, Visual Studio Code

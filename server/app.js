@@ -8,16 +8,42 @@ const axios = require('axios');
 
 // clients
 const clients = require("./clients");
+const res = require("express/lib/response");
+
+app.use(function (req, res, next) {
+    console.log(req.method, req.originalUrl)
+    next();
+});
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // allow access to everything in these folders
 app.use(express.static("public"));
 
+// favicon.ico
+app.get("/favicon.ico", function (req, res) {
+    res.sendFile("public/res/favicon.ico", {"root": "./"});
+})
+
+// sitemap.xml
+app.get("/sitemap.xml", function (req, res) {
+    res.sendFile("public/res/sitemap.xml", {"root": "./"});
+});
+
+// robots.txt
+app.get("/robots.txt", function (req, res) {
+    res.sendFile("public/res/robots.txt", {"root": "./"});
+});
+
+// humans.txt
+app.get("/humans.txt", function (req, res) {
+    res.sendFile("public/res/humans.txt", {"root": "./"});
+});
+
 // PAGE: home
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
+    res.sendFile("public/index.html", {"root": "./"});
 });
 
 // API: health
@@ -57,7 +83,7 @@ app.post("/api/v1/scitylana", function (req, res) {
 
     // OK
     res.sendStatus(200);
-})
+});
 
 // handle the connection of clients
 clients.init(io);
