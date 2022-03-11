@@ -138,7 +138,7 @@ function createGameDescription () {
     const gameInstructions = createGameInstructions();
     gameDescription.appendChild(gameInstructions);
 
-    gameDescription.appendChild(createParagraphMessage("<a href='https://plausible.io/oasis.toddgriffin.me'>Plausible Analytics</a>"));
+    gameDescription.appendChild(createParagraphMessage("<a href=\"https://plausible.io/oasis.toddgriffin.me\">Plausible Analytics</a> | <a href=\"https://uptime.toddgriffin.me/\">Uptime</a>"));
 
     // return completed login/signup choice
     return gameDescription;
