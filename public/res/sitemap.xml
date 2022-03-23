@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
         <loc>https://oasis.toddgriffin.me/</loc>
         <lastmod>2022-02-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
+        <image:image>
+            <image:loc>https://oasis.toddgriffin.me/res/cover-photo.webp</image:loc>
+            <image:title>Oasis Cover Photo</image:title>
+            <image:caption>Zoomed out screenshot of the Oasis worldmap.</image:caption>
+            <image:geo_location>Westmont, Illinois USA</image:geo_location>
+            <image:license>https://creativecommons.org/licenses/by-nc-nd/4.0/</image:license>
+        </image:image>
     </url>
 </urlset>
