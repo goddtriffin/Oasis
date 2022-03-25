@@ -10,6 +10,8 @@ const axios = require('axios');
 const clients = require("./clients");
 const res = require("express/lib/response");
 
+app.set("trust proxy", true);
+
 app.use(function (req, res, next) {
     console.log(req.method, req.originalUrl)
     next();
