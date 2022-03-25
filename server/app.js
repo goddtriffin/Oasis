@@ -67,6 +67,9 @@ app.post("/api/v1/scitylana", function (req, res) {
         "screen_width": req.body.screen_width,
     }
 
+    console.log("Plausible Analytics headers:", headers);
+    console.log("Plausible Analytics body:", body);
+
     if (process.env.NODE_ENV === "production") {
         axios.post("https://plausible.io/api/event", body, headers)
             .then(function (response) {
