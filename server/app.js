@@ -10,6 +10,7 @@ const axios = require('axios');
 const clients = require("./clients");
 const res = require("express/lib/response");
 
+// this allows the client's IP propogate to the request properly
 app.set("trust proxy", true);
 
 app.use(function (req, res, next) {
@@ -55,6 +56,8 @@ app.get("/api/v1/health", function (req, res) {
 
 // API: Plausible Analytics
 app.post("/api/v1/scitylana", function (req, res) {
+    const domain = (process.env.NODE_ENV === "production")? "oasis.toddgriffin.me" : "test.toddgriffin.me";
+
     const headers = {
         "User-Agent": req.body.user_agent,
         "Content-Type": "application/json",
@@ -62,7 +65,7 @@ app.post("/api/v1/scitylana", function (req, res) {
     }
 
     const body = {
-        "domain": "oasis.toddgriffin.me",
+        "domain": domain,
         "name": "pageview",
         "url": req.body.url,
         "referrer": req.body.referrer,
@@ -72,19 +75,13 @@ app.post("/api/v1/scitylana", function (req, res) {
     console.log("Plausible Analytics headers:", headers);
     console.log("Plausible Analytics body:", body);
 
-    if (process.env.NODE_ENV === "production") {
-        axios.post("https://plausible.io/api/event", body, headers)
-            .then(function (response) {
-                console.log("Plausible Analytics:", response.status);
-            })
-            .catch(function (error) {
-                console.log("Plausible Analytics:", error);
-            });
-    } else {
-        console.log("Not sending Plausible analytics request due to being in development environment.");
-        console.log("Plausible Analytics headers:", headers);
-        console.log("Plausible Analytics body:", body);
-    }
+    axios.post("https://plausible.io/api/event", body, headers)
+        .then(function (response) {
+            console.log("Successfully sent Plausible Analytics call.");
+        })
+        .catch(function (error) {
+            console.log("Failed Plausible Analytics call:", error);
+        });
 
     // OK
     res.sendStatus(200);

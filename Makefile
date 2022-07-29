@@ -29,7 +29,7 @@ dev: ## runs the development binary in hot-reload watch mode
 
 .PHONY: run
 run: init_db ## runs the production binary
-	NODE_ENV=production node server/app.js
+	node server/app.js
 
 .PHONY: init_db
 init_db: ## deletes the Sqlite database and re-initializes it
@@ -55,6 +55,7 @@ run_docker: ## runs a new Docker container
 	--name "oasis" \
 	-d --restart unless-stopped \
 	-p 8080:8080 \
+	-e NODE_ENV="development" \
 	goddtriffin/oasis
 
 .PHONY: start_docker
