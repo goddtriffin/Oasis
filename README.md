@@ -6,18 +6,20 @@ Simple, realtime multiplayer IO game.
 
 https://oasis.toddgriffin.me/
 
-![cover photo](/public/res/cover-photo.png)
+![cover photo](/public/res/cover-photo.webp)
 
 ## Features
 
 - realtime multiplayer
-- random, realistic world map generation (Stone, Grass, Sand, Shore, Ocean, Trees, Leaves)
+- random, realistic world map generation (Stone, Grass, Sand, Shore, Ocean,
+  Trees, Leaves)
 - finite tilemap w/ world wrap (seamlessly transition between tilemap borders)
 - 8 direction movement/facing
 - punching/killing/respawning
 - leaderboard for kill counts
 - terrain affects player max speed (Grass is fastest, Ocean is slowest)
-- directional facing affects player max speed (side-stepping or backwards movement is slower than forwards movement)
+- directional facing affects player max speed (side-stepping or backwards
+  movement is slower than forwards movement)
 
 ## Requirements
 
@@ -31,7 +33,8 @@ On a fresh git clone run `make install` to get up and running quickly!
 
 ## Try it out!
 
-Run `make dev` and with your favourite browser<sub>*coughchromecough*</sub> visit `localhost:8080`!
+Run `make dev` and with your favourite browser<sub> _coughchromecough_</sub>
+visit `localhost:8080`!
 
 ## Background
 
