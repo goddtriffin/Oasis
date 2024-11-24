@@ -1,3 +1,12 @@
+const Sentry = require("@sentry/node");
+if (process.env.SENTRY_DSN === undefined || process.env.SENTRY_DSN === null || process.env.SENTRY_DSN === "") {
+  console.error("SENTRY_DSN is not set. Exiting.");
+  process.exit(1);
+}
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+});
+
 require("log-timestamp");
 const express = require("express");
 const app = express();

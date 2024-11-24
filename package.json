@@ -26,7 +26,8 @@
     "socket.io": "4.5.1",
     "sqlite3": "5.0.10",
     "axios": "0.27.2",
-    "log-timestamp": "0.3.0"
+    "log-timestamp": "0.3.0",
+    "@sentry/node": "8.40.0"
   },
   "devDependencies": {
     "nodemon": "2.0.19",
