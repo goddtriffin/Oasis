@@ -1,4 +1,4 @@
-FROM node:18.7.0-alpine3.16
+FROM node:23.3.0-alpine3.20
 
 # update alpine linux dependencies
 RUN apk update

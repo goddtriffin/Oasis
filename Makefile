@@ -2,22 +2,15 @@ $(VERBOSE).SILENT:
 .DEFAULT_GOAL := help
 
 .PHONY: help
-help: # Prints out help
-	@IFS=$$'\n' ; \
-	help_lines=(`fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##/:/'`); \
-	printf "%-30s %s\n" "target" "help" ; \
-	printf "%-30s %s\n" "------" "----" ; \
-	for help_line in $${help_lines[@]}; do \
-			IFS=$$':' ; \
-			help_split=($$help_line) ; \
-			help_command=`echo $${help_split[0]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
-			help_info=`echo $${help_split[2]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
-			printf '\033[36m'; \
-			printf "%-30s %s" $$help_command ; \
-			printf '\033[0m'; \
-			printf "%s\n" $$help_info; \
+help: # show available commands and their descriptions
+	@printf "%-30s %s\n" "target" "help"
+	@printf "%-30s %s\n" "------" "----"
+	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+	while read -r line; do \
+		target=$$(echo "$$line" | cut -f1 -d":"); \
+		help=$$(echo "$$line" | cut -f2- -d"#" | cut -c3-); \
+		printf '\033[36m%-30s\033[0m %s\n' "$$target" "$$help"; \
 	done
-	@echo
 
 .PHONY: install
 install: ## installs dependencies
@@ -45,48 +38,30 @@ upgrade_deps: ## upgrades dependencies
 	npm install
 	npm find-dupes
 
-.PHONY: build_docker
-build_docker: ## builds Docker container
-	docker build --tag goddtriffin/oasis:latest --file ./deployment/Dockerfile .
+.PHONY: docker_build
+docker_build: ## builds Docker container
+	docker build \
+		--platform linux/amd64 \
+		--tag goddtriffin/oasis:latest \
+		--file ./Dockerfile \
+		.
 
-.PHONY: run_docker
-run_docker: ## runs a new Docker container
-	docker run \
-	--name "oasis" \
-	-d --restart unless-stopped \
-	-p 8080:8080 \
-	-e NODE_ENV="development" \
-	goddtriffin/oasis
+.PHONY: docker_run
+docker_run: ## runs Docker containers
+	docker compose up -d
 
-.PHONY: start_docker
-start_docker: ## resumes a stopped Docker container
-	docker start oasis
+.PHONY: docker_stop
+docker_stop: ## stops Docker containers
+	docker compose down
 
-.PHONY: stop_docker
-stop_docker: ## stops the Docker container
-	docker stop oasis
+.PHONY: docker_logs
+docker_logs: ## displays Docker logs
+	docker compose logs oasis_server -f
 
-.PHONY: remove_docker
-remove_docker: ## removes the Docker container
-	docker rm oasis
+.PHONY: docker_mem_usage
+docker_mem_usage: ## displays the memory usage of the currently running Docker containers
+	docker stats oasis_server --no-stream --format "{{.Container}}: {{.MemUsage}}"
 
-.PHONY: push_docker
-push_docker: ## pushes new Docker image to Docker Hub
+.PHONY: docker_push
+docker_push: ## pushes Docker images to Docker Hub
 	docker push goddtriffin/oasis:latest
-
-.PHONY: restart_deployment
-restart_deployment: ## restarts all pods in the oasis k8s deployment
-	kubectl rollout restart deployment oasis
-
-.PHONY: deploy
-deploy: build_docker push_docker restart_deployment # builds/pushes new docker image at :latest and restarts k8s deployment
-
-# TODO: vet the other targets
-
-.PHONY: mem_usage
-mem_usage: # displays the memory usage of the currently running Docker container
-	docker stats oasis --no-stream --format "{{.Container}}: {{.MemUsage}}"
-
-.PHONY: logs
-logs: # displays logs from the currently running Docker container
-	docker logs oasis

@@ -1,0 +1,9 @@
+services:
+  oasis_server:
+    image: goddtriffin/oasis:latest
+    container_name: oasis_server
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./.oasis-server.env
