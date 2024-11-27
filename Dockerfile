@@ -15,6 +15,9 @@ RUN npm ci --only=production
 # copy the rest of the project in
 COPY . .
 
+# initialize the database
+RUN make init_db
+
 # run app
 EXPOSE 8080
-CMD ["make", "run"]
+ENTRYPOINT ["node", "server/app.js"]
