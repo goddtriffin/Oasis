@@ -18,8 +18,11 @@ install: ## installs dependencies
 
 .PHONY: dev
 dev: ## runs the development binary in hot-reload watch mode
+	set -e; \
+	PORT="$${PORT:-$$(deno run --allow-net --allow-run=lsof jsr:@todd/webserver-base@0.0.8/free-port oasis)}"; \
+	echo "==> http://127.0.0.1:$$PORT"; \
 	NODE_ENV=development \
-		PORT=8080 \
+		PORT="$$PORT" \
 		npx nodemon server/app.js
 
 .PHONY: init_db
@@ -46,7 +49,10 @@ docker_build: ## builds Docker container
 
 .PHONY: docker_run
 docker_run: ## runs Docker containers
-	docker compose up -d
+	set -e; \
+	HOST_PORT="$${HOST_PORT:-$$(deno run --allow-net --allow-run=lsof jsr:@todd/webserver-base@0.0.8/free-port oasis)}"; \
+	echo "==> http://127.0.0.1:$$HOST_PORT"; \
+	HOST_PORT="$$HOST_PORT" docker compose up -d
 
 .PHONY: docker_stop
 docker_stop: ## stops Docker containers
