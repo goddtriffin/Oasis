@@ -84,7 +84,7 @@ app.post("/api/v1/scitylana", function (req, res) {
     console.log("Plausible Analytics headers:", headers);
     console.log("Plausible Analytics body:", body);
 
-    axios.post("https://plausible.io/api/event", body, headers)
+    axios.post("https://plausible.io/api/event", body, { headers: headers })
         .then(function (response) {
             console.log("Successfully sent Plausible Analytics call.");
         })
