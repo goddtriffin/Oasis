@@ -19,7 +19,7 @@ install: ## installs dependencies
 .PHONY: dev
 dev: ## runs the development binary in hot-reload watch mode
 	set -e; \
-	PORT="$${PORT:-$$(deno run --allow-net --allow-run=lsof jsr:@todd/webserver-base@0.0.8/free-port oasis)}"; \
+	PORT="$${PORT:-$$(deno run --allow-net --allow-run=lsof jsr:@todd/webserver-base@0.1.1/free-port oasis)}"; \
 	echo "==> http://127.0.0.1:$$PORT"; \
 	NODE_ENV=development \
 		PORT="$$PORT" \
@@ -50,7 +50,7 @@ docker_build: ## builds Docker container
 .PHONY: docker_run
 docker_run: ## runs Docker containers
 	set -e; \
-	HOST_PORT="$${HOST_PORT:-$$(deno run --allow-net --allow-run=lsof jsr:@todd/webserver-base@0.0.8/free-port oasis)}"; \
+	HOST_PORT="$${HOST_PORT:-$$(deno run --allow-net --allow-run=lsof jsr:@todd/webserver-base@0.1.1/free-port oasis)}"; \
 	echo "==> http://127.0.0.1:$$HOST_PORT"; \
 	HOST_PORT="$$HOST_PORT" docker compose up -d
 

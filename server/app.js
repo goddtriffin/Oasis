@@ -12,12 +12,10 @@ const express = require("express");
 const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-const bodyParser = require("body-parser");
 const axios = require('axios');
 
 // clients
 const clients = require("./clients");
-const res = require("express/lib/response");
 
 // this allows the client's IP propogate to the request properly
 app.set("trust proxy", true);
@@ -28,7 +26,7 @@ app.use(function (req, res, next) {
 });
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 // allow access to everything in these folders
 app.use(express.static("public"));
@@ -65,10 +63,12 @@ app.get("/api/v1/health", function (req, res) {
 
 // API: Plausible Analytics
 app.post("/api/v1/scitylana", function (req, res) {
+    // Express 5 leaves req.body undefined when no body parser matched
+    const reqBody = req.body || {};
     const domain = (process.env.NODE_ENV === "production")? "oasis.toddgriffin.me" : "test.toddgriffin.me";
 
     const headers = {
-        "User-Agent": req.body.user_agent,
+        "User-Agent": reqBody.user_agent,
         "Content-Type": "application/json",
         "X-Forwarded-For": req.ip,
     }
@@ -76,9 +76,9 @@ app.post("/api/v1/scitylana", function (req, res) {
     const body = {
         "domain": domain,
         "name": "pageview",
-        "url": req.body.url,
-        "referrer": req.body.referrer,
-        "screen_width": req.body.screen_width,
+        "url": reqBody.url,
+        "referrer": reqBody.referrer,
+        "screen_width": reqBody.screen_width,
     }
 
     console.log("Plausible Analytics headers:", headers);

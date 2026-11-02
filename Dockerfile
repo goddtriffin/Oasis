@@ -1,4 +1,4 @@
-FROM node:23.3.0-alpine3.20
+FROM node:24.22.2-alpine3.24
 
 # update alpine linux dependencies
 RUN apk update
@@ -10,7 +10,7 @@ WORKDIR /oasis
 # (only copy dependency files first for cached layers)
 COPY package.json .
 COPY package-lock.json .
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 # copy the rest of the project in
 COPY . .
